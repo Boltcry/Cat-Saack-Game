@@ -139,9 +139,9 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public static void RegisterTextField(TextMeshProUGUI aTextField)
-    {
-        Instance.textField = aTextField;
-    }
+    // public static void RegisterTextField(TextMeshProUGUI aTextField)
+    // {
+    //     Instance.textField = aTextField;
+    // }
 
 }
