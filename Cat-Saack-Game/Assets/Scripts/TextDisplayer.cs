@@ -4,21 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// Handles showing text in the game. Should be attached to GameManager
-// need a method that registers all the new objects to the TextManager when a new scene is loaded in
-//      maybe in GameManager that calls a separate method here?
-//this looks pretty good :3
-public class TextManager : MonoBehaviour
+// Handles showing text in the game. Should be attached to whatever object holds the relevant panel and text field
+// Registers itself to the Dialogue Manager and can have multiple TextDisplayers running simultaneously
+public class TextDisplayer : MonoBehaviour
 {
-
-    public static TextManager Instance;
 
     public float typeSpeed = 10;
     // the text object that will be populated by DisplayText
     public TextMeshProUGUI textField;
     public GameObject TextPanel;
 
-    public static bool sequenceStarted = false;
 
     Queue<string> textQueue = new Queue<string>();
     bool isTyping = false;
@@ -31,29 +26,32 @@ public class TextManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        gameObject.SetActive(false);
     }
 
-    public static void AddTextToQueue(string aText)
+    void Start()
+    {
+        DialogueManager.RegisterTextDisplayer(this);
+    }
+
+    public void AddTextToQueue(string aText)
     {
         if (aText != "")
         {
-            Instance.textQueue.Enqueue(aText);
+            textQueue.Enqueue(aText);
         }
     }
 
-    public static IEnumerator StartTextSequence()
+    public IEnumerator StartTextSequence()
     {
-        sequenceStarted = true; //DEBUG ONLY
-        Instance.TextPanel.SetActive(true);
-        yield return Instance.StartCoroutine(Instance.StartNextText());
+        TextPanel.SetActive(true);
+        yield return StartCoroutine(StartNextText());
     }
 
     public IEnumerator EndTextSequence()
     {
         textField.text = "";
         TextPanel.SetActive(false);
-        sequenceStarted = false; //DEBUG ONLY
         yield return null;
     }
 
@@ -115,34 +113,26 @@ public class TextManager : MonoBehaviour
         {
             yield return null;
         }
-        shouldContinue = false;
+        SetContinue(false);
         // set continue button to inactive
     }
 
     // Immediately display the rest of the line.
-    void FinishParagraphEarly()
+    public void FinishParagraphEarly()
     {
         textField.maxVisibleCharacters = textField.text.Length;
         isTyping = false;
         // changing isTyping should also end the typing early in the DisplayText coroutine
     }
 
-    // call this method from a unity event when Continue button is selected
-    public static void RecieveDialogueSelect()
+    public bool IsTyping()
     {
-        if (Instance.isTyping)
-        {
-            Instance.FinishParagraphEarly();
-        }
-        else
-        {
-            Instance.shouldContinue = true;
-        }
+        return isTyping;
     }
 
-    // public static void RegisterTextField(TextMeshProUGUI aTextField)
-    // {
-    //     Instance.textField = aTextField;
-    // }
+    public void SetContinue(bool aContinue)
+    {
+        shouldContinue = aContinue;
+    }
 
 }

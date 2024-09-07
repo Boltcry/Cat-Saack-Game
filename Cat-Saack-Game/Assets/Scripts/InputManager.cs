@@ -49,13 +49,13 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R)) //STARTS TEST DIALOGUE
         {
-            if (!TextManager.sequenceStarted)
+            if (!DialogueManager.sequenceStarted)
             {
                 DialogueManager.StartDialogue();
             }
             else
             {
-                TextManager.RecieveDialogueSelect();
+                DialogueManager.RecieveDialogueSelect();
             }
         }
     }
