@@ -7,6 +7,7 @@ using TMPro;
 // Handles showing text in the game. Should be attached to GameManager
 // need a method that registers all the new objects to the TextManager when a new scene is loaded in
 //      maybe in GameManager that calls a separate method here?
+//this looks pretty good :3
 public class TextManager : MonoBehaviour
 {
 
