@@ -47,17 +47,6 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) //STARTS TEST DIALOGUE
-        {
-            if (!DialogueManager.sequenceStarted)
-            {
-                DialogueManager.StartDialogue();
-            }
-            else
-            {
-                DialogueManager.RecieveDialogueSelect();
-            }
-        }
     }
 
     // When the Move action is performed
@@ -100,11 +89,15 @@ public class InputManager : MonoBehaviour
             if (actionMapName == "Player")
             {
                 Debug.Log("OnSelect pressed in Overworld mode");
+                playerOverworld.OnSelect();
             }
 
             if (actionMapName == "Menu")
             {
-                cursorButton.OnSelect();
+                if (cursorButton != null)
+                {
+                    cursorButton.OnSelect();
+                }
             }
         }
 
@@ -136,6 +129,18 @@ public class InputManager : MonoBehaviour
             Instance.cursorButton.SetIsHighlighted(true);
         }
         Debug.Log("Switched action map to Menu");
+    }
+
+    public static void SetCursorButton(MenuButton aButton)
+    {
+        if (aButton != null)
+        {
+            Instance.cursorButton = aButton;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to assign cursorButton when given parameter is null");
+        }
     }
 
     // public static void PushMenuToStack(GameObject aObject)

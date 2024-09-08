@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class OverworldInteractable : MonoBehaviour, Interactable
 {
+    //Ink Dialogue file
+    public TextAsset inkJSON;
+
     OutlineObject outlineObject;
 
     void Awake()
@@ -14,7 +17,10 @@ public class OverworldInteractable : MonoBehaviour, Interactable
 
     public void OnSelect()
     {
-        //
+        if(inkJSON != null)
+        {
+            DialogueManager.StartDialogue(inkJSON);
+        }
     }
 
     public void SetOutlineActive(bool aActive)

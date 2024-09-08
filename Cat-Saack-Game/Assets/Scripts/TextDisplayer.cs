@@ -13,6 +13,7 @@ public class TextDisplayer : MonoBehaviour
     // the text object that will be populated by DisplayText
     public TextMeshProUGUI textField;
     public GameObject TextPanel;
+    public MenuButton continueButton;
 
 
     Queue<string> textQueue = new Queue<string>();
@@ -26,11 +27,12 @@ public class TextDisplayer : MonoBehaviour
 
     void Awake()
     {
-        gameObject.SetActive(false);
     }
 
     void Start()
     {
+        SetContinueButtonVisible(false);
+        gameObject.SetActive(false);
         DialogueManager.RegisterTextDisplayer(this);
     }
 
@@ -52,6 +54,7 @@ public class TextDisplayer : MonoBehaviour
     {
         textField.text = "";
         TextPanel.SetActive(false);
+        DialogueManager.EndDialogue();
         yield return null;
     }
 
@@ -109,12 +112,14 @@ public class TextDisplayer : MonoBehaviour
     IEnumerator WaitForContinue()
     {
         // set continue button to active
+        SetContinueButtonVisible(true);
         while (!shouldContinue)
         {
             yield return null;
         }
         SetContinue(false);
         // set continue button to inactive
+        SetContinueButtonVisible(false);
     }
 
     // Immediately display the rest of the line.
@@ -130,9 +135,28 @@ public class TextDisplayer : MonoBehaviour
         return isTyping;
     }
 
+    // Sets shouldContinue to the provided bool.
     public void SetContinue(bool aContinue)
     {
         shouldContinue = aContinue;
+    }
+
+    // Enables or disables the Continue button's Image if it has one.
+    void SetContinueButtonVisible(bool aActive)
+    {
+        if (continueButton != null)
+        {
+            Image continueButtonImage = continueButton.gameObject.GetComponent<Image>();
+            if (continueButtonImage != null)
+            {
+                continueButtonImage.enabled = aActive;
+            }
+        }
+    }
+
+    public MenuButton GetContinueButton()
+    {
+        return continueButton;
     }
 
 }

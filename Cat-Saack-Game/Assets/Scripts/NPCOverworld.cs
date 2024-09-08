@@ -6,6 +6,6 @@ public class NPCOverworld : OverworldInteractable
 {
     new public void OnSelect()
     {
-        // play dialogue data
+        base.OnSelect();
     }
 }

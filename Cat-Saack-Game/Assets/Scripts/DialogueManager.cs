@@ -8,6 +8,8 @@ using System.Linq;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    private DialogueReader dialogueReader;
+
     public TextDisplayer dialogueText;
     public TextDisplayer skinnyText;
 
@@ -19,18 +21,25 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
     }
 
-    public static void StartDialogue() //for testing purposes
+    void Start()
     {
-        Instance.dialogueText.AddTextToQueue("Hi! This is a test of the text code from Please Stab For Me.");
-        Instance.dialogueText.AddTextToQueue("(I should also test short text...)");
-        Instance.dialogueText.AddTextToQueue("Test!");
-        Instance.dialogueText.AddTextToQueue("This is the last text. I hope the closing of the box works properly.");
+        dialogueReader = GetComponent<DialogueReader>();
+    }
 
+    public static void StartDialogue(TextAsset aInkJSON) //for testing purposes
+    {
         Instance.skinnyText.AddTextToQueue("This is short text");
         Instance.skinnyText.AddTextToQueue("It runs simultaneously with the main dialogue panel.");
         Instance.skinnyText.AddTextToQueue("It could behave a little weird though...");
         Instance.skinnyText.AddTextToQueue("I want it to be a tutorial dialogue option");
         Instance.skinnyText.AddTextToQueue("I wonder if the text will close itself after it's done?");
+
+        // Switch input mode to Menu & set cursor to continueButton. Later move this to cutscene manager?
+        InputManager.SwitchInputModeMenu();
+        InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
+
+        Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
+        AddNextDialogueChunk();
 
         sequenceStarted = true; //DEBUG ONLY
         Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
@@ -40,6 +49,16 @@ public class DialogueManager : MonoBehaviour
     public static void EndDialogue()
     {
         sequenceStarted = false; //DEBUG ONLY
+        InputManager.SwitchInputModeOverworld();
+    }
+
+    public static void AddNextDialogueChunk()
+    {
+        List<string> dialogueList = Instance.dialogueReader.RetrieveNextStoryChunk();
+        foreach (string line in dialogueList)
+        {
+            Instance.dialogueText.AddTextToQueue(line);
+        }
     }
 
     // call this method from a unity event when Continue button is selected
