@@ -101,6 +101,12 @@ public class MenuButton : MonoBehaviour
         UpdateButtonColor();
     }
 
+    // may be changed later to character-by-character
+    public void SetButtonText(string aText)
+    {
+        buttonText.text = aText;
+    }
+
     public void SetIsDisabled(bool aActive)
     {
         isDisabled = aActive;

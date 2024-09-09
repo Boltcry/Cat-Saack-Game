@@ -723,6 +723,38 @@ PrefabInstance:
       propertyPath: leftLink
       value: 
       objectReference: {fileID: 1406729315}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1636688419}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RecieveChoiceSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7666048468717085745, guid: ee73444b94881b640a2364b9f9070123, type: 3}
       propertyPath: m_text
       value: Choice 3
@@ -1529,6 +1561,38 @@ PrefabInstance:
       propertyPath: rightLink
       value: 
       objectReference: {fileID: 439613444}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1636688419}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RecieveChoiceSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7666048468717085745, guid: ee73444b94881b640a2364b9f9070123, type: 3}
       propertyPath: m_text
       value: Choice 2
@@ -1906,6 +1970,34 @@ PrefabInstance:
       propertyPath: rightLink
       value: 
       objectReference: {fileID: 1406729315}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1636688419}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RecieveChoiceSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DialogueManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407332729933469918, guid: ee73444b94881b640a2364b9f9070123, type: 3}
+      propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee73444b94881b640a2364b9f9070123, type: 3}
 --- !u!224 &4596011371507556700 stripped

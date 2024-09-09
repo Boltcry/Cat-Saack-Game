@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
 
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
-        AddNextDialogueChunk();
+        ContinueDialogue();
 
         sequenceStarted = true; //DEBUG ONLY
         Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
@@ -54,12 +54,23 @@ public class DialogueManager : MonoBehaviour
         InputManager.SwitchInputModeOverworld();
     }
 
-    public static void AddNextDialogueChunk()
+    public static void ContinueDialogue()
     {
+        // Add next dialogue chunk
         List<string> dialogueList = Instance.dialogueReader.RetrieveNextStoryChunk();
         foreach (string line in dialogueList)
         {
             Instance.dialogueText.AddTextToQueue(line);
+        }
+
+        // Check for if choices should be displayed
+        if (dialogueList.Count == 0)
+        {
+            List<string> currentChoicesText = Instance.dialogueReader.GetChoicesText();
+            if (currentChoicesText.Count > 0)
+            {
+                Instance.dialogueText.DisplayChoices(currentChoicesText);
+            }
         }
     }
 
@@ -80,6 +91,11 @@ public class DialogueManager : MonoBehaviour
                 text.SetContinue(true);
             }
         }
+    }
+
+    public static void RecieveChoiceSelect(int aChoiceIndex)
+    {
+        Instance.dialogueReader.RecieveChoiceSelect(aChoiceIndex);
     }
 
     public static void RegisterTextDisplayer(TextDisplayer aTextDisplayer)

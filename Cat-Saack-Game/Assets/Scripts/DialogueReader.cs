@@ -32,5 +32,22 @@ public class DialogueReader : MonoBehaviour
         return currentStory.canContinue;
     }
 
+    public List<string> GetChoicesText()
+    {
+        List<Choice> currentChoices = currentStory.currentChoices;
+        List<string> choicesText = new List<string>();
+        foreach (Choice choice in currentChoices)
+        {
+            choicesText.Add(choice.text);
+        }
+
+        return choicesText;
+    }
+
+    public void RecieveChoiceSelect(int aChoiceIndex)
+    {
+        currentStory.ChooseChoiceIndex(aChoiceIndex);
+    }
+
 
 }
