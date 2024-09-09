@@ -11,6 +11,7 @@ public class TextDisplayer : MonoBehaviour
 
     public float typeSpeed = 10;
     // the text object that will be populated by DisplayText
+    [Header("Main UI")]
     public TextMeshProUGUI textField;
     public GameObject TextPanel;
     public MenuButton continueButton;
@@ -23,11 +24,6 @@ public class TextDisplayer : MonoBehaviour
 
     Coroutine displayTextCoroutine;
     const float MAX_TYPE_TIME = 0.1f;
-
-
-    void Awake()
-    {
-    }
 
     void Start()
     {

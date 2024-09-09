@@ -14,7 +14,7 @@ public class OverworldInteractable : MonoBehaviour, Interactable
         outlineObject = GetComponent<OutlineObject>();
     }
 
-
+    // Plays the dialogue associated with the interactable. May change to a Cutscene later
     public void OnSelect()
     {
         if(inkJSON != null)
