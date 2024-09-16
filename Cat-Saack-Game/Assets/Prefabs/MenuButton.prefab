@@ -94,9 +94,9 @@ MonoBehaviour:
   downLink: {fileID: 0}
   leftLink: {fileID: 0}
   rightLink: {fileID: 0}
-  highlightedColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}
-  pressedColor: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 0}
-  disabledColor: {r: 0, g: 0, b: 0, a: 0}
+  highlightedColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  pressedColor: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
+  disabledColor: {r: 0, g: 0, b: 0, a: 1}
   pressedColorDuration: 0.1
   buttonData: {fileID: 0}
   onSelect:

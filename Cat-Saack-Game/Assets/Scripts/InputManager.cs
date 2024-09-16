@@ -67,13 +67,16 @@ public class InputManager : MonoBehaviour
             {
                 if (cursorButton != null)
                 {
-                    Debug.Log("moved in the menu system");
+                    //Debug.Log("moved in the menu system"); //DEBUG ONLY
+
                     moveDirection = aContext.ReadValue<Vector2>().normalized;
                     //disable the old button's hover status
                     cursorButton.SetIsHighlighted(false); 
                     cursorButton = cursorButton.GetButtonInDirection(moveDirection);
                     //set the new button to hover status
                     cursorButton.SetIsHighlighted(true);
+
+                    //Debug.Log("Cursor button name: "+cursorButton.gameObject.name); //DEBUG ONLY
                 }
             }
         }
@@ -88,7 +91,7 @@ public class InputManager : MonoBehaviour
         {
             if (actionMapName == "Player")
             {
-                Debug.Log("OnSelect pressed in Overworld mode");
+                //Debug.Log("OnSelect pressed in Overworld mode");
                 playerOverworld.OnSelect();
             }
 
@@ -135,7 +138,15 @@ public class InputManager : MonoBehaviour
     {
         if (aButton != null)
         {
+            // Unhighlight the previous button if there is one
+            if (Instance.cursorButton != null)
+            {
+                Instance.cursorButton.SetIsHighlighted(false);
+            }
+
+            // Set the new cursor button and highlight it
             Instance.cursorButton = aButton;
+            Instance.cursorButton.SetIsHighlighted(true);
         }
         else
         {

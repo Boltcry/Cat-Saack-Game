@@ -14,7 +14,6 @@ public class DialogueManager : MonoBehaviour
     public TextDisplayer skinnyText;
 
     List<TextDisplayer> textDisplayers = new List<TextDisplayer>();
-    public static bool sequenceStarted = false;
 
     void Awake()
     {
@@ -28,14 +27,6 @@ public class DialogueManager : MonoBehaviour
 
     public static void StartDialogue(TextAsset aInkJSON)
     {
-        //TESTING ONLY
-        Instance.skinnyText.AddTextToQueue("This is short text");
-        Instance.skinnyText.AddTextToQueue("It runs simultaneously with the main dialogue panel.");
-        Instance.skinnyText.AddTextToQueue("It could behave a little weird though...");
-        Instance.skinnyText.AddTextToQueue("I want it to be a tutorial dialogue option");
-        Instance.skinnyText.AddTextToQueue("I wonder if the text will close itself after it's done?");
-
-
         // Switch input mode to Menu & set cursor to continueButton. Later move this to cutscene manager?
         InputManager.SwitchInputModeMenu();
         InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
@@ -43,14 +34,11 @@ public class DialogueManager : MonoBehaviour
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
         ContinueDialogue();
 
-        sequenceStarted = true; //DEBUG ONLY
         Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
-        Instance.StartCoroutine(Instance.skinnyText.StartTextSequence());
     }
 
     public static void EndDialogue()
     {
-        sequenceStarted = false; //DEBUG ONLY
         InputManager.SwitchInputModeOverworld();
     }
 
@@ -96,6 +84,8 @@ public class DialogueManager : MonoBehaviour
     public static void RecieveChoiceSelect(int aChoiceIndex)
     {
         Instance.dialogueReader.RecieveChoiceSelect(aChoiceIndex);
+        ContinueDialogue();
+        Instance.dialogueText.SetContinue(true);
     }
 
     public static void RegisterTextDisplayer(TextDisplayer aTextDisplayer)

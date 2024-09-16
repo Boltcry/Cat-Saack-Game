@@ -1,9 +1,10 @@
+This is a test of the choices in the dialogue system.
 Which pokemon is your favorite?
-* Wooper
+* [Wooper]
     So real. YIPPEEEE :000000
-* Snom
+* [Snom]
     The little prickly we would overthrow a small-to-medium-sized-nation for.
-* Joltik
+* [Joltik]
     The only cute insect.
 
 -

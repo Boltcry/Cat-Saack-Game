@@ -12,6 +12,17 @@ public class DialogueTextDisplayer : TextDisplayer
     [Header("Choice UI")]
     public MenuButton[] choiceButtons;
 
+    bool isWaitingChoices = false;
+
+    new void Start()
+    {
+        base.Start();
+        foreach (MenuButton button in choiceButtons)
+        {
+            button.gameObject.SetActive(false);
+        }
+    }
+
     public void SetPortrait(Image aPortrait)
     {
         if (aPortrait != null)
@@ -26,6 +37,11 @@ public class DialogueTextDisplayer : TextDisplayer
         {
             speakerName.text = aName;
         }
+    }
+
+    public void SetIsWaitingChoices(bool aActive)
+    {
+        isWaitingChoices = aActive;
     }
 
     public void DisplayChoices(List<string> aChoiceListText)
@@ -58,5 +74,53 @@ public class DialogueTextDisplayer : TextDisplayer
 
         // Set cursor button to highlight the first choice
         InputManager.SetCursorButton(choiceButtons[0]);
+
+        SetIsWaitingChoices(true);
+    }
+
+    //wait for recieveDialogueSelect but also display choices if needed
+    protected override IEnumerator WaitForContinue()
+    {
+        // handle choices
+        // if no more text to display
+        if (textQueue.Count == 0)
+        {
+            if (!isWaitingChoices)
+            {
+                SetContinueButtonVisible(true);
+            }
+            DialogueManager.ContinueDialogue();
+        }
+        // handle normal dialogue continue
+        else
+        {
+            // set continue button to active
+            SetContinueButtonVisible(true);
+        }
+
+        while (!shouldContinue)
+        {
+            yield return null;
+        }
+        SetContinue(false);
+        SetIsWaitingChoices(false);
+        // set continue button to inactive
+        SetContinueButtonVisible(false);
+        // reset cursor button
+        InputManager.SetCursorButton(continueButton);
+
+        // hide all choice buttons
+        foreach (MenuButton choice in choiceButtons)
+        {
+            choice.gameObject.SetActive(false);
+        }
+    }
+
+    public override IEnumerator EndTextSequence()
+    {
+        textField.text = "";
+        DialogueManager.EndDialogue();
+        TextPanel.SetActive(false);
+        yield return null;
     }
 }

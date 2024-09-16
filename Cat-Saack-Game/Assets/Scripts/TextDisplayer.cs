@@ -17,15 +17,15 @@ public class TextDisplayer : MonoBehaviour
     public MenuButton continueButton;
 
 
-    Queue<string> textQueue = new Queue<string>();
-    bool isTyping = false;
-    bool shouldContinue = false;
+    protected Queue<string> textQueue = new Queue<string>();
+    protected bool isTyping = false;
+    protected bool shouldContinue = false;
     string currentText;
 
     Coroutine displayTextCoroutine;
     const float MAX_TYPE_TIME = 0.1f;
 
-    void Start()
+    protected void Start()
     {
         SetContinueButtonVisible(false);
         gameObject.SetActive(false);
@@ -46,11 +46,10 @@ public class TextDisplayer : MonoBehaviour
         yield return StartCoroutine(StartNextText());
     }
 
-    public IEnumerator EndTextSequence()
+    public virtual IEnumerator EndTextSequence()
     {
         textField.text = "";
         TextPanel.SetActive(false);
-        DialogueManager.EndDialogue();
         yield return null;
     }
 
@@ -105,7 +104,7 @@ public class TextDisplayer : MonoBehaviour
     }
 
     // Wait for the player to press a button that calls RecieveDialogueSelect() before continuing.
-    IEnumerator WaitForContinue()
+    protected virtual IEnumerator WaitForContinue()
     {
         // set continue button to active
         SetContinueButtonVisible(true);
@@ -138,7 +137,7 @@ public class TextDisplayer : MonoBehaviour
     }
 
     // Enables or disables the Continue button's Image if it has one.
-    void SetContinueButtonVisible(bool aActive)
+    protected void SetContinueButtonVisible(bool aActive)
     {
         if (continueButton != null)
         {
