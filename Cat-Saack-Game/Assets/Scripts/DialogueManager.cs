@@ -45,10 +45,19 @@ public class DialogueManager : MonoBehaviour
     public static void ContinueDialogue()
     {
         // Add next dialogue chunk
-        List<string> dialogueList = Instance.dialogueReader.RetrieveNextStoryChunk();
-        foreach (string line in dialogueList)
+        var (dialogueList, tagList) = Instance.dialogueReader.RetrieveNextStoryChunk();
+        //List<string> dialogueList = Instance.dialogueReader.RetrieveNextStoryChunk();
+        if (dialogueList.Count == tagList.Count)
         {
-            Instance.dialogueText.AddTextToQueue(line);
+            for (int i = 0; i < dialogueList.Count; i++)
+            {
+                Instance.dialogueText.AddTextToQueue(dialogueList[i]);
+                Instance.dialogueText.AddTagToQueue(tagList[i]);
+            }
+        }
+        else
+        {
+            Debug.LogError("dialogueList and tagList are not the same length. dialogueList length: " +dialogueList.Count+ ". tagList length: "+tagList.Count);
         }
 
         // Check for if choices should be displayed

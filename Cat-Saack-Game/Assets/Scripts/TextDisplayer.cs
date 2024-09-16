@@ -77,7 +77,7 @@ public class TextDisplayer : MonoBehaviour
     // if the select button is pressed immediately display the rest of the line.
     // when the dialogue is finished displaying show the menu button to continue
     // perhaps have one menu button to complete the dialogue, and upon completing it set the continue button as active and switch the cursor to it manually.
-    public IEnumerator DisplayText(string aText)
+    public virtual IEnumerator DisplayText(string aText)
     {
         isTyping = true;
         int maxVisibleChars = 0;

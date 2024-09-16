@@ -12,6 +12,7 @@ public class DialogueTextDisplayer : TextDisplayer
     [Header("Choice UI")]
     public MenuButton[] choiceButtons;
 
+    Queue<List<string[]>> tagQueue = new Queue<List<string[]>>();
     bool isWaitingChoices = false;
 
     new void Start()
@@ -42,6 +43,11 @@ public class DialogueTextDisplayer : TextDisplayer
     public void SetIsWaitingChoices(bool aActive)
     {
         isWaitingChoices = aActive;
+    }
+
+    public void AddTagToQueue(List<string[]> aTagLine)
+    {
+        tagQueue.Enqueue(aTagLine);
     }
 
     public void DisplayChoices(List<string> aChoiceListText)
@@ -122,5 +128,44 @@ public class DialogueTextDisplayer : TextDisplayer
         DialogueManager.EndDialogue();
         TextPanel.SetActive(false);
         yield return null;
+    }
+
+    public override IEnumerator DisplayText(string aText)
+    {
+        HandleTags(tagQueue.Dequeue());
+        yield return StartCoroutine(base.DisplayText(aText));
+    }
+
+    // handles tags for a single line of story.
+    public void HandleTags(List<string[]> currentTags)
+    {
+        if (DialogueTag.TagLineIsEmpty(currentTags))
+        {
+            Debug.Log("Tag line is empty.");
+            return;
+        }
+        
+        foreach (string [] tag in currentTags)
+        {
+            string tagKey = tag[0];
+            string tagValue = tag[1];
+
+            //handle tag
+            switch(tagKey)
+            {
+                case DialogueTag.SPEAKER_TAG:
+                    Debug.Log("speaker=" + tagValue);
+                    break;
+                case DialogueTag.PORTRAIT_TAG:
+                    Debug.Log("portrait=" + tagValue);
+                    break;
+                case DialogueTag.LAYOUT_TAG:
+                    Debug.Log("layout=" + tagValue);
+                    break;
+                default:
+                    Debug.LogWarning("Tag came in but is not currently being handled: "+ tagKey + ":" + tagValue);
+                    break;
+            }
+        }
     }
 }
