@@ -6,7 +6,11 @@ using Ink.Runtime;
 
 public static class DialogueTag
 {
+    // default name for portrait sprite library entries
+    public const string DEFAULT_LIBRARY_LABEL_NAME = "Entry";
+
     public const string SPEAKER_TAG = "speaker";
+    // portrait tags should be in the format characterName_expressionName EX: alien_happy
     public const string PORTRAIT_TAG = "portrait";
     public const string LAYOUT_TAG = "layout";
     public static readonly List<string[]> EMPTY_TAG_PAIR = new List<string[]> { new string[] { "", "" } };
@@ -55,10 +59,10 @@ public class DialogueReader : MonoBehaviour
         
         while (currentStory.canContinue)
         {
-            // parse and add current tags for the line
-            currentChunkTags.Add(ParseTags(currentStory.currentTags));
             // add next dialogue line
             dialogueList.Add(currentStory.Continue());
+            // parse and add current tags for the line
+            currentChunkTags.Add(ParseTags(currentStory.currentTags));
         }
 
         return (dialogueList, currentChunkTags);

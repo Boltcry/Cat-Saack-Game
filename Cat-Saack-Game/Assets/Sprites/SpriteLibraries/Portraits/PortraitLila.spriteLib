@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: neutral
+    m_Hash: 606397936
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: 21300000, guid: ac72a6e0607d4a4468bd5a5c297c9b7a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 4babd2e78217df2459e52bf07f18d929, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 1
+  - m_Name: happy
+    m_Hash: 1055753161
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: 21300000, guid: 78e43a9dad825fa43b79190d627cc1cd, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 7019622dedb904c4898a84386a4679cc, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 1
+  - m_Name: annoyed
+    m_Hash: 241283328
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Entry
+      m_Hash: 719368820
+      m_Sprite: {fileID: 21300000, guid: 246fa5e56cebb5b488217de208bd12d0, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 69baa3a3fa7c30448b3c520022ae3e5b, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 1
+  m_PrimaryLibraryGUID: 817c19eeeecdc724daebbad0957430b9

@@ -6,7 +6,7 @@ using TMPro;
 
 public class DialogueTextDisplayer : TextDisplayer
 {
-    public Image portrait;
+    public PortraitManager portrait;
     public TextMeshProUGUI speakerName;
 
     [Header("Choice UI")]
@@ -14,29 +14,35 @@ public class DialogueTextDisplayer : TextDisplayer
 
     Queue<List<string[]>> tagQueue = new Queue<List<string[]>>();
     bool isWaitingChoices = false;
+    Animator animator;
 
     new void Start()
     {
         base.Start();
+        animator = GetComponent<Animator>();
         foreach (MenuButton button in choiceButtons)
         {
             button.gameObject.SetActive(false);
         }
     }
 
-    public void SetPortrait(Image aPortrait)
-    {
-        if (aPortrait != null)
-        {
-            //portrait.sprite = aPortrait;
-        }
-    }
-
-    public void SetSpeakerName(string aName)
+    void SetSpeakerName(string aName)
     {
         if (aName != null)
         {
             speakerName.text = aName;
+        }
+    }
+
+    void SetLayout(string aLayoutType)
+    {
+        if (aLayoutType.ToLower() == "left")
+        {
+            animator.SetBool("isLeftLayout", true);
+        }
+        else if (aLayoutType.ToLower() == "right")
+        {
+            animator.SetBool("isLeftLayout", false);
         }
     }
 
@@ -144,7 +150,7 @@ public class DialogueTextDisplayer : TextDisplayer
             Debug.Log("Tag line is empty.");
             return;
         }
-        
+
         foreach (string [] tag in currentTags)
         {
             string tagKey = tag[0];
@@ -154,13 +160,23 @@ public class DialogueTextDisplayer : TextDisplayer
             switch(tagKey)
             {
                 case DialogueTag.SPEAKER_TAG:
-                    Debug.Log("speaker=" + tagValue);
+                    //Debug.Log("speaker=" + tagValue);
+                    SetSpeakerName(tagValue);
                     break;
                 case DialogueTag.PORTRAIT_TAG:
-                    Debug.Log("portrait=" + tagValue);
+                    // split portrait tag
+                    //Debug.Log("portrait=" + tagValue);
+                    string [] splitTag = tagValue.Split('_');
+                    string character = splitTag[0];
+                    string expression = splitTag[1];
+                    if (portrait != null)
+                    {
+                        portrait.SetPortrait(character, expression);
+                    }
                     break;
                 case DialogueTag.LAYOUT_TAG:
                     Debug.Log("layout=" + tagValue);
+                    SetLayout(tagValue);
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: "+ tagKey + ":" + tagValue);
