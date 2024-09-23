@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+//this is a change
 
 public class DialogueManager : MonoBehaviour
 {
