@@ -36,7 +36,10 @@ public class PortraitManager : MonoBehaviour
             Sprite updatedSprite = currentLibrary.GetSprite(aCategory, aLabel);
             if (updatedSprite != null)
             {
-                portraitImage.sprite = updatedSprite;
+                if (portraitImage != null)
+                {
+                    portraitImage.sprite = updatedSprite;
+                }
                 //Debug.Log("successfully set category to "+aCategory+ " and label to "+aLabel);
             }
         }

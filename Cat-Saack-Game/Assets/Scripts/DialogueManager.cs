@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
         InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
 
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
+        Instance.dialogueReader.StartListeningVariables();
         ContinueDialogue();
 
         Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
@@ -48,6 +49,7 @@ public class DialogueManager : MonoBehaviour
 
     public static void EndDialogue()
     {
+        Instance.dialogueReader.StopListeningVariables();
         InputManager.SwitchInputModeOverworld();
     }
 

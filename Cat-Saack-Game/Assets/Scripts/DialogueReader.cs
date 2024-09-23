@@ -42,11 +42,16 @@ public static class DialogueTag
 // Handles reading ink JSON files. Should be attached as a component to DialogueManager.
 public class DialogueReader : MonoBehaviour
 {
+    [SerializeField] private TextAsset loadInkGlobalsJSON;
+    [HideInInspector] public DialogueVariableObserver dialogueVariables;
 
     private Story currentStory;
-    
     private List<List<string[]>> currentChunkTags = new List<List<string[]>>();
 
+    void Awake()
+    {
+        dialogueVariables = new DialogueVariableObserver(loadInkGlobalsJSON);
+    }
 
     // registers JSON file with the dialogue reader
     public void ReadDialogueSetup(TextAsset aInkJSON)
@@ -123,5 +128,28 @@ public class DialogueReader : MonoBehaviour
         }
 
         return parsedTags;
+    }
+
+    public void StartListeningVariables()
+    {
+        dialogueVariables.StartListening(currentStory);
+    }
+
+    public void StopListeningVariables()
+    {
+        dialogueVariables.StopListening(currentStory);
+    }
+
+    // result must be type casted as the appropriate value
+    // EX: string testVariableText = ((Ink.Runtime.StringValue) DialogueReader.GetVariableState("test_variable")).value;
+    public Ink.Runtime.Object GetVariableState(string aVariableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(aVariableName, out variableValue);
+        if (variableValue == null)
+        {
+            Debug.LogWarning("Ink variable found to be null: " +aVariableName);
+        }
+        return variableValue;
     }
 }
