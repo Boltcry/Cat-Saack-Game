@@ -11,9 +11,11 @@ public class DialogueManager : MonoBehaviour
     private DialogueReader dialogueReader;
 
     public DialogueTextDisplayer dialogueText;
-    public TextDisplayer skinnyText;
+    public DialogueSpeakerConfigSO defaultSpeakerConfig;
+    public DialogueSpeakerConfigSO[] speakerConfigs;
 
     List<TextDisplayer> textDisplayers = new List<TextDisplayer>();
+    Dictionary<string, DialogueSpeakerConfigSO> speakerConfigDict;
 
     void Awake()
     {
@@ -23,6 +25,13 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         dialogueReader = GetComponent<DialogueReader>();
+
+        // initialize speakerConfig dictionary
+        speakerConfigDict = new Dictionary<string, DialogueSpeakerConfigSO>();
+        foreach (DialogueSpeakerConfigSO speakerConfig in speakerConfigs)
+        {
+            speakerConfigDict[speakerConfig.id] = speakerConfig;
+        }
     }
 
     public static void StartDialogue(TextAsset aInkJSON)
@@ -46,7 +55,6 @@ public class DialogueManager : MonoBehaviour
     {
         // Add next dialogue chunk
         var (dialogueList, tagList) = Instance.dialogueReader.RetrieveNextStoryChunk();
-        //List<string> dialogueList = Instance.dialogueReader.RetrieveNextStoryChunk();
         if (dialogueList.Count == tagList.Count)
         {
             for (int i = 0; i < dialogueList.Count; i++)
@@ -100,6 +108,17 @@ public class DialogueManager : MonoBehaviour
     public static void RegisterTextDisplayer(TextDisplayer aTextDisplayer)
     {
         Instance.textDisplayers.Add(aTextDisplayer);
+        aTextDisplayer.SetSpeakerConfig(Instance.defaultSpeakerConfig);
+    }
+
+    public static DialogueSpeakerConfigSO GetSpeakerConfig(string aID)
+    {
+        if (Instance.speakerConfigDict.TryGetValue(aID, out DialogueSpeakerConfigSO speakerConfig))
+        {
+            return speakerConfig;
+        }
+        Debug.LogWarning("SpeakerConfigSO with ID " +aID+ " not found.");
+        return null;
     }
 
 }

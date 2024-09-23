@@ -15,6 +15,14 @@ public class TextDisplayer : MonoBehaviour
     public TextMeshProUGUI textField;
     public GameObject TextPanel;
     public MenuButton continueButton;
+    protected DialogueSpeakerConfigSO currentSpeakerConfig;
+
+    //[Header("Audio")]
+    // [Tooltip("Stop the previous audio clip before playing a new one")]
+    // public bool stopAudioSource;
+    // [Range(1,5)]public int textAudioPlayRate = 1;
+    // [Range(-3,3)] float minPitch = 0.8f;
+    // [Range(-3,3)] float maxPitch = 1.2f;
 
 
     protected Queue<string> textQueue = new Queue<string>();
@@ -25,8 +33,12 @@ public class TextDisplayer : MonoBehaviour
     Coroutine displayTextCoroutine;
     const float MAX_TYPE_TIME = 0.1f;
 
+    AudioSource audioSource;
+
     protected void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         SetContinueButtonVisible(false);
         gameObject.SetActive(false);
         DialogueManager.RegisterTextDisplayer(this);
@@ -91,8 +103,13 @@ public class TextDisplayer : MonoBehaviour
             {
                 break;
             }
+            // play dialogue sound clip
+            PlayTextSound(maxVisibleChars);
+
+            // Show new character
             maxVisibleChars++;
             textField.maxVisibleCharacters = maxVisibleChars;
+            
 
             yield return new WaitForSeconds(MAX_TYPE_TIME / typeSpeed);
         }
@@ -152,6 +169,29 @@ public class TextDisplayer : MonoBehaviour
     public MenuButton GetContinueButton()
     {
         return continueButton;
+    }
+
+    // 
+    private void PlayTextSound(int aMaxVisibleChars)
+    {
+        if (audioSource == null)
+        {
+            return;
+        }
+        if (aMaxVisibleChars % currentSpeakerConfig.textAudioPlayRate == 0)
+        {
+            if (currentSpeakerConfig.stopAudioSource)
+            {
+                audioSource.Stop();
+            }
+            audioSource.pitch = Random.Range(currentSpeakerConfig.minPitch, currentSpeakerConfig.maxPitch);
+            audioSource.PlayOneShot(audioSource.clip);
+        }
+    }
+
+    public void SetSpeakerConfig(DialogueSpeakerConfigSO aSpeakerConfig)
+    {
+        currentSpeakerConfig = aSpeakerConfig;
     }
 
 }

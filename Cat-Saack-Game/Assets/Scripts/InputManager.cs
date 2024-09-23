@@ -20,6 +20,9 @@ public class InputManager : MonoBehaviour
     string actionMapName;
     private Vector2 moveDirection;
     
+    // input select cooldown
+    private bool selectCooldownActive = false;
+    public float selectCooldown = 0.1f;
 
     bool currentlyOverworld = false; // FOR DEBUG ONLY
 
@@ -89,21 +92,32 @@ public class InputManager : MonoBehaviour
 
         if (aContext.phase == InputActionPhase.Performed)
         {
-            if (actionMapName == "Player")
+            if (!selectCooldownActive)
             {
-                //Debug.Log("OnSelect pressed in Overworld mode");
-                playerOverworld.OnSelect();
-            }
-
-            if (actionMapName == "Menu")
-            {
-                if (cursorButton != null)
+                StartCoroutine(WaitForSelectCooldown());
+                if (actionMapName == "Player")
                 {
-                    cursorButton.OnSelect();
+                    //Debug.Log("OnSelect pressed in Overworld mode");
+                    playerOverworld.OnSelect();
+                }
+
+                if (actionMapName == "Menu")
+                {
+                    if (cursorButton != null)
+                    {
+                        cursorButton.OnSelect();
+                    }
                 }
             }
         }
 
+    }
+
+    private IEnumerator WaitForSelectCooldown()
+    {
+        selectCooldownActive = true;
+        yield return new WaitForSeconds(selectCooldown);
+        selectCooldownActive = false;
     }
 
     // Switch to Overworld input mode

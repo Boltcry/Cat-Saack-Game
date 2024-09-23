@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class DialogueTextDisplayer : TextDisplayer
 {
+    [Header("Dialogue UI")]
     public PortraitManager portrait;
     public TextMeshProUGUI speakerName;
 
@@ -159,23 +161,32 @@ public class DialogueTextDisplayer : TextDisplayer
             //handle tag
             switch(tagKey)
             {
+                case DialogueTag.CHAR_TAG:
+                    currentSpeakerConfig = DialogueManager.GetSpeakerConfig(tagValue);
+                    // update speaker to the name if there is not a separate speaker tag for this line.
+                    if (!currentTags.Any(tag => tag[0].Equals(DialogueTag.SPEAKER_TAG)))
+                    {
+                        SetSpeakerName(currentSpeakerConfig.speakerName);
+                    }
+                    // update portrait to new character default if no separate portrait tag for this line.
+                    if (!currentTags.Any(tag => tag[0].Equals(DialogueTag.PORTRAIT_TAG)))
+                    {
+                        portrait.SetPortrait(currentSpeakerConfig.portraitSpriteLibrary, "neutral");
+                    }
+                    //Debug.Log("Set character to id of "+currentSpeakerConfig.id);
+                    break;
                 case DialogueTag.SPEAKER_TAG:
                     //Debug.Log("speaker=" + tagValue);
                     SetSpeakerName(tagValue);
                     break;
                 case DialogueTag.PORTRAIT_TAG:
-                    // split portrait tag
-                    //Debug.Log("portrait=" + tagValue);
-                    string [] splitTag = tagValue.Split('_');
-                    string character = splitTag[0];
-                    string expression = splitTag[1];
                     if (portrait != null)
                     {
-                        portrait.SetPortrait(character, expression);
+                        portrait.SetPortrait(currentSpeakerConfig.portraitSpriteLibrary, tagValue);
                     }
                     break;
                 case DialogueTag.LAYOUT_TAG:
-                    Debug.Log("layout=" + tagValue);
+                    //Debug.Log("layout=" + tagValue);
                     SetLayout(tagValue);
                     break;
                 default:

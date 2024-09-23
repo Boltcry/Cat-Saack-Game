@@ -9,8 +9,12 @@ public static class DialogueTag
     // default name for portrait sprite library entries
     public const string DEFAULT_LIBRARY_LABEL_NAME = "Entry";
 
+    // Character tag should be used to indicate which character will be speaking.
+    // This will set the portrait sprite library and audio config
+    public const string CHAR_TAG = "character";
+    // Speaker tag should be used to indicate the desired name to show in the text box indicating name.
     public const string SPEAKER_TAG = "speaker";
-    // portrait tags should be in the format characterName_expressionName EX: alien_happy
+    // portrait tags should be the name of the category in the relevant sprite library. For example if you are in speakerConfig.id "alien"'s library, use tag "#portrait:happy"
     public const string PORTRAIT_TAG = "portrait";
     public const string LAYOUT_TAG = "layout";
     public static readonly List<string[]> EMPTY_TAG_PAIR = new List<string[]> { new string[] { "", "" } };
