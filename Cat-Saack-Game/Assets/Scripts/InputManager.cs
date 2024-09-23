@@ -150,22 +150,22 @@ public class InputManager : MonoBehaviour
 
     public static void SetCursorButton(MenuButton aButton)
     {
-        if (aButton != null)
+        // Unhighlight the previous button if there is one
+        if (Instance.cursorButton != null)
         {
-            // Unhighlight the previous button if there is one
-            if (Instance.cursorButton != null)
-            {
-                Instance.cursorButton.SetIsHighlighted(false);
-            }
+            Instance.cursorButton.SetIsHighlighted(false);
+        }
 
-            // Set the new cursor button and highlight it
-            Instance.cursorButton = aButton;
+        // Set the new cursor button and highlight it
+        Instance.cursorButton = aButton;
+        if (Instance.cursorButton != null)
+        {
             Instance.cursorButton.SetIsHighlighted(true);
         }
-        else
-        {
-            Debug.LogWarning("Tried to assign cursorButton when given parameter is null");
-        }
+        // else
+        // {
+        //     Debug.Log("Did not highlight cursor button. Set it to null instead");
+        // }
     }
 
     // public static void PushMenuToStack(GameObject aObject)

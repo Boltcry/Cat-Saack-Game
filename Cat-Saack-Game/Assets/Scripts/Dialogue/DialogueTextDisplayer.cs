@@ -10,6 +10,7 @@ public class DialogueTextDisplayer : TextDisplayer
     [Header("Dialogue UI")]
     public PortraitManager portrait;
     public TextMeshProUGUI speakerName;
+    public string defaultLayout = "left";
 
     [Header("Choice UI")]
     public MenuButton[] choiceButtons;
@@ -45,6 +46,10 @@ public class DialogueTextDisplayer : TextDisplayer
         else if (aLayoutType.ToLower() == "right")
         {
             animator.SetBool("isLeftLayout", false);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid layout given: "+aLayoutType);
         }
     }
 
@@ -130,6 +135,16 @@ public class DialogueTextDisplayer : TextDisplayer
         }
     }
 
+    public override IEnumerator StartTextSequence()
+    {
+        TextPanel.SetActive(true);
+
+        // set default layout
+        SetLayout(defaultLayout);
+
+        yield return StartCoroutine(StartNextText());
+    }
+
     public override IEnumerator EndTextSequence()
     {
         textField.text = "";
@@ -149,7 +164,7 @@ public class DialogueTextDisplayer : TextDisplayer
     {
         if (DialogueTag.TagLineIsEmpty(currentTags))
         {
-            Debug.Log("Tag line is empty.");
+            //Debug.Log("Tag line is empty.");
             return;
         }
 

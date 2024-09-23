@@ -52,7 +52,7 @@ public class TextDisplayer : MonoBehaviour
         }
     }
 
-    public IEnumerator StartTextSequence()
+    public virtual IEnumerator StartTextSequence()
     {
         TextPanel.SetActive(true);
         yield return StartCoroutine(StartNextText());

@@ -9,7 +9,7 @@ How's the weather looking?
     Ooh, nice and chilly. I hope there's wind. #character:ffion #portrait:happy #layout:left
     Then I can finally wear some layers! #character:lila #portrait:happy #layout:right
 * [Wet]
-    Hey, at least there'll be rain, right? #portrait:neutral #layout:right
+    Hey, at least there'll be rain, right? #character:lila #portrait:neutral #layout:right
     Yeah, but then it'll be muggy tomorrow. #character:ffion #portrait:annoyed #layout:left
 
 -

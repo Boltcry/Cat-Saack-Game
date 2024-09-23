@@ -38,19 +38,27 @@ public class DialogueManager : MonoBehaviour
     {
         // Switch input mode to Menu & set cursor to continueButton. Later move this to cutscene manager?
         InputManager.SwitchInputModeMenu();
-        InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
 
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
         Instance.dialogueReader.StartListeningVariables();
         ContinueDialogue();
 
+        Instance.StartCoroutine(Instance.LateSetButton());
         Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
+    }
+
+    private IEnumerator LateSetButton()
+    {
+        yield return new WaitForEndOfFrame();
+        InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
     }
 
     public static void EndDialogue()
     {
         Instance.dialogueReader.StopListeningVariables();
+        // Restore player overworld control & clear cursorButton
         InputManager.SwitchInputModeOverworld();
+        InputManager.SetCursorButton(null);
     }
 
     public static void ContinueDialogue()
