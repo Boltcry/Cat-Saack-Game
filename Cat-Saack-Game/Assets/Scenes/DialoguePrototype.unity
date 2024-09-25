@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 76420394}
   - component: {fileID: 76420393}
-  - component: {fileID: 76420392}
   - component: {fileID: 76420391}
+  - component: {fileID: 76420392}
   - component: {fileID: 76420395}
   m_Layer: 6
   m_Name: NPC
