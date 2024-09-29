@@ -17,13 +17,6 @@ public class TextDisplayer : MonoBehaviour
     public MenuButton continueButton;
     protected DialogueSpeakerConfigSO currentSpeakerConfig;
 
-    //[Header("Audio")]
-    // [Tooltip("Stop the previous audio clip before playing a new one")]
-    // public bool stopAudioSource;
-    // [Range(1,5)]public int textAudioPlayRate = 1;
-    // [Range(-3,3)] float minPitch = 0.8f;
-    // [Range(-3,3)] float maxPitch = 1.2f;
-
 
     protected Queue<string> textQueue = new Queue<string>();
     protected bool isTyping = false;
@@ -55,7 +48,7 @@ public class TextDisplayer : MonoBehaviour
     public virtual IEnumerator StartTextSequence()
     {
         TextPanel.SetActive(true);
-        yield return StartCoroutine(StartNextText());
+        yield return DialogueManager.Instance.StartCoroutine(StartNextText());
     }
 
     public virtual IEnumerator EndTextSequence()
@@ -71,16 +64,16 @@ public class TextDisplayer : MonoBehaviour
         // if there is no more text to display
         if (textQueue.Count == 0)
         {
-            yield return StartCoroutine(EndTextSequence());
-            yield break;
+            yield return DialogueManager.Instance.StartCoroutine(EndTextSequence());
+            //yield break;
         }
 
-        if (!isTyping)
+        else if (!isTyping)
         {
             currentText = textQueue.Dequeue();
 
             // Call DisplayText() and wait for it to end
-            displayTextCoroutine = StartCoroutine(DisplayText(currentText));
+            displayTextCoroutine = DialogueManager.Instance.StartCoroutine(DisplayText(currentText));
             yield return displayTextCoroutine;
         }
     }
@@ -115,7 +108,7 @@ public class TextDisplayer : MonoBehaviour
         }
 
         isTyping = false;
-        yield return StartCoroutine(WaitForContinue());
+        yield return DialogueManager.Instance.StartCoroutine(WaitForContinue());
         
         yield return StartNextText();
     }

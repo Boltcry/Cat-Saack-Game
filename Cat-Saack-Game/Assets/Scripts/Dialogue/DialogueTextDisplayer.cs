@@ -142,21 +142,20 @@ public class DialogueTextDisplayer : TextDisplayer
         // set default layout
         SetLayout(defaultLayout);
 
-        yield return StartCoroutine(StartNextText());
+        yield return DialogueManager.Instance.StartCoroutine(StartNextText());
     }
 
     public override IEnumerator EndTextSequence()
     {
         textField.text = "";
-        DialogueManager.EndDialogue();
+        yield return DialogueManager.Instance.StartCoroutine(DialogueManager.EndDialogue());
         TextPanel.SetActive(false);
-        yield return null;
     }
 
     public override IEnumerator DisplayText(string aText)
     {
         HandleTags(tagQueue.Dequeue());
-        yield return StartCoroutine(base.DisplayText(aText));
+        yield return DialogueManager.Instance.StartCoroutine(base.DisplayText(aText));
     }
 
     // handles tags for a single line of story.
