@@ -21,8 +21,8 @@ public class SequenceManager : MonoBehaviour
         if (aSequence != null)
         {
             Debug.Log("Starting sequence");
-            // switch input mode to menu, do the WaitTillEndOfFrame thing
             Instance.currentSequence = aSequence;
+
             //Instance.sequenceIsRunning = true;
             Instance.StartCoroutine(Instance.RunSequence());
         }
@@ -33,6 +33,15 @@ public class SequenceManager : MonoBehaviour
         foreach (SequenceStep step in currentSequence.sequenceSteps)
         {
             Debug.Log("Starting new step");
+            // switch input mode based on step's disableMove flag
+            if (step.disableMove)
+            {
+                InputManager.SwitchInputModeMenu();
+            }
+            else
+            {
+                InputManager.SwitchInputModeOverworld();
+            }
             yield return StartCoroutine(step.Execute());
         }
         EndSequence();
@@ -42,7 +51,11 @@ public class SequenceManager : MonoBehaviour
     {
         //sequenceIsRunning = false;
         currentSequence = null;
-        // reset input modes
+
+        // Restore player overworld control & clear cursorButton
+        InputManager.SwitchInputModeOverworld();
+        InputManager.SetCursorButton(null);
+        
         Debug.Log("Ending Sequence");
     }
 }

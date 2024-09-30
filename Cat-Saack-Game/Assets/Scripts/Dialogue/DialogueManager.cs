@@ -36,17 +36,12 @@ public class DialogueManager : MonoBehaviour
 
     public static IEnumerator StartDialogue(TextAsset aInkJSON)
     {
-        Debug.Log("Starting Dialogue");
-        // Switch input mode to Menu & set cursor to continueButton. Later move this to cutscene manager?
-        InputManager.SwitchInputModeMenu();
-
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
         Instance.dialogueReader.StartListeningVariables();
         ContinueDialogue();
 
         Instance.StartCoroutine(Instance.LateSetButton());
         yield return Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
-        Debug.Log("Ending StartDialogue coroutine");
     }
 
     private IEnumerator LateSetButton()
@@ -58,11 +53,8 @@ public class DialogueManager : MonoBehaviour
     public static IEnumerator EndDialogue()
     {
         Instance.dialogueReader.StopListeningVariables();
-        // Restore player overworld control & clear cursorButton
-        InputManager.SwitchInputModeOverworld();
-        InputManager.SetCursorButton(null);
+        //InputManager.SetCursorButton(null);
         yield return null;
-        Debug.Log("Ending EndDialogue Coroutine");
     }
 
     public static void ContinueDialogue()

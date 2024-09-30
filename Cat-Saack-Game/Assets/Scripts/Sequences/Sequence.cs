@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Sequence
 {
-    public bool disablePlayerInput = true;
     [SerializeReference] // marks list as holding polymorphic types
     public List<SequenceStep> sequenceSteps = new List<SequenceStep>();
 }
@@ -13,6 +12,9 @@ public class Sequence
 [System.Serializable]
 public abstract class SequenceStep
 {
+    [Tooltip("Switch input mode to Menu during this step")]
+    public bool disableMove = true;
+
     public abstract IEnumerator Execute();
 }
 
