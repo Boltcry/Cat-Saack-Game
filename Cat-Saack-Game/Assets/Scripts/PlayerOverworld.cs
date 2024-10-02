@@ -60,6 +60,7 @@ public class PlayerOverworld : MonoBehaviour
                 {
                     closestDistance = distance;
                     interactable = tempInteractable;
+                    Debug.Log($"Found interactable: {tempInteractable.gameObject.name} at distance {distance}");
                 }
             }
         }

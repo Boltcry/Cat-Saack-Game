@@ -6,6 +6,7 @@ public class NPCOverworld : OverworldInteractable
 {
     new public void OnSelect()
     {
+        Debug.Log("npc selected");
         base.OnSelect();
     }
 }
