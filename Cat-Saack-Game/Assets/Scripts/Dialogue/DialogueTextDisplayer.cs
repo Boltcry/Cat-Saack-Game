@@ -176,7 +176,8 @@ public class DialogueTextDisplayer : TextDisplayer
             switch(tagKey)
             {
                 case DialogueTag.CHAR_TAG:
-                    currentSpeakerConfig = DialogueManager.GetSpeakerConfig(tagValue);
+                    SetSpeakerConfig(DialogueManager.GetSpeakerConfig(tagValue));
+
                     // update speaker to the name if there is not a separate speaker tag for this line.
                     if (!currentTags.Any(tag => tag[0].Equals(DialogueTag.SPEAKER_TAG)))
                     {

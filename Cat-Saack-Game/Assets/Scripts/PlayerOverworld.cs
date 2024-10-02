@@ -5,12 +5,18 @@ using UnityEngine;
 // Player in the overworld. Handles movement
 public class PlayerOverworld : MonoBehaviour
 {
-
-    private Rigidbody2D rb;
+    [Header("Movement & Interact")]
     public float moveSpeed = 3f;
     public float interactRange = 5f;
     public LayerMask interactLayer;
 
+    [Header("Running Audio")]
+    public AudioClip[] footstepAudioClips;
+    public float footstepInterval = 0.7f;
+    public float walkSpeedThreshold = 0.1f;
+    private float footstepTimer = 0f;
+
+    private Rigidbody2D rb;
     private OverworldInteractable closestInteractable;
     private OverworldInteractable previousInteractable;
 
@@ -22,6 +28,7 @@ public class PlayerOverworld : MonoBehaviour
     void Update()
     {
         FindClosestInteractable();
+        HandleFootstepAudio();
     }
 
     public void OnSelect()
@@ -76,6 +83,31 @@ public class PlayerOverworld : MonoBehaviour
         }
         previousInteractable = closestInteractable;
         closestInteractable = interactable;
+    }
+
+    // plays a sound effect for the player's footsteps at a set interval
+    void HandleFootstepAudio()
+    {
+        if (footstepAudioClips.Length > 0)
+        {
+            float speed = rb.velocity.magnitude;
+            // player is moving
+            if (speed > walkSpeedThreshold)
+            {
+                footstepTimer += Time.deltaTime;
+
+                if (footstepTimer >= footstepInterval)
+                {
+                    AudioManager.PlayAudioClip(AudioType.SFX, footstepAudioClips[Random.Range(0, footstepAudioClips.Length)]);
+                    footstepTimer = 0f;
+                }
+            }
+            // player is not moving
+            else
+            {
+                footstepTimer = 0f;
+            }
+        }
     }
 
     #if UNITY_EDITOR

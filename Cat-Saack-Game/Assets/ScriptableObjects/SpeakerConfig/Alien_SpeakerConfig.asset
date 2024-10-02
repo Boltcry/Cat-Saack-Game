@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1763390e7b28a44a4f537f9cac7104, type: 3}
+  m_Name: Alien_SpeakerConfig
+  m_EditorClassIdentifier: 
+  id: alien
+  speakerName: Crush
+  portraitSpriteLibrary: {fileID: 7108339969198208228, guid: adc71898567fcf24481afb4bc3f7c07a, type: 3}
+  voiceClip: {fileID: 8300000, guid: a45ae3635d7ce8042a151feb9159aaa3, type: 3}
+  stopAudioSource: 1
+  textAudioPlayRate: 3
+  minPitch: 0.57
+  maxPitch: 0.93

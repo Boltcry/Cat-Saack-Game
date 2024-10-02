@@ -185,6 +185,10 @@ public class TextDisplayer : MonoBehaviour
     public void SetSpeakerConfig(DialogueSpeakerConfigSO aSpeakerConfig)
     {
         currentSpeakerConfig = aSpeakerConfig;
+        if (aSpeakerConfig.voiceClip != null && audioSource != null)
+        {
+            audioSource.clip = aSpeakerConfig.voiceClip;
+        }
     }
 
 }
