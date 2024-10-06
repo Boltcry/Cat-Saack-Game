@@ -1,3 +1,3 @@
 INCLUDE globals.ink
 
-{test_variable}
+{test_variable} #character:alien

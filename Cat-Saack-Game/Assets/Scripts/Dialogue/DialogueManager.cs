@@ -10,11 +10,12 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
     private DialogueReader dialogueReader;
 
-    public DialogueTextDisplayer dialogueText;
+    public TextDisplayer defaultTextDisplayer;
     public DialogueSpeakerConfigSO defaultSpeakerConfig;
     public DialogueSpeakerConfigSO[] speakerConfigs;
 
     List<TextDisplayer> textDisplayers = new List<TextDisplayer>();
+    TextDisplayer currentTextDisplayer;
     Dictionary<string, DialogueSpeakerConfigSO> speakerConfigDict;
 
     void Awake()
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         dialogueReader = GetComponent<DialogueReader>();
+        currentTextDisplayer = defaultTextDisplayer;
 
         // initialize speakerConfig dictionary
         speakerConfigDict = new Dictionary<string, DialogueSpeakerConfigSO>();
@@ -34,26 +36,29 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public static IEnumerator StartDialogue(TextAsset aInkJSON)
+    public static IEnumerator StartDialogue(TextAsset aInkJSON, TextDisplayer aTextDisplayer)
     {
+        InputManager.SetCursorButton(null);
+        Instance.currentTextDisplayer = aTextDisplayer;
+        Instance.currentTextDisplayer.SetSpeakerConfig(Instance.defaultSpeakerConfig);
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
         Instance.dialogueReader.StartListeningVariables();
         ContinueDialogue();
 
         Instance.StartCoroutine(Instance.LateSetButton());
-        yield return Instance.StartCoroutine(Instance.dialogueText.StartTextSequence());
+        yield return Instance.StartCoroutine(Instance.currentTextDisplayer.StartTextSequence());
     }
 
     private IEnumerator LateSetButton()
     {
         yield return new WaitForEndOfFrame();
-        InputManager.SetCursorButton(Instance.dialogueText.GetContinueButton());
+        InputManager.SetCursorButton(Instance.currentTextDisplayer.GetContinueButton());
     }
 
     public static IEnumerator EndDialogue()
     {
         Instance.dialogueReader.StopListeningVariables();
-        //InputManager.SetCursorButton(null);
+        InputManager.SetCursorButton(null);
         yield return null;
     }
 
@@ -65,8 +70,11 @@ public class DialogueManager : MonoBehaviour
         {
             for (int i = 0; i < dialogueList.Count; i++)
             {
-                Instance.dialogueText.AddTextToQueue(dialogueList[i]);
-                Instance.dialogueText.AddTagToQueue(tagList[i]);
+                Instance.currentTextDisplayer.AddTextToQueue(dialogueList[i]);
+                if (Instance.currentTextDisplayer is DialogueTextDisplayer dialogueTextDisplayer)
+                {
+                    dialogueTextDisplayer.AddTagToQueue(tagList[i]);
+                }
             }
         }
         else
@@ -80,7 +88,10 @@ public class DialogueManager : MonoBehaviour
             List<string> currentChoicesText = Instance.dialogueReader.GetChoicesText();
             if (currentChoicesText.Count > 0)
             {
-                Instance.dialogueText.DisplayChoices(currentChoicesText);
+                if (Instance.currentTextDisplayer is DialogueTextDisplayer dialogueTextDisplayer)
+                {
+                    dialogueTextDisplayer.DisplayChoices(currentChoicesText);
+                }
             }
         }
     }
@@ -108,13 +119,12 @@ public class DialogueManager : MonoBehaviour
     {
         Instance.dialogueReader.RecieveChoiceSelect(aChoiceIndex);
         ContinueDialogue();
-        Instance.dialogueText.SetContinue(true);
+        Instance.currentTextDisplayer.SetContinue(true);
     }
 
     public static void RegisterTextDisplayer(TextDisplayer aTextDisplayer)
     {
         Instance.textDisplayers.Add(aTextDisplayer);
-        aTextDisplayer.SetSpeakerConfig(Instance.defaultSpeakerConfig);
     }
 
     public static DialogueSpeakerConfigSO GetSpeakerConfig(string aID)

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: ffion
   speakerName: Ffion
   portraitSpriteLibrary: {fileID: 7108339969198208228, guid: 817c19eeeecdc724daebbad0957430b9, type: 3}
-  voiceClip: {fileID: 8300000, guid: a45ae3635d7ce8042a151feb9159aaa3, type: 3}
+  voiceClip: {fileID: 8300000, guid: 4c2004db496c75c4d8418ecddd4e4a0f, type: 3}
   stopAudioSource: 1
   textAudioPlayRate: 2
   minPitch: 0.8

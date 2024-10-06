@@ -12,6 +12,7 @@ public class TextDisplayer : MonoBehaviour
     public float typeSpeed = 10;
     // the text object that will be populated by DisplayText
     [Header("Main UI")]
+    public bool clearTextOnStart = false;
     public TextMeshProUGUI textField;
     public GameObject TextPanel;
     public MenuButton continueButton;
@@ -35,6 +36,11 @@ public class TextDisplayer : MonoBehaviour
         SetContinueButtonVisible(false);
         gameObject.SetActive(false);
         DialogueManager.RegisterTextDisplayer(this);
+
+        if (clearTextOnStart)
+        {
+            textField.text = "";
+        }
     }
 
     public void AddTextToQueue(string aText)
@@ -54,8 +60,8 @@ public class TextDisplayer : MonoBehaviour
     public virtual IEnumerator EndTextSequence()
     {
         textField.text = "";
+        yield return DialogueManager.Instance.StartCoroutine(DialogueManager.EndDialogue());
         TextPanel.SetActive(false);
-        yield return null;
     }
 
 
@@ -65,7 +71,6 @@ public class TextDisplayer : MonoBehaviour
         if (textQueue.Count == 0)
         {
             yield return DialogueManager.Instance.StartCoroutine(EndTextSequence());
-            //yield break;
         }
 
         else if (!isTyping)
@@ -108,6 +113,7 @@ public class TextDisplayer : MonoBehaviour
         }
 
         isTyping = false;
+        SetContinue(false);
         yield return DialogueManager.Instance.StartCoroutine(WaitForContinue());
         
         yield return StartNextText();
@@ -116,6 +122,7 @@ public class TextDisplayer : MonoBehaviour
     // Wait for the player to press a button that calls RecieveDialogueSelect() before continuing.
     protected virtual IEnumerator WaitForContinue()
     {
+        yield return new WaitForEndOfFrame();
         // set continue button to active
         SetContinueButtonVisible(true);
         while (!shouldContinue)
@@ -182,7 +189,8 @@ public class TextDisplayer : MonoBehaviour
         }
     }
 
-    public void SetSpeakerConfig(DialogueSpeakerConfigSO aSpeakerConfig)
+    // set speaker config & related settings to new config
+    public virtual void SetSpeakerConfig(DialogueSpeakerConfigSO aSpeakerConfig)
     {
         currentSpeakerConfig = aSpeakerConfig;
         if (aSpeakerConfig.voiceClip != null && audioSource != null)

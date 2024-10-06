@@ -100,6 +100,7 @@ public class DialogueTextDisplayer : TextDisplayer
     //wait for recieveDialogueSelect but also display choices if needed
     protected override IEnumerator WaitForContinue()
     {
+        yield return new WaitForEndOfFrame();
         // handle choices
         // if no more text to display
         if (textQueue.Count == 0)
@@ -143,13 +144,6 @@ public class DialogueTextDisplayer : TextDisplayer
         SetLayout(defaultLayout);
 
         yield return DialogueManager.Instance.StartCoroutine(StartNextText());
-    }
-
-    public override IEnumerator EndTextSequence()
-    {
-        textField.text = "";
-        yield return DialogueManager.Instance.StartCoroutine(DialogueManager.EndDialogue());
-        TextPanel.SetActive(false);
     }
 
     public override IEnumerator DisplayText(string aText)
@@ -209,5 +203,13 @@ public class DialogueTextDisplayer : TextDisplayer
                     break;
             }
         }
+    }
+
+    // set speaker config & related settings to new config
+    public override void SetSpeakerConfig(DialogueSpeakerConfigSO aSpeakerConfig)
+    {
+        base.SetSpeakerConfig(aSpeakerConfig);
+        SetSpeakerName(aSpeakerConfig.speakerName);
+        portrait.SetPortrait(currentSpeakerConfig.portraitSpriteLibrary, "neutral");
     }
 }

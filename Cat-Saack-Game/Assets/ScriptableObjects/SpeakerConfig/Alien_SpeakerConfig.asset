@@ -15,8 +15,8 @@ MonoBehaviour:
   id: alien
   speakerName: Crush
   portraitSpriteLibrary: {fileID: 7108339969198208228, guid: adc71898567fcf24481afb4bc3f7c07a, type: 3}
-  voiceClip: {fileID: 8300000, guid: a45ae3635d7ce8042a151feb9159aaa3, type: 3}
+  voiceClip: {fileID: 8300000, guid: b0f4a09493b21304895178cefcd6d483, type: 3}
   stopAudioSource: 1
   textAudioPlayRate: 3
-  minPitch: 0.57
-  maxPitch: 0.93
+  minPitch: 0.37
+  maxPitch: 0.7

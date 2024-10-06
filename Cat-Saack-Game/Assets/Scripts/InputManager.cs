@@ -24,32 +24,12 @@ public class InputManager : MonoBehaviour
     private bool selectCooldownActive = false;
     public float selectCooldown = 0.1f;
 
-    bool currentlyOverworld = false; // FOR DEBUG ONLY
-
     void Awake()
     {
         Instance = this;
         playerInput = GetComponent<PlayerInput>();
         playerOverworld = FindObjectOfType<PlayerOverworld>();
         actionMapName = playerInput.currentActionMap.name;
-    }
-
-    void Update() // FOR DEBUG ONLY, SWITCHES INPUT MODE WHEN PRESSING Y
-    {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            if(currentlyOverworld)
-            {
-                SwitchInputModeMenu();
-                currentlyOverworld = false;
-            }
-            else
-            {
-                SwitchInputModeOverworld();
-                currentlyOverworld = true;
-            }
-        }
-
     }
 
     // When the Move action is performed
@@ -129,7 +109,7 @@ public class InputManager : MonoBehaviour
         {
             Instance.cursorButton.SetIsHighlighted(false);
         }
-        Debug.Log("Switched action map to Player (overworld)");
+        // Debug.Log("Switched action map to Player (overworld)");
     }
 
     // Switch to Menu UI input mode
@@ -145,7 +125,7 @@ public class InputManager : MonoBehaviour
         {
             Instance.cursorButton.SetIsHighlighted(true);
         }
-        Debug.Log("Switched action map to Menu");
+        // Debug.Log("Switched action map to Menu");
     }
 
     public static void SetCursorButton(MenuButton aButton)

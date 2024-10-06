@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 [System.Serializable]
 public class Sequence
@@ -22,13 +24,36 @@ public abstract class SequenceStep
 public class DialogueStep : SequenceStep
 {
     public TextAsset inkJSON;
+    public TextDisplayer textPanel;
 
     public override IEnumerator Execute()
     {
-        yield return SequenceManager.Instance.StartCoroutine(DialogueManager.StartDialogue(inkJSON));
+        yield return SequenceManager.Instance.StartCoroutine(DialogueManager.StartDialogue(inkJSON, textPanel));
     }
 }
 
+[System.Serializable]
+public class TimelineStep : SequenceStep
+{
+    public TimelineAsset timelineToPlay;
+
+    public override IEnumerator Execute()
+    {
+        if (SequenceManager.Instance.playableDirector != null && timelineToPlay != null)
+        {
+            SequenceManager.Instance.playableDirector.playableAsset = timelineToPlay;
+            SequenceManager.Instance.playableDirector.Play();
+
+            while (SequenceManager.Instance.playableDirector.state == PlayState.Playing)
+            {
+                yield return null;
+            }
+        }
+    }
+}
+
+/*
+// temp for testing
 [System.Serializable]
 public class TestStep : SequenceStep
 {
@@ -41,3 +66,4 @@ public class TestStep : SequenceStep
         Debug.Log("Test step done.");
     }
 }
+*/

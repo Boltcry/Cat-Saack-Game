@@ -6,9 +6,6 @@ public class OverworldInteractable : MonoBehaviour, Interactable
 {
     public Sequence sequenceToRun = new Sequence();
 
-    //Ink Dialogue file
-    public TextAsset inkJSON;
-
     OutlineObject outlineObject;
 
     void Awake()
@@ -16,15 +13,13 @@ public class OverworldInteractable : MonoBehaviour, Interactable
         outlineObject = GetComponent<OutlineObject>();
     }
 
-    // Plays the dialogue associated with the interactable. May change to a Cutscene later
+    // Plays the sequence associated with the interactable if provided
     public void OnSelect()
     {
-        SequenceManager.StartSequence(sequenceToRun);
-
-        // if(inkJSON != null)
-        // {
-        //     DialogueManager.StartDialogue(inkJSON);
-        // }
+        if (sequenceToRun != null)
+        {
+            SequenceManager.StartSequence(sequenceToRun);
+        }
     }
 
     public void SetOutlineActive(bool aActive)

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SequenceManager : MonoBehaviour
 {
     public static SequenceManager Instance;
+
+    public PlayableDirector playableDirector;
 
     [HideInInspector] 
     public Sequence currentSequence;
@@ -14,13 +17,18 @@ public class SequenceManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        if (playableDirector == null)
+        {
+            playableDirector = GetComponentInChildren<PlayableDirector>();
+        }
     }
 
     public static void StartSequence(Sequence aSequence)
     {
         if (aSequence != null)
         {
-            Debug.Log("Starting sequence");
+            //Debug.Log("Starting sequence");
             Instance.currentSequence = aSequence;
 
             //Instance.sequenceIsRunning = true;
@@ -32,11 +40,13 @@ public class SequenceManager : MonoBehaviour
     {
         foreach (SequenceStep step in currentSequence.sequenceSteps)
         {
-            Debug.Log("Starting new step");
+            yield return new WaitForEndOfFrame();
+            //Debug.Log("Starting new step");
             // switch input mode based on step's disableMove flag
             if (step.disableMove)
             {
                 InputManager.SwitchInputModeMenu();
+                InputManager.SetCursorButton(null);
             }
             else
             {
@@ -53,9 +63,9 @@ public class SequenceManager : MonoBehaviour
         currentSequence = null;
 
         // Restore player overworld control & clear cursorButton
-        InputManager.SwitchInputModeOverworld();
         InputManager.SetCursorButton(null);
+        InputManager.SwitchInputModeOverworld();
         
-        Debug.Log("Ending Sequence");
+        //Debug.Log("Ending Sequence");
     }
 }
