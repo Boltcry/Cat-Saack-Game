@@ -2,33 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Player in the overworld. Handles movement
-public class PlayerOverworld : MonoBehaviour
+// Player in the overworld. Handles interactions
+// inherits from PlayerTopDown to recieve footstep and movement functionality
+public class PlayerOverworld : PlayerTopDown
 {
-    [Header("Movement & Interact")]
-    public float moveSpeed = 3f;
+    [Header("Interactions")]
     public float interactRange = 5f;
     public LayerMask interactLayer;
 
-    [Header("Running Audio")]
-    public AudioClip[] footstepAudioClips;
-    public float footstepInterval = 0.7f;
-    public float walkSpeedThreshold = 0.1f;
-    private float footstepTimer = 0f;
-
-    private Rigidbody2D rb;
     private OverworldInteractable closestInteractable;
     private OverworldInteractable previousInteractable;
 
-    void Start()
+    new protected void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    void Update()
-    {
+        base.Update();
         FindClosestInteractable();
-        HandleFootstepAudio();
     }
 
     public void OnSelect()
@@ -37,18 +25,6 @@ public class PlayerOverworld : MonoBehaviour
         {
             closestInteractable.OnSelect();
         }
-    }
-
-    // Takes move input from InputManager and moves the player
-    public void Move(Vector2 aMoveInput)
-    {
-        //anim.SetFloat("xInput", aMoveInput.x);
-        //anim.SetFloat("yInput", aMoveInput.y);
-
-        Vector2 velocity = rb.velocity;
-        velocity.x = aMoveInput.x * moveSpeed;
-        velocity.y = aMoveInput.y * moveSpeed;
-        rb.velocity = velocity;
     }
 
     // Checks for the closest OverworldInteractable on the Interactable layer to the player and marks it
@@ -83,31 +59,6 @@ public class PlayerOverworld : MonoBehaviour
         }
         previousInteractable = closestInteractable;
         closestInteractable = interactable;
-    }
-
-    // plays a sound effect for the player's footsteps at a set interval
-    void HandleFootstepAudio()
-    {
-        if (footstepAudioClips.Length > 0)
-        {
-            float speed = rb.velocity.magnitude;
-            // player is moving
-            if (speed > walkSpeedThreshold)
-            {
-                footstepTimer += Time.deltaTime;
-
-                if (footstepTimer >= footstepInterval)
-                {
-                    AudioManager.PlayAudioClip(AudioType.SFX, footstepAudioClips[Random.Range(0, footstepAudioClips.Length)]);
-                    footstepTimer = 0f;
-                }
-            }
-            // player is not moving
-            else
-            {
-                footstepTimer = 0f;
-            }
-        }
     }
 
     #if UNITY_EDITOR
