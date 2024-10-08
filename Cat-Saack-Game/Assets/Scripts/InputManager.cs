@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 
     public static InputManager Instance;
 
-    private PlayerOverworld playerOverworld;
+    private PlayerTopDown playerTopDown;
     private PlayerInput playerInput;
     private InputAction selectAction;
     
@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     {
         Instance = this;
         playerInput = GetComponent<PlayerInput>();
-        playerOverworld = FindObjectOfType<PlayerOverworld>();
+        playerTopDown = FindObjectOfType<PlayerTopDown>();
         actionMapName = playerInput.currentActionMap.name;
     }
 
@@ -38,9 +38,9 @@ public class InputManager : MonoBehaviour
 
         if (actionMapName == "Player")
         {
-            if (playerOverworld != null)
+            if (playerTopDown != null)
             {
-                playerOverworld.Move(aContext.ReadValue<Vector2>());
+                playerTopDown.Move(aContext.ReadValue<Vector2>());
             }
         }
 
@@ -77,8 +77,11 @@ public class InputManager : MonoBehaviour
                 StartCoroutine(WaitForSelectCooldown());
                 if (actionMapName == "Player")
                 {
-                    //Debug.Log("OnSelect pressed in Overworld mode");
-                    playerOverworld.OnSelect();
+                    if (playerTopDown is PlayerOverworld playerOverworld)
+                    {
+                        //Debug.Log("OnSelect pressed in Overworld mode");
+                        playerOverworld.OnSelect();
+                    }
                 }
 
                 if (actionMapName == "Menu")
