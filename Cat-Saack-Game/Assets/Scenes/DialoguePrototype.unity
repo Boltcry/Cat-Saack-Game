@@ -5098,6 +5098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625f4574d5dff364eae7011be13ff542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobbyMusic: {fileID: 8300000, guid: 6121b13496dfa74429e75e8a5f527a00, type: 3}
 --- !u!4 &1266441488
 Transform:
   m_ObjectHideFlags: 0
@@ -6628,6 +6629,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3200040314069905086, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6121b13496dfa74429e75e8a5f527a00, type: 3}
     - target: {fileID: 3200040314491173203, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 

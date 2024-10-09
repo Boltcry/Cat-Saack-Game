@@ -15,6 +15,8 @@ public class MinigameManagerDuck : MonoBehaviour
     public PlayerDuckDodgeInfinite player;
     public BoxCollider2D gameRoomBounds;
 
+    public AudioClip minigameMusic;
+
     [HideInInspector]
     public static DifficultyLevel currentDifficulty;
     [HideInInspector]
@@ -52,6 +54,10 @@ public class MinigameManagerDuck : MonoBehaviour
 
     void Start()
     {
+        if (minigameMusic != null)
+        {
+            AudioManager.PlayAudioClip(AudioType.AMBIENT, minigameMusic);
+        }
         StartGame();
     }
 

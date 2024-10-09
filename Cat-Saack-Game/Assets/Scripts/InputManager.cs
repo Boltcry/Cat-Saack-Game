@@ -120,6 +120,7 @@ public class InputManager : MonoBehaviour
     // Switch to Overworld input mode
     public static void SwitchInputModeOverworld()
     {
+        SetCursorButton(null);
         Instance.playerInput.SwitchCurrentActionMap("Player");
         Instance.actionMapName = Instance.playerInput.currentActionMap.name;
         if (Instance.cursorButton != null)

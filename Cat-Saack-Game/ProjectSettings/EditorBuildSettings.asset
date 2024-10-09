@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 69f4c41d9875f0e418a4ffb88fb3133d
+  - enabled: 1
     path: Assets/Scenes/DialoguePrototype.unity
     guid: 0ffb3562ab935814996a8f767d717799
   - enabled: 1
     path: Assets/Scenes/DuckDodgeInfinite.unity
     guid: e2e7f4633e0e3cc4cb9cd947d74ec1bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SceneTransitionTest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

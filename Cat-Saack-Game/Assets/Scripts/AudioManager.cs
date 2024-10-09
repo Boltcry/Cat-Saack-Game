@@ -47,6 +47,14 @@ public class AudioManager : MonoBehaviour
                     Instance.uiAudioSource.PlayOneShot(aClip);
                 }
                 break;
+            case AudioType.AMBIENT:
+                if (Instance.ambientAudioSource != null)
+                {
+                    Instance.ambientAudioSource.loop = true;
+                    Instance.ambientAudioSource.clip = aClip;
+                    Instance.ambientAudioSource.Play();
+                }
+                break;
         }
     }
 }

@@ -6,6 +6,8 @@ public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance;
 
+    public AudioClip lobbyMusic;
+
     void Awake()
     {
         Instance = this;
@@ -14,5 +16,10 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         InputManager.SwitchInputModeOverworld();
+
+        if (lobbyMusic != null)
+        {
+            AudioManager.PlayAudioClip(AudioType.AMBIENT, lobbyMusic);
+        }
     }
 }

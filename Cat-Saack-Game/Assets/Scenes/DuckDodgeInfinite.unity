@@ -7456,6 +7456,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 531061714}
   player: {fileID: 4123247057916579952}
   gameRoomBounds: {fileID: 1882394130}
+  minigameMusic: {fileID: 8300000, guid: 08ad909d07c58ef4fb6ff474953016ef, type: 3}
   defaultDifficulty: 0
   mediumDifficultyStart: 15
   hardDifficultyStart: 40
@@ -7562,7 +7563,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.9
+  m_fontSize: 19.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
