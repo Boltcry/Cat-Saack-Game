@@ -6,6 +6,9 @@ using UnityEngine;
 public class MinigameManagerDuck : MonoBehaviour
 {
     public static MinigameManagerDuck Instance;
+    // StartGame() event handler
+    public delegate void GameStartedHandler();
+    public static event GameStartedHandler OnGameStarted;
 
     public MinigameUIManagerDuck uiManager;
     public EnemySpawner enemySpawner;
@@ -45,7 +48,10 @@ public class MinigameManagerDuck : MonoBehaviour
         {
             player = FindObjectOfType<PlayerDuckDodgeInfinite>();
         }
+    }
 
+    void Start()
+    {
         StartGame();
     }
 
@@ -96,15 +102,27 @@ public class MinigameManagerDuck : MonoBehaviour
         Instance.startTime = Time.time;
         Instance.SetDifficulty(Instance.defaultDifficulty);
         gameIsRunning = true;
+
+        OnGameStarted?.Invoke();
+        Instance.StartCoroutine(Instance.LateStartGame());
         Debug.Log("Started Game");
+    }
+
+    IEnumerator LateStartGame()
+    {
+        yield return new WaitForEndOfFrame();
+        if (InputManager.Instance != null)
+        {
+            InputManager.SwitchInputModeOverworld();
+        }
     }
 
     public static void GameOver()
     {
         Instance.uiManager.DisplayHealth(Instance.player.GetHealth()); // display final health
         gameIsRunning = false;
-        Debug.Log("DuckDodgeInfinite: Game Over");
         // game over text + time survived
+        Instance.uiManager.DisplayGameOver();
         // display the leaderboard
     }
 }

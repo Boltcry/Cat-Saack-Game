@@ -9,7 +9,21 @@ public class SceneLoader : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static void StartGoToScene(string aTargetScene)
+    {
+        Instance.StartCoroutine(GoToScene(aTargetScene));
     }
 
     // called by either SceneLoadStep or UnityEvents (MenuButton)
@@ -24,6 +38,7 @@ public class SceneLoader : MonoBehaviour
             {
                 yield return null;
             }
+            InputManager.RegisterSelf();
             Debug.Log("Loaded Scene" +aTargetScene);
         }
     }

@@ -16,6 +16,7 @@ public class OverworldInteractable : MonoBehaviour, Interactable
     // Plays the sequence associated with the interactable if provided
     public void OnSelect()
     {
+        InputManager.SetCursorButton(null);
         if (sequenceToRun != null)
         {
             SequenceManager.StartSequence(sequenceToRun);

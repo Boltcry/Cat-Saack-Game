@@ -19,7 +19,16 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public static void PlayAudioClip(AudioType aAudioType, AudioClip aClip)

@@ -26,10 +26,24 @@ public class InputManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
-        playerInput = GetComponent<PlayerInput>();
-        playerTopDown = FindObjectOfType<PlayerTopDown>();
-        actionMapName = playerInput.currentActionMap.name;
+        if (Instance == null)
+        {
+            Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        RegisterSelf();
+    }
+
+    public static void RegisterSelf()
+    {
+        Instance.playerInput = Instance.gameObject.GetComponent<PlayerInput>();
+        Instance.playerTopDown = FindObjectOfType<PlayerTopDown>();
+        Instance.actionMapName = Instance.playerInput.currentActionMap.name;
     }
 
     // When the Move action is performed

@@ -25,7 +25,6 @@ public class EnemySpawner : MonoBehaviour
         }
         gameRoomBounds = MinigameManagerDuck.Instance.gameRoomBounds;
         bounds = gameRoomBounds.bounds;
-        StartCoroutine(SpawnEnemies());
     }
 
     public void UpdateDifficultySettings()
@@ -48,6 +47,13 @@ public class EnemySpawner : MonoBehaviour
         currentSpawnTime = currentSettings.startingSpawnTime;
     }
 
+    // starts the SpawnEnemies coroutine. Meant to be used with the OnGameStarted event
+    void StartSpawnEnemies()
+    {
+        StartCoroutine(SpawnEnemies());
+    }
+
+    // Spawns enemies as long as the game is running.
     IEnumerator SpawnEnemies()
     {
         while (MinigameManagerDuck.gameIsRunning)
@@ -60,6 +66,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    // Spawns a singular enemy
     void SpawnEnemy()
     {
         if (currentSettings != null && currentSettings.diffEnemies.Count > 0)
@@ -73,6 +80,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    // Determines spawn position based on difficulty
     Vector3 FindSpawnPosition()
     {
         Vector3 spawnPosition = Vector3.one;
@@ -118,6 +126,17 @@ public class EnemySpawner : MonoBehaviour
                 break;
         }
         return spawnPosition;
+    }
+
+    // May move to a separate OnGameStart class that this can inherit from later
+    void OnEnable()
+    {
+        MinigameManagerDuck.OnGameStarted += StartSpawnEnemies;
+    }
+
+    void OnDisable()
+    {
+        MinigameManagerDuck.OnGameStarted -= StartSpawnEnemies;
     }
 
 #if UNITY_EDITOR

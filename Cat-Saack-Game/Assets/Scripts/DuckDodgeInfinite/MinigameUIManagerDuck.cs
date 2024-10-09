@@ -13,6 +13,13 @@ public class MinigameUIManagerDuck : MonoBehaviour
     public GameObject gameOverScreen;
     public TextMeshProUGUI timeSurvivedText;
 
+    void Start()
+    {
+        timeText.gameObject.SetActive(true);
+        healthText.gameObject.SetActive(true);
+        gameOverScreen.SetActive(false);
+    }
+
     // set the timeText to the current elapsed time. Called by MinigameManagerDuck
     public void DisplayElapsedTime((int aMinutes, int aSeconds) aTime)
     {
@@ -34,6 +41,20 @@ public class MinigameUIManagerDuck : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = "Health: " + aHealth;
+        }
+    }
+
+    public void DisplayGameOver()
+    {
+        gameOverScreen.SetActive(true);
+
+        InputManager.SetCursorButton(null);
+        InputManager.SwitchInputModeMenu();
+
+        (int minutes, int seconds) finalTime = MinigameManagerDuck.Instance.CalculateCurrentTime();
+        if (timeSurvivedText != null)
+        {
+            timeSurvivedText.text = string.Format("Time survived: {0:00}:{1:00}", finalTime.minutes, finalTime.seconds);
         }
     }
 
