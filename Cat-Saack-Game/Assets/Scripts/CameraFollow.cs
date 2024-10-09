@@ -9,7 +9,6 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public float smoothTime = 0.3f;
     private Vector3 refVelocity;
-    //public float gameScreenWidth = 5;
     public BoxCollider2D cameraBounds;
 
     PixelPerfectCamera pixelPerfectCamera;

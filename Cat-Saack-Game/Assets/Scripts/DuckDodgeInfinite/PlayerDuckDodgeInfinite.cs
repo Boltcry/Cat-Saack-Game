@@ -21,6 +21,7 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
     {
         base.Start();
         startPosition = transform.position;
+        isInvincible = false; // reset upon starting new game
         
         // get sprite & invincibilitySprite if not already set
         if (sprite == null || invincibilitySprite == null)
@@ -44,23 +45,19 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
     {
         base.Update();
 
-        // gameplay update function
-        if (isInvincible)
+        if (MinigameManagerDuck.gameIsRunning)
         {
-            invincibilityTimeLeft -= Time.deltaTime;
-
-            if (invincibilityTimeLeft <= 0.0f)
+            // gameplay update function
+            if (isInvincible)
             {
-                isInvincible = false;
-                invincibilitySprite.gameObject.SetActive(false);
+                invincibilityTimeLeft -= Time.deltaTime;
+
+                if (invincibilityTimeLeft <= 0.0f)
+                {
+                    isInvincible = false;
+                    invincibilitySprite.gameObject.SetActive(false);
+                }
             }
-        }
-
-
-        if(health<=0)
-        {
-            Debug.Log("DuckDodgeInfinite: Game Over");
-            //GameManager.GameOver();
         }
     }
 
@@ -70,6 +67,10 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
         {
             health--;
             SetInvincible(1f);
+            if(health<=0)
+            {
+                MinigameManagerDuck.GameOver();
+            }
         }
     }
 
