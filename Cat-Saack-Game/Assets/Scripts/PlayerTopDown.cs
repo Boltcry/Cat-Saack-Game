@@ -13,14 +13,14 @@ public class PlayerTopDown : MonoBehaviour
     public float walkSpeedThreshold = 0.1f;
     private float footstepTimer = 0f;
 
-    //protected Animator anim;
+    protected Animator anim;
 
     protected Rigidbody2D rb;
 
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected void Update()
@@ -31,8 +31,11 @@ public class PlayerTopDown : MonoBehaviour
     // Takes move input from InputManager and moves the player
     public void Move(Vector2 aMoveInput)
     {
-        //anim.SetFloat("xInput", aMoveInput.x);
-        //anim.SetFloat("yInput", aMoveInput.y);
+        if (anim != null)
+        {
+            anim.SetFloat("xInput", aMoveInput.x);
+            anim.SetFloat("yInput", aMoveInput.y);
+        }
 
         Vector2 velocity = rb.velocity;
         velocity.x = aMoveInput.x * moveSpeed;
