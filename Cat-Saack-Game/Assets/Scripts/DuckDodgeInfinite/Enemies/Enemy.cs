@@ -31,8 +31,20 @@ public class Enemy : MonoBehaviour
             BoxCollider2D gameRoomBounds = MinigameManagerDuck.Instance.gameRoomBounds;
             if(Vector3.Distance(transform.position, gameRoomBounds.bounds.center) > destroyDistance) 
             {
-                Destroy(this.gameObject);
+                DestroyEnemy();
             }
+
+            // move towards the enemy's movementDirection
+            rb.velocity = movementDirection * moveSpeed;
+        }
+    }
+
+    protected void LookToDirection(Vector3 aDirection)
+    {
+        if (aDirection != Vector3.zero)
+        {
+            float lookAngle = (Mathf.Atan2(aDirection.y, aDirection.x) * Mathf.Rad2Deg);
+            transform.rotation = Quaternion.Euler( 0, 0, lookAngle);
         }
     }
 
@@ -41,13 +53,17 @@ public class Enemy : MonoBehaviour
         if (aTarget != null)
         {
             lookTarget = aTarget;
-            Debug.Log("Set look target to "+lookTarget);
         }
     }
 
+    // bank the enemy if possible, if not destroy the object
     public void DestroyEnemy()
     {
-        Destroy(this.gameObject);
+        bool bankSuccessful = ItemBankManager.AddObjectToBank(this.gameObject);
+        if (!bankSuccessful)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetDestroyDistance(float aDistance)

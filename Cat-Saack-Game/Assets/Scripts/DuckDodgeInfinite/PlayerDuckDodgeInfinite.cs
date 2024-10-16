@@ -12,8 +12,12 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
 
     [Header("Game Variables")]
     public int health = 3;
+
     bool isInvincible = false;
     float invincibilityTimeLeft = 0.0f;
+    float originalSpeed;
+    bool isSpeedBoosted = false;
+    float speedBoostTimeLeft = 0.0f;
 
     private Vector3 startPosition;
 
@@ -21,6 +25,7 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
     {
         base.Start();
         startPosition = transform.position;
+        originalSpeed = moveSpeed;
         isInvincible = false; // reset upon starting new game
         
         // get sprite & invincibilitySprite if not already set
@@ -58,6 +63,17 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
                     invincibilitySprite.gameObject.SetActive(false);
                 }
             }
+
+            if (isSpeedBoosted)
+            {
+                speedBoostTimeLeft -= Time.deltaTime;
+
+                if (speedBoostTimeLeft <= 0.0f)
+                {
+                    isSpeedBoosted = false;
+                    moveSpeed = originalSpeed;
+                }
+            }
         }
     }
 
@@ -79,6 +95,18 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
         isInvincible = true;
         invincibilitySprite.gameObject.SetActive(true);
         invincibilityTimeLeft = duration;
+    }
+
+    public void SetSpeed(float aDuration, float aSpeedMultiplier)
+    {
+        isSpeedBoosted = true;
+        moveSpeed = originalSpeed * aSpeedMultiplier;
+        speedBoostTimeLeft = aDuration;
+    }
+
+    public void AddHealth(int aHealth)
+    {
+        health += aHealth;
     }
 
     public int GetHealth()

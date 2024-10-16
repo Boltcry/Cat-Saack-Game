@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
 
     DifficultySettings currentSettings;
     float currentSpawnTime;
+    float currentDifficultyTimeElapsed = 0f;
+    Coroutine enemySpawnCoroutine;
 
     void Start()
     {
@@ -45,12 +47,27 @@ public class EnemySpawner : MonoBehaviour
                 break;
         }
         currentSpawnTime = currentSettings.startingSpawnTime;
+        currentDifficultyTimeElapsed = 0f;
+        StopSpawnEnemies();
+        StartSpawnEnemies();
     }
 
     // starts the SpawnEnemies coroutine. Meant to be used with the OnGameStarted event
     void StartSpawnEnemies()
     {
-        StartCoroutine(SpawnEnemies());
+        if (enemySpawnCoroutine == null)
+        {
+            enemySpawnCoroutine = StartCoroutine(SpawnEnemies());
+        }
+    }
+
+    void StopSpawnEnemies()
+    {
+        if (enemySpawnCoroutine != null)
+        {
+            StopCoroutine(enemySpawnCoroutine);
+            enemySpawnCoroutine = null;
+        }
     }
 
     // Spawns enemies as long as the game is running.
@@ -59,25 +76,42 @@ public class EnemySpawner : MonoBehaviour
         while (MinigameManagerDuck.gameIsRunning)
         {
             SpawnEnemy();
-            Debug.Log("Current spawnTime: "+currentSpawnTime);
+            //Debug.Log("Current spawnTime: "+currentSpawnTime);
             yield return new WaitForSeconds(currentSpawnTime);
 
-            currentSpawnTime = Mathf.Max(currentSettings.minSpawnTime, currentSpawnTime - Time.deltaTime * spawnTimeReductionRate);
+            currentDifficultyTimeElapsed += currentSpawnTime;
+            float timeRemainingRatio = Mathf.Clamp01((currentSettings.timeToMinimum - currentDifficultyTimeElapsed) / currentSettings.timeToMinimum);
+
+            //currentSpawnTime = Mathf.Max(currentSettings.minSpawnTime, currentSpawnTime - spawnTimeReductionRate);
+            currentSpawnTime = Mathf.Lerp(currentSettings.minSpawnTime, currentSettings.startingSpawnTime, timeRemainingRatio);
         }
     }
 
     // Spawns a singular enemy
     void SpawnEnemy()
     {
-        if (currentSettings != null && currentSettings.diffEnemies.Count > 0)
+        Enemy spawnedEnemy = null;
+        // Try to pull an enemy from the item bank
+        GameObject grabbedObject = ItemBankManager.GrabObjectFromBank<Enemy>();
+        if (grabbedObject != null)
         {
-            // find enemy to spawn randomly, maybe replace later with an enemy spawn chance
-            Enemy enemyToSpawn = currentSettings.diffEnemies[Random.Range(0, currentSettings.diffEnemies.Count)];
-            // instantiate enemy, maybe replace later with an enemy bank
-            Enemy spawnedEnemy = Instantiate(enemyToSpawn, FindSpawnPosition(), Quaternion.identity);
-            spawnedEnemy.SetLookTarget(enemyTarget);
-            spawnedEnemy.SetDestroyDistance(destroyDistance);
+            spawnedEnemy = GetComponent<Enemy>();
         }
+
+        // Instantiate an enemy if grabbing from bank not successful
+        if (spawnedEnemy == null)
+        {
+            if (currentSettings != null && currentSettings.diffEnemies.Count > 0)
+            {
+                // find enemy to spawn randomly, maybe replace later with an enemy spawn chance
+                Enemy enemyToSpawn = currentSettings.diffEnemies[Random.Range(0, currentSettings.diffEnemies.Count)];
+                spawnedEnemy = Instantiate(enemyToSpawn, FindSpawnPosition(), Quaternion.identity);
+            }
+        }
+
+        spawnedEnemy.gameObject.SetActive(true);
+        spawnedEnemy.SetLookTarget(enemyTarget);
+        spawnedEnemy.SetDestroyDistance(destroyDistance);
     }
 
     // Determines spawn position based on difficulty
@@ -119,7 +153,9 @@ public class EnemySpawner : MonoBehaviour
                 spawnPosition = new Vector3(spawnX, spawnY, 0f);
                 break;
             case DifficultyLevel.Hard:
-                Debug.Log("Finding spawn position for difficulty Hard");
+                float angle = Random.Range(0f, 360f);
+                float distance = Random.Range(currentSettings.minSpawnRange, currentSettings.maxSpawnRange);
+                spawnPosition = transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * distance;
                 break;
             default:
                 Debug.LogWarning("Difficulty level is currently at a level not handled");

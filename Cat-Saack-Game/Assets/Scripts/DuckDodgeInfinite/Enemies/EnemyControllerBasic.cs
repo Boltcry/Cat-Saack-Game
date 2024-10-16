@@ -47,14 +47,4 @@ public class EnemyControllerBasic : Enemy
             }
         }
     }
-
-    override protected void Update()
-    {
-        if (MinigameManagerDuck.gameIsRunning)
-        {
-            base.Update();
-        
-            rb.velocity = movementDirection * moveSpeed;
-        }
-    }
 }

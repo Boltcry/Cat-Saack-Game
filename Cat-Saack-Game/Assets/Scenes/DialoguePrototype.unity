@@ -6633,6 +6633,18 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 6121b13496dfa74429e75e8a5f527a00, type: 3}
+    - target: {fileID: 3200040314491173200, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200040314491173200, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200040314491173200, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3200040314491173203, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 

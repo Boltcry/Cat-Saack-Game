@@ -6,6 +6,8 @@ public class PlayerTopDown : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed = 3f;
+    private float xInput = 0;
+    private float yInput = 0;
 
     [Header("Footstep Audio")]
     public AudioClip[] footstepAudioClips;
@@ -28,19 +30,24 @@ public class PlayerTopDown : MonoBehaviour
         HandleFootstepAudio();
     }
 
-    // Takes move input from InputManager and moves the player
-    public void Move(Vector2 aMoveInput)
+    protected void FixedUpdate()
     {
         if (anim != null)
         {
-            anim.SetFloat("xInput", aMoveInput.x);
-            anim.SetFloat("yInput", aMoveInput.y);
+            anim.SetFloat("xInput", xInput);
+            anim.SetFloat("yInput", yInput);
         }
 
-        Vector2 velocity = rb.velocity;
-        velocity.x = aMoveInput.x * moveSpeed;
-        velocity.y = aMoveInput.y * moveSpeed;
-        rb.velocity = velocity;
+        Vector2 moveInput = new Vector2(xInput, yInput);
+        moveInput.Normalize();
+        rb.velocity = moveInput * moveSpeed;
+    }
+
+    // Takes move input from InputManager and moves the player
+    public void Move(Vector2 aMoveInput)
+    {
+        xInput = aMoveInput.x;
+        yInput = aMoveInput.y;
     }
 
     // plays a sound effect for the player's footsteps at a set interval

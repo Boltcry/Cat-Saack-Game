@@ -14,6 +14,7 @@ public class MinigameManagerDuck : MonoBehaviour
     public EnemySpawner enemySpawner;
     public PlayerDuckDodgeInfinite player;
     public BoxCollider2D gameRoomBounds;
+    public Vector3 itemStorageBank;
 
     public AudioClip minigameMusic;
 
@@ -68,11 +69,11 @@ public class MinigameManagerDuck : MonoBehaviour
             elapsedTime = Time.time - startTime;
 
             // update difficulty if needed
-            if (elapsedTime >= mediumDifficultyStart)
+            if (currentDifficulty < DifficultyLevel.Medium && elapsedTime >= mediumDifficultyStart)
             {
                 SetDifficulty(DifficultyLevel.Medium);
             }
-            if (elapsedTime >= hardDifficultyStart)
+            if (currentDifficulty < DifficultyLevel.Hard && elapsedTime >= hardDifficultyStart)
             {
                 SetDifficulty(DifficultyLevel.Hard);
             }
@@ -100,7 +101,7 @@ public class MinigameManagerDuck : MonoBehaviour
         {
             enemySpawner.UpdateDifficultySettings();
         }
-        Debug.Log("Updated Difficulty");
+        Debug.Log("Updated Difficulty to "+aDifficultyLevel);
     }
 
     public static void StartGame()
@@ -130,5 +131,20 @@ public class MinigameManagerDuck : MonoBehaviour
         // game over text + time survived
         Instance.uiManager.DisplayGameOver();
         // display the leaderboard
+    }
+
+    public static void SetPlayerSpeed(float aDuration, float aSpeedMultiplier)
+    {
+        Instance.player.SetSpeed(aDuration, aSpeedMultiplier);
+    }
+
+    public static void SetPlayerInvincible(float aDuration)
+    {
+        Instance.player.SetInvincible(aDuration);
+    }
+
+    public static void AddPlayerHealth(int aHealth)
+    {
+        Instance.player.AddHealth(aHealth);
     }
 }

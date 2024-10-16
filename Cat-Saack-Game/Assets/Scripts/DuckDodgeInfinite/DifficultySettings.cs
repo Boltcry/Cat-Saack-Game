@@ -14,6 +14,8 @@ public class DifficultySettings
     public float minSpawnTime = 1;
     [Tooltip("Number of seconds between each enemy spawn when starting the difficulty level")]
     public float startingSpawnTime = 3;
+    [Tooltip("Number of seconds from difficulty start till the minimum spawn time is reached")]
+    public float timeToMinimum;
 
     public float minSpawnRange = 1f;
     public float maxSpawnRange = 5f;
