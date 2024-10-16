@@ -10,13 +10,19 @@ public class OutlineObject : MonoBehaviour
     public Material originalMaterial;
     public Material outlineMaterial;
 
-    SpriteRenderer spriteRenderer;
-    Image image;
+    public SpriteRenderer spriteRenderer;
+    public Image image;
 
     public void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        image = GetComponent<Image>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        if (image == null)
+        {
+            image = GetComponent<Image>();
+        }
     }
 
     // Shows or hides outline based on given bool.

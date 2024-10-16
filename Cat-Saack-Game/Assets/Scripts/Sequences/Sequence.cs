@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
-using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Sequence
@@ -60,32 +59,7 @@ public class SceneLoadStep : SequenceStep
 
     public override IEnumerator Execute()
     {
-        if (SceneInProject(targetScene))
-        {
-            AsyncOperation operation = SceneManager.LoadSceneAsync(targetScene);
-
-            while (!operation.isDone)
-            {
-                yield return null;
-            }
-            Debug.Log("Loaded Scene" +targetScene);
-        }
-    }
-
-    bool SceneInProject(string aSceneName)
-    {
-        int sceneCount = SceneManager.sceneCountInBuildSettings;
-        for (int i = 0; i < sceneCount; i++)
-        {
-            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
-            string sceneNameFromPath = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-            if (sceneNameFromPath.Equals(aSceneName))
-            {
-                return true; // scene found
-            }
-        }
-        Debug.LogWarning("Scene by name " +aSceneName+ " not found.");
-        return false; //scene not found
+        yield return SequenceManager.Instance.StartCoroutine(SceneLoader.GoToScene(targetScene));
     }
 }
 

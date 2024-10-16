@@ -19,7 +19,16 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public static void PlayAudioClip(AudioType aAudioType, AudioClip aClip)
@@ -36,6 +45,14 @@ public class AudioManager : MonoBehaviour
                 if (Instance.uiAudioSource != null)
                 {
                     Instance.uiAudioSource.PlayOneShot(aClip);
+                }
+                break;
+            case AudioType.AMBIENT:
+                if (Instance.ambientAudioSource != null)
+                {
+                    Instance.ambientAudioSource.loop = true;
+                    Instance.ambientAudioSource.clip = aClip;
+                    Instance.ambientAudioSource.Play();
                 }
                 break;
         }

@@ -6,6 +6,8 @@ public class PlayerTopDown : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed = 3f;
+    private float xInput = 0;
+    private float yInput = 0;
 
     [Header("Footstep Audio")]
     public AudioClip[] footstepAudioClips;
@@ -13,14 +15,14 @@ public class PlayerTopDown : MonoBehaviour
     public float walkSpeedThreshold = 0.1f;
     private float footstepTimer = 0f;
 
-    //protected Animator anim;
+    protected Animator anim;
 
     protected Rigidbody2D rb;
 
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected void Update()
@@ -28,16 +30,24 @@ public class PlayerTopDown : MonoBehaviour
         HandleFootstepAudio();
     }
 
+    protected void FixedUpdate()
+    {
+        if (anim != null)
+        {
+            anim.SetFloat("xInput", xInput);
+            anim.SetFloat("yInput", yInput);
+        }
+
+        Vector2 moveInput = new Vector2(xInput, yInput);
+        moveInput.Normalize();
+        rb.velocity = moveInput * moveSpeed;
+    }
+
     // Takes move input from InputManager and moves the player
     public void Move(Vector2 aMoveInput)
     {
-        //anim.SetFloat("xInput", aMoveInput.x);
-        //anim.SetFloat("yInput", aMoveInput.y);
-
-        Vector2 velocity = rb.velocity;
-        velocity.x = aMoveInput.x * moveSpeed;
-        velocity.y = aMoveInput.y * moveSpeed;
-        rb.velocity = velocity;
+        xInput = aMoveInput.x;
+        yInput = aMoveInput.y;
     }
 
     // plays a sound effect for the player's footsteps at a set interval
