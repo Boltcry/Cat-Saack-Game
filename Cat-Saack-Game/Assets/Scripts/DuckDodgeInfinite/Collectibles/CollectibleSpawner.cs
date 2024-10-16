@@ -33,7 +33,6 @@ public class CollectibleSpawner : MonoBehaviour
     // attempts to spawn a collectible at location provided by GetWalkablePosition
     void SpawnCollectible()
     {
-        Debug.Log("Start spawning collectible");
         if (currentCollectibleCount < maxCollectibles)
         {
             Vector3 spawnPosition = GetWalkablePosition();
@@ -93,7 +92,6 @@ public class CollectibleSpawner : MonoBehaviour
     // adds walkable tiles to a list walkableTiles using walkableTilemap and collisionTilemap
     void CacheWalkableTiles()
     {
-        Debug.Log("Starting CacheWalkableTiles");
         if (walkableTilemap != null)
         {
             BoundsInt bounds = walkableTilemap.cellBounds;
@@ -109,7 +107,6 @@ public class CollectibleSpawner : MonoBehaviour
                         if (walkableTilemap.HasTile(tilePos) && !collisionTilemap.HasTile(tilePos))
                         {
                             walkableTiles.Add(tilePos);
-                            Debug.Log("Added tile. collisionMap is not null");
                         }
                     }
                     // if no collision Tilemap simply pick a spot on the walkableTilemap
@@ -117,14 +114,12 @@ public class CollectibleSpawner : MonoBehaviour
                     {
                         if (walkableTilemap.HasTile(tilePos))
                         {
-                            walkableTiles.Add(tilePos);
-                            Debug.Log("Added tile. collisionMap is null");                            
+                            walkableTiles.Add(tilePos);                    
                         }
                     }
                 }
             }
         }
-        Debug.Log(walkableTiles.Count);
     }
 
     public void DeregisterCollectible()

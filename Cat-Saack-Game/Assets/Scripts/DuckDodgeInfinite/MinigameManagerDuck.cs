@@ -51,6 +51,11 @@ public class MinigameManagerDuck : MonoBehaviour
         {
             player = FindObjectOfType<PlayerDuckDodgeInfinite>();
         }
+
+        if (InputManager.Instance != null)
+        {
+            InputManager.SwitchInputModeMenu();
+        }
     }
 
     void Start()
@@ -59,7 +64,6 @@ public class MinigameManagerDuck : MonoBehaviour
         {
             AudioManager.PlayAudioClip(AudioType.AMBIENT, minigameMusic);
         }
-        StartGame();
     }
 
     void Update()

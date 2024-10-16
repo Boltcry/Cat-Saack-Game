@@ -7,6 +7,8 @@ using TMPro;
 // have this inherit from a general UI manager in the future?
 public class MinigameUIManagerDuck : MonoBehaviour
 {
+    public GameObject titleScreen;
+    public MenuButton startGameButton;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI healthText;
     public GameObject pauseScreen; // interact with main UI manager in some way?
@@ -18,6 +20,8 @@ public class MinigameUIManagerDuck : MonoBehaviour
         timeText.gameObject.SetActive(true);
         healthText.gameObject.SetActive(true);
         gameOverScreen.SetActive(false);
+        titleScreen.SetActive(true);
+        InputManager.SetCursorButton(startGameButton);
     }
 
     // set the timeText to the current elapsed time. Called by MinigameManagerDuck
@@ -58,5 +62,21 @@ public class MinigameUIManagerDuck : MonoBehaviour
         }
     }
 
+    void HideTitleScreen()
+    {
+        // replace later with a fade
+        titleScreen.SetActive(false);
+    }
+
     // show leaderboard screen (have separate Leaderboard class?)
+
+    void OnEnable()
+    {
+        MinigameManagerDuck.OnGameStarted += HideTitleScreen;
+    }
+
+    void OnDisable()
+    {
+        MinigameManagerDuck.OnGameStarted -= HideTitleScreen;
+    }
 }
