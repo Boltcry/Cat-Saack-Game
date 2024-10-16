@@ -63,18 +63,57 @@ public class SceneLoadStep : SequenceStep
     }
 }
 
-/*
-// temp for testing
 [System.Serializable]
-public class TestStep : SequenceStep
+public class WaitForButtonPressedStep : SequenceStep
 {
-    public string testString;
+    public MenuButton targetButton;
 
     public override IEnumerator Execute()
     {
-        Debug.Log("Running Test Step. testString value is "+testString);
-        yield return new WaitForSeconds(1);
-        Debug.Log("Test step done.");
+        bool buttonPressed = false;
+
+        UnityEngine.Events.UnityAction action = () => buttonPressed = true;
+        targetButton.onSelect.AddListener(action);
+
+        yield return new WaitUntil(() => buttonPressed);
+
+        Debug.Log("Button pressed, continuing sequence");
+        targetButton.onSelect.RemoveListener(action);
     }
 }
-*/
+
+[System.Serializable]
+public class WaitForInteractStep : SequenceStep
+{
+    public Interactable targetInteractable;
+
+    public override IEnumerator Execute()
+    {
+        bool interacted = false;
+        targetInteractable.OnSelected += () => interacted = true;
+
+        yield return new WaitUntil(() => interacted);
+
+        targetInteractable.OnSelected -= () => interacted = true;
+
+        Debug.Log("Interactable selected, continuing sequence.");
+    }
+}
+
+[System.Serializable]
+public class WaitForTriggerEnterStep : SequenceStep
+{
+    public SequenceStepTrigger targetTrigger;
+
+    public override IEnumerator Execute()
+    {
+        bool triggerEntered = false;
+        targetTrigger.OnTriggered += () => triggerEntered = true;
+
+        yield return new WaitUntil(() => triggerEntered);
+
+        targetTrigger.OnTriggered -= () => triggerEntered = true;
+
+        Debug.Log("Trigger bounds entered, continuing sequence");
+    }
+}

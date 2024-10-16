@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class OverworldInteractable : MonoBehaviour, Interactable
 {
     public Sequence sequenceToRun = new Sequence();
+    
+    public event Action OnSelected;
 
     OutlineObject outlineObject;
 
@@ -21,6 +24,7 @@ public class OverworldInteractable : MonoBehaviour, Interactable
         {
             SequenceManager.StartSequence(sequenceToRun);
         }
+        OnSelected?.Invoke();
     }
 
     public void SetOutlineActive(bool aActive)
