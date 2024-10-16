@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["\n","ev",{"VAR?":"test_variable"},"out","/ev","^ ","#","^character:alien","/#","\n",["done",{"#f":5,"#n":"g-0"}],null],"done",{"global decl":["ev","str","^variable not assigned","/str",{"VAR=":"test_variable"},"/ev","end",null],"#f":1}],"listDefs":{}}

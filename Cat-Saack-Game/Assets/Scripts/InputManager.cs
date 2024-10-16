@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 
     public static InputManager Instance;
 
-    private PlayerOverworld playerOverworld;
+    private PlayerTopDown playerTopDown;
     private PlayerInput playerInput;
     private InputAction selectAction;
     
@@ -20,33 +20,30 @@ public class InputManager : MonoBehaviour
     string actionMapName;
     private Vector2 moveDirection;
     
-
-    bool currentlyOverworld = false; // FOR DEBUG ONLY
+    // input select cooldown
+    private bool selectCooldownActive = false;
+    public float selectCooldown = 0.1f;
 
     void Awake()
     {
-        Instance = this;
-        playerInput = GetComponent<PlayerInput>();
-        playerOverworld = FindObjectOfType<PlayerOverworld>();
-        actionMapName = playerInput.currentActionMap.name;
+        if (Instance == null)
+        {
+            Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        RegisterSelf();
     }
 
-    void Update() // FOR DEBUG ONLY, SWITCHES INPUT MODE WHEN PRESSING Y
+    public static void RegisterSelf()
     {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            if(currentlyOverworld)
-            {
-                SwitchInputModeMenu();
-                currentlyOverworld = false;
-            }
-            else
-            {
-                SwitchInputModeOverworld();
-                currentlyOverworld = true;
-            }
-        }
-
+        Instance.playerInput = Instance.gameObject.GetComponent<PlayerInput>();
+        Instance.playerTopDown = FindObjectOfType<PlayerTopDown>();
+        Instance.actionMapName = Instance.playerInput.currentActionMap.name;
     }
 
     // When the Move action is performed
@@ -55,9 +52,9 @@ public class InputManager : MonoBehaviour
 
         if (actionMapName == "Player")
         {
-            if (playerOverworld != null)
+            if (playerTopDown != null)
             {
-                playerOverworld.Move(aContext.ReadValue<Vector2>());
+                playerTopDown.Move(aContext.ReadValue<Vector2>());
             }
         }
 
@@ -89,33 +86,48 @@ public class InputManager : MonoBehaviour
 
         if (aContext.phase == InputActionPhase.Performed)
         {
-            if (actionMapName == "Player")
+            if (!selectCooldownActive)
             {
-                //Debug.Log("OnSelect pressed in Overworld mode");
-                playerOverworld.OnSelect();
-            }
-
-            if (actionMapName == "Menu")
-            {
-                if (cursorButton != null)
+                StartCoroutine(WaitForSelectCooldown());
+                if (actionMapName == "Player")
                 {
-                    cursorButton.OnSelect();
+                    if (playerTopDown is PlayerOverworld playerOverworld)
+                    {
+                        //Debug.Log("OnSelect pressed in Overworld mode");
+                        playerOverworld.OnSelect();
+                    }
+                }
+
+                if (actionMapName == "Menu")
+                {
+                    if (cursorButton != null)
+                    {
+                        cursorButton.OnSelect();
+                    }
                 }
             }
         }
 
     }
 
+    private IEnumerator WaitForSelectCooldown()
+    {
+        selectCooldownActive = true;
+        yield return new WaitForSeconds(selectCooldown);
+        selectCooldownActive = false;
+    }
+
     // Switch to Overworld input mode
     public static void SwitchInputModeOverworld()
     {
+        SetCursorButton(null);
         Instance.playerInput.SwitchCurrentActionMap("Player");
         Instance.actionMapName = Instance.playerInput.currentActionMap.name;
         if (Instance.cursorButton != null)
         {
             Instance.cursorButton.SetIsHighlighted(false);
         }
-        Debug.Log("Switched action map to Player (overworld)");
+        // Debug.Log("Switched action map to Player (overworld)");
     }
 
     // Switch to Menu UI input mode
@@ -131,27 +143,27 @@ public class InputManager : MonoBehaviour
         {
             Instance.cursorButton.SetIsHighlighted(true);
         }
-        Debug.Log("Switched action map to Menu");
+        // Debug.Log("Switched action map to Menu");
     }
 
     public static void SetCursorButton(MenuButton aButton)
     {
-        if (aButton != null)
+        // Unhighlight the previous button if there is one
+        if (Instance.cursorButton != null)
         {
-            // Unhighlight the previous button if there is one
-            if (Instance.cursorButton != null)
-            {
-                Instance.cursorButton.SetIsHighlighted(false);
-            }
+            Instance.cursorButton.SetIsHighlighted(false);
+        }
 
-            // Set the new cursor button and highlight it
-            Instance.cursorButton = aButton;
+        // Set the new cursor button and highlight it
+        Instance.cursorButton = aButton;
+        if (Instance.cursorButton != null)
+        {
             Instance.cursorButton.SetIsHighlighted(true);
         }
-        else
-        {
-            Debug.LogWarning("Tried to assign cursorButton when given parameter is null");
-        }
+        // else
+        // {
+        //     Debug.Log("Did not highlight cursor button. Set it to null instead");
+        // }
     }
 
     // public static void PushMenuToStack(GameObject aObject)

@@ -1,0 +1,25 @@
+//public UnityEngine.U2D.Animation.SpriteLibraryAsset[] characterLibraries;
+//Dictionary<string, UnityEngine.U2D.Animation.SpriteLibraryAsset> characterLibraryDict;
+
+in start:
+
+// // initialize dictionary
+        // characterLibraryDict = new Dictionary<string, UnityEngine.U2D.Animation.SpriteLibraryAsset>();
+        // foreach (UnityEngine.U2D.Animation.SpriteLibraryAsset library in characterLibraries)
+        // {
+        //     characterLibraryDict[library.name] = library;
+        // }
+
+    // void SetCharacter(string aName)
+    // {
+    //     if (characterLibraryDict.TryGetValue(aName, out UnityEngine.U2D.Animation.SpriteLibraryAsset library))
+    //     {
+    //         currentLibrary = library;
+    //         spriteLibrary.spriteLibraryAsset = library;
+    //         //Debug.Log("successfully set character library to "+aName);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("Character '"+aName+"' not found.");
+    //     }
+    // }

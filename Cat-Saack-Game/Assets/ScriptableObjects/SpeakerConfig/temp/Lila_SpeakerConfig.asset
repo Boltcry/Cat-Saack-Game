@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1763390e7b28a44a4f537f9cac7104, type: 3}
+  m_Name: Lila_SpeakerConfig
+  m_EditorClassIdentifier: 
+  id: lila
+  speakerName: Lila
+  portraitSpriteLibrary: {fileID: 7108339969198208228, guid: 39f4e4eb1a8dca3489353978bca588d6, type: 3}
+  voiceClip: {fileID: 8300000, guid: b0f4a09493b21304895178cefcd6d483, type: 3}
+  stopAudioSource: 1
+  textAudioPlayRate: 2
+  minPitch: 1.2
+  maxPitch: 1.5

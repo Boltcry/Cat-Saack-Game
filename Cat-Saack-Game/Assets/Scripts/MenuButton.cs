@@ -9,7 +9,8 @@ using TMPro;
 // Uses links to find adjacent buttons in menu
 public class MenuButton : MonoBehaviour
 {
-    
+    public AudioClip buttonPressedSound;
+
     public MenuButton upLink;
     public MenuButton downLink;
     public MenuButton leftLink;
@@ -44,6 +45,11 @@ public class MenuButton : MonoBehaviour
         if (onSelect != null && !isDisabled)
         {
             StartCoroutine(SetColorForSeconds(pressedColor, pressedColorDuration));
+            // play audio clip sound
+            if (buttonPressedSound != null)
+            {
+                AudioManager.PlayAudioClip(AudioType.UI, buttonPressedSound);
+            }
             onSelect.Invoke();
         }
     }

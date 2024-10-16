@@ -2,25 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Player in the overworld. Handles movement
-public class PlayerOverworld : MonoBehaviour
+// Player in the overworld. Handles interactions
+// inherits from PlayerTopDown to recieve footstep and movement functionality
+public class PlayerOverworld : PlayerTopDown
 {
-
-    private Rigidbody2D rb;
-    public float moveSpeed = 3f;
+    [Header("Interactions")]
     public float interactRange = 5f;
     public LayerMask interactLayer;
 
     private OverworldInteractable closestInteractable;
     private OverworldInteractable previousInteractable;
 
-    void Start()
+    new protected void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    void Update()
-    {
+        base.Update();
         FindClosestInteractable();
     }
 
@@ -30,18 +25,6 @@ public class PlayerOverworld : MonoBehaviour
         {
             closestInteractable.OnSelect();
         }
-    }
-
-    // Takes move input from InputManager and moves the player
-    public void Move(Vector2 aMoveInput)
-    {
-        //anim.SetFloat("xInput", aMoveInput.x);
-        //anim.SetFloat("yInput", aMoveInput.y);
-
-        Vector2 velocity = rb.velocity;
-        velocity.x = aMoveInput.x * moveSpeed;
-        velocity.y = aMoveInput.y * moveSpeed;
-        rb.velocity = velocity;
     }
 
     // Checks for the closest OverworldInteractable on the Interactable layer to the player and marks it
