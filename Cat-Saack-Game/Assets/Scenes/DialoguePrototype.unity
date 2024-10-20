@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a76bc31423d2224db6c4a6da604c75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sequenceDataToRun: {fileID: 0}
   sequenceToRun:
     sequenceSteps:
     - rid: 4128931797978841139
@@ -4607,6 +4608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a76bc31423d2224db6c4a6da604c75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sequenceDataToRun: {fileID: 0}
   sequenceToRun:
     sequenceSteps:
     - rid: 3375089618448809984
@@ -4991,6 +4993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a76bc31423d2224db6c4a6da604c75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sequenceDataToRun: {fileID: 0}
   sequenceToRun:
     sequenceSteps:
     - rid: 3375089633515012096
@@ -6633,17 +6636,9 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 6121b13496dfa74429e75e8a5f527a00, type: 3}
-    - target: {fileID: 3200040314491173200, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3200040314491173200, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3200040314491173200, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
+    - target: {fileID: 3200040314491173201, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: m_Name
+      value: SequencePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 3200040314491173203, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
       propertyPath: m_PlayableAsset
@@ -6665,6 +6660,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[3].value
       value: 
       objectReference: {fileID: 1555126158}
+    - target: {fileID: 3200040314796136554, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: sequencePlayerPrefab
+      value: 
+      objectReference: {fileID: 5603766416368119788, guid: e9c31c368ae16cb4a93246e2500db605, type: 3}
     - target: {fileID: 3200040315591943198, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
       propertyPath: defaultTextDisplayer
       value: 
