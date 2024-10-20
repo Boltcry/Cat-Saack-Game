@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - Puck
+  - Enemy
   layers:
   - Default
   - TransparentFX
