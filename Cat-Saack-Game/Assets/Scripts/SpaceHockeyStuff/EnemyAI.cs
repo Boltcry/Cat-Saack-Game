@@ -7,45 +7,63 @@ public class EnemyAI : MonoBehaviour
     public Transform puck;
     public Transform goal;
     public float moveSpeed = 5f;
-    public float reactionDelay = 0.2f; 
-    public float defendDistance = 3f; 
+    public float reactionDelay = 1f;
+    public float defenceDistance= 5f;
+    public float goalBuffer = 1f;
+    public float fieldCenter; 
+    public Color gizmoColor = Color.red;
+
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(AIUpdate());
+        StartCoroutine(EnemyUpdate());;
     }
 
-    IEnumerator AIUpdate()
+    IEnumerator EnemyUpdate ()
     {
         while (true)
         {
             yield return new WaitForSeconds(reactionDelay);
+            bool isPuckInHalf = puck.position.y > fieldCenter;
 
-            
-            float distanceToPuck = Vector2.Distance(puck.position, transform.position);
-            float distanceToGoal = Vector2.Distance(goal.position, transform.position); // find puck
-
-            
-
-            if (distanceToPuck < defendDistance && distanceToGoal > defendDistance)
+            if (isPuckInHalf)
             {
-                Vector2 direction = (puck.position - transform.position).normalized;////// defend against puck
-                rb.velocity = direction * moveSpeed;
+                float distanceToPuck = Vector2.Distance(puck.position, transform.position);
+
+                if (distanceToPuck < defenceDistance)
+                {
+                    Vector2 direction = (puck.position - transform.position).normalized;
+                    rb.velocity = direction *moveSpeed;
+                }
             }
-            else
+            else 
             {
-                
-                Vector2 directionToGoal = (goal.position - transform.position).normalized; ///Defense with no puck
-                rb.velocity = directionToGoal * moveSpeed;
+                float distanceToGoal = Vector2.Distance(goal.position, transform.position);
+                if (distanceToGoal > goalBuffer)
+                {
+                    Vector2 goalDirection = (goal.position - transform.position).normalized;
+                    rb.velocity = goalDirection *moveSpeed;
+                }
+                else 
+                {
+                    rb.velocity = Vector2.zero;
+                }
             }
 
-            
-            if (rb.velocity.magnitude > moveSpeed)
-            {
+                if (rb.velocity.magnitude > moveSpeed)
+                {
                 rb.velocity = rb.velocity.normalized * moveSpeed;
+                }
+
             }
         }
-    }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawLine(new Vector3(-10, fieldCenter, 0), new Vector3(10, fieldCenter, 0));
+            Gizmos.DrawWireCube(new Vector3(0, (fieldCenter + goal.position.y) / 2, 0), new Vector3(20, Mathf.Abs(fieldCenter - goal.position.y), 0));
+        }
 }

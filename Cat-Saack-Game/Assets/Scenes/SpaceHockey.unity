@@ -221,7 +221,8 @@ MonoBehaviour:
   goal: {fileID: 1521684467}
   moveSpeed: 5
   reactionDelay: 0.2
-  defendDistance: 50
+  defendDistance: 15
+  goalBuffer: 5
 --- !u!1 &103303609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1344,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5cb76ed136487d44da938607b9ede5cf, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8396226, g: 0.1544589, b: 0.1544589, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -31,7 +31,7 @@ public class HockeyManager : MonoBehaviour
    public void ResetPlayer()
    {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        Player.transform.position = new Vector2(0f, 0f);
+        Player.transform.position = new Vector2(0f, -3.69f);
         Rigidbody2D rb = Player.GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
    }
