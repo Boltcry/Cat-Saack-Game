@@ -6,6 +6,7 @@ public class TitleScreenManager : MonoBehaviour
 {
     public static TitleScreenManager Instance;
 
+    public SequenceDataSO sequenceOnAwake;
     public AudioClip titleMusic;
     public MenuButton startGameButton;
 
@@ -15,6 +16,15 @@ public class TitleScreenManager : MonoBehaviour
     }
 
     void Start()
+    {
+        if (sequenceOnAwake != null)
+        {
+            Sequence sequence = sequenceOnAwake.sequenceToRun;
+            SequenceManager.StartSequence(sequence);
+        }
+    }
+
+    public void StartTitleScreen()
     {
         InputManager.SwitchInputModeMenu();
         if (startGameButton != null)

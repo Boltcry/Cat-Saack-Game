@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using UnityEngine.Events;
+using UnityEngine.Video;
+using UnityEngine.UI;
 
 // holds SequenceSteps
 [System.Serializable]
@@ -157,5 +159,30 @@ public class InvokeEventStep : SequenceStep
             eventToInvoke.Invoke();
         }
         yield return null;
+    }
+}
+
+[System.Serializable]
+public class PlayVideoStep : SequenceStep
+{
+    public VideoClip videoToPlay;
+    public RawImage videoRawImage;
+
+    public override IEnumerator Execute(SequencePlayer aSequencePlayer)
+    {
+        if (videoToPlay != null)
+        {
+            videoRawImage.gameObject.SetActive(true);
+            Debug.Log("Set videoRawImage to active");
+
+            aSequencePlayer.videoPlayer.clip = videoToPlay;
+            aSequencePlayer.videoPlayer.Play();
+            while (aSequencePlayer.videoPlayer.isPlaying)
+            {
+                yield return null;
+            }
+            videoRawImage.gameObject.SetActive(false);
+            Debug.Log("Set videoRawImage to inactive");
+        }
     }
 }

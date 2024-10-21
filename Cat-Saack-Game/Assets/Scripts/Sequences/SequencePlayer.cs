@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Video;
 
 public class SequencePlayer : MonoBehaviour
 {
@@ -12,12 +13,18 @@ public class SequencePlayer : MonoBehaviour
     public Sequence currentSequence;
     [HideInInspector]
     public PlayableDirector playableDirector;
+    [HideInInspector]
+    public VideoPlayer videoPlayer;
 
     void Awake()
     {
         if (playableDirector == null)
         {
             playableDirector = GetComponent<PlayableDirector>();
+        }
+        if (videoPlayer == null)
+        {
+            videoPlayer = GetComponent<VideoPlayer>();
         }
     }
 
