@@ -19,6 +19,8 @@ public abstract class SequenceStep
 {
     [Tooltip("Switch input mode to Menu during this step")]
     public bool disableMove = true;
+    [Tooltip("Reset input mode to Overworld after this step")]
+    public bool restoreMove = true;
 
     public abstract IEnumerator Execute(SequencePlayer aSequencePlayer);
 }

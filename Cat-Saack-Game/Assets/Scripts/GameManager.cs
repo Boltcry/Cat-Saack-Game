@@ -18,4 +18,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public static void Pause()
+    {
+        // stop other things in the relevant game
+        // muffle sound
+        UIManager.OpenPauseMenu();
+    }
+
+    public static void Unpause()
+    {
+        // unmuffle sound
+        // resume game
+    }
 }

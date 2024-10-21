@@ -49,6 +49,12 @@ public class SequencePlayer : MonoBehaviour
                 InputManager.SwitchInputModeOverworld();
             }
             yield return StartCoroutine(step.Execute(this));
+
+            if (step.restoreMove)
+            {
+                InputManager.SwitchInputModeOverworld();
+                InputManager.SetCursorButton(null);
+            }
         }
         EndSequence();
     }
@@ -59,8 +65,8 @@ public class SequencePlayer : MonoBehaviour
         isPlaying = false;
         
         // Restore player overworld control & clear cursorButton
-        InputManager.SetCursorButton(null);
-        InputManager.SwitchInputModeOverworld();
+        //InputManager.SetCursorButton(null);
+        //InputManager.SwitchInputModeOverworld();
         
         //Debug.Log("Ending Sequence");
 

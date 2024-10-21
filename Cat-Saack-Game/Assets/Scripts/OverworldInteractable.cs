@@ -15,6 +15,10 @@ public class OverworldInteractable : MonoBehaviour, Interactable
     void Awake()
     {
         outlineObject = GetComponent<OutlineObject>();
+        if (outlineObject == null)
+        {
+            outlineObject = GetComponentInChildren<OutlineObject>();
+        }
         if (sequenceDataToRun != null && sequenceDataToRun.sequenceToRun != null)
         {
             sequenceToRun = sequenceDataToRun.sequenceToRun;
