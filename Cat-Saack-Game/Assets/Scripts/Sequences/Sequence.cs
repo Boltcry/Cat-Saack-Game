@@ -94,6 +94,7 @@ public class WaitForButtonPressedStep : SequenceStep
 }
 
 // waits for an interactable to be interacted with
+// NEED TO FIX TO SHOW UP IN THE EDITOR
 [System.Serializable]
 public class WaitForInteractStep : SequenceStep
 {
@@ -135,8 +136,6 @@ public class WaitForTriggerEnterStep : SequenceStep
 [System.Serializable]
 public class WaitForSequenceEndStep : SequenceStep
 {
-    public Sequence sequenceToWaitFor;
-
     public override IEnumerator Execute(SequencePlayer aSequencePlayer)
     {
         while (SequenceManager.Instance.AreSequencesPlaying(aSequencePlayer))
@@ -173,16 +172,20 @@ public class PlayVideoStep : SequenceStep
         if (videoToPlay != null)
         {
             videoRawImage.gameObject.SetActive(true);
-            Debug.Log("Set videoRawImage to active");
 
             aSequencePlayer.videoPlayer.clip = videoToPlay;
+            aSequencePlayer.videoPlayer.Prepare();
+            while (!aSequencePlayer.videoPlayer.isPrepared)
+            {
+                yield return null;
+            }
+            
             aSequencePlayer.videoPlayer.Play();
             while (aSequencePlayer.videoPlayer.isPlaying)
             {
                 yield return null;
             }
             videoRawImage.gameObject.SetActive(false);
-            Debug.Log("Set videoRawImage to inactive");
         }
     }
 }

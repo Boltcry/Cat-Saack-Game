@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScreenManager : MonoBehaviour
+public class TitleScreenManager : LevelManager
 {
     public static TitleScreenManager Instance;
 
-    public SequenceDataSO sequenceOnAwake;
     public AudioClip titleMusic;
     public MenuButton startGameButton;
 
@@ -15,18 +14,9 @@ public class TitleScreenManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
-    {
-        if (sequenceOnAwake != null)
-        {
-            Sequence sequence = sequenceOnAwake.sequenceToRun;
-            SequenceManager.StartSequence(sequence);
-        }
-    }
-
     public void StartTitleScreen()
     {
-        InputManager.SwitchInputModeMenu();
+        //InputManager.SwitchInputModeMenu();
         if (startGameButton != null)
         {
             InputManager.SetCursorButton(startGameButton);

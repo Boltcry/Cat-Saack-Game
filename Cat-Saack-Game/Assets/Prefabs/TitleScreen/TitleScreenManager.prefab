@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf5f26ad04b2cd4692613d80ea01043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sequenceOnAwake: {fileID: 11400000, guid: 39a7f231ac8ef844c842fe818c5be99f, type: 2}
+  sequenceOnAwake:
+    sequenceSteps: []
   titleMusic: {fileID: 8300000, guid: 58fd8f82cfe21ff41ad931f706a7477e, type: 3}
   startGameButton: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []
