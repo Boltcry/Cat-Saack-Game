@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public MenuPanel pauseMenu;
+    private MenuPanel pauseMenu;
 
     private Stack<MenuPanel> menuStack = new Stack<MenuPanel>();
 

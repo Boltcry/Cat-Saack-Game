@@ -6,7 +6,6 @@ public class TitleScreenManager : LevelManager
 {
     public static TitleScreenManager Instance;
 
-    public AudioClip titleMusic;
     public MenuButton startGameButton;
 
     void Awake()
@@ -14,17 +13,14 @@ public class TitleScreenManager : LevelManager
         Instance = this;
     }
 
-    public void StartTitleScreen()
+    public override void StartLevel()
     {
+        base.StartLevel();
+        
         //InputManager.SwitchInputModeMenu();
         if (startGameButton != null)
         {
             InputManager.SetCursorButton(startGameButton);
-        }
-
-        if (titleMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, titleMusic);
         }
     }
 

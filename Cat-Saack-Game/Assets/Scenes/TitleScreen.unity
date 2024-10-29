@@ -735,7 +735,7 @@ PrefabInstance:
     - target: {fileID: 3407332729933469918, guid: ebd2beae4bbd4e74983ae72c4d85e4c2, type: 3}
       propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1879954531}
     - target: {fileID: 3407332729933469918, guid: ebd2beae4bbd4e74983ae72c4d85e4c2, type: 3}
       propertyPath: onSelect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1093,6 +1093,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1879954531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3200040316024224130, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+  m_PrefabInstance: {fileID: 641049089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddde4de49acebb847aff289057e1589d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1968547872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
@@ -1212,7 +1223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2215059346313417527, guid: c65aa5953b265d746be922c2f5a476e7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c65aa5953b265d746be922c2f5a476e7, type: 3}
@@ -1223,6 +1234,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
+      propertyPath: ambientMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 58fd8f82cfe21ff41ad931f706a7477e, type: 3}
     - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
       propertyPath: sequenceOnAwake
       value: 
@@ -1329,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
       propertyPath: managedReferences[3375090143932973060].eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartTitleScreen
+      value: StartLevel
       objectReference: {fileID: 0}
     - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
       propertyPath: managedReferences[3375090143932973060].eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

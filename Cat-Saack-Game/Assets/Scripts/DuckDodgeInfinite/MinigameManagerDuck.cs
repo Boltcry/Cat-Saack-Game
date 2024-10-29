@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MinigameManagerDuck : MonoBehaviour
+public class MinigameManagerDuck : LevelManager
 {
     public static MinigameManagerDuck Instance;
     // StartGame() event handler
     public delegate void GameStartedHandler();
     public static event GameStartedHandler OnGameStarted;
 
+    [Header("Minigame Settings")]
     public MinigameUIManagerDuck uiManager;
     public EnemySpawner enemySpawner;
     public PlayerDuckDodgeInfinite player;
     public BoxCollider2D gameRoomBounds;
     public Vector3 itemStorageBank;
-
-    public AudioClip minigameMusic;
 
     [HideInInspector]
     public static DifficultyLevel currentDifficulty;
@@ -58,12 +57,10 @@ public class MinigameManagerDuck : MonoBehaviour
         }
     }
 
-    void Start()
+    protected override void Start()
     {
-        if (minigameMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, minigameMusic);
-        }
+        base.Start();
+        base.StartLevel();
     }
 
     void Update()

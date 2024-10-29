@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyManager : MonoBehaviour, SavableData
+public class LobbyManager : LevelManager, SavableData
 {
     public static LobbyManager Instance;
-
-    public AudioClip lobbyMusic;
     
     // data to be saved
     private Vector3 lastPlayerPosition;
@@ -17,14 +15,11 @@ public class LobbyManager : MonoBehaviour, SavableData
         Instance = this;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         InputManager.SwitchInputModeOverworld();
-
-        if (lobbyMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, lobbyMusic);
-        }
+        base.StartLevel();
     }
 
     public void SaveData()

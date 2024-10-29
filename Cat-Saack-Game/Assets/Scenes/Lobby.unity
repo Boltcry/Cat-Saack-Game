@@ -5941,6 +5941,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8522955868737058704, guid: d21d83d30bc428d449d996c200f1bb45, type: 3}
+      propertyPath: ambientMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 6121b13496dfa74429e75e8a5f527a00, type: 3}
     - target: {fileID: 8522955868737058705, guid: d21d83d30bc428d449d996c200f1bb45, type: 3}
       propertyPath: m_Name
       value: LobbyManager
