@@ -40,6 +40,8 @@ public class SceneLoader : MonoBehaviour
             }
             InputManager.RegisterSelf();
             Debug.Log("Loaded Scene" +aTargetScene);
+
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(aTargetScene));
         }
     }
 

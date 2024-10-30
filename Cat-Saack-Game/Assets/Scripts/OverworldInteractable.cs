@@ -5,7 +5,8 @@ using System;
 
 public class OverworldInteractable : MonoBehaviour, Interactable
 {
-    public Sequence sequenceToRun = new Sequence();
+    public SequenceDataSO sequenceDataToRun;
+    public Sequence sequenceToRun;
     
     public event Action OnSelected;
 
@@ -14,6 +15,14 @@ public class OverworldInteractable : MonoBehaviour, Interactable
     void Awake()
     {
         outlineObject = GetComponent<OutlineObject>();
+        if (outlineObject == null)
+        {
+            outlineObject = GetComponentInChildren<OutlineObject>();
+        }
+        if (sequenceDataToRun != null && sequenceDataToRun.sequenceToRun != null)
+        {
+            sequenceToRun = sequenceDataToRun.sequenceToRun;
+        }
     }
 
     // Plays the sequence associated with the interactable if provided

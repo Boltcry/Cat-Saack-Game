@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ef184c10fff104992b292f93fb0ff0, type: 3}
+  m_Name: StartMinigameDuck
+  m_EditorClassIdentifier: 
+  sequenceToRun:
+    sequenceSteps:
+    - rid: 1482223530606854164
+    - rid: 1482223530606854150
+  references:
+    version: 2
+    RefIds:
+    - rid: 1482223530606854150
+      type: {class: InvokeEventStep, ns: , asm: Assembly-CSharp}
+      data:
+        disableMove: 1
+        restoreMove: 1
+        eventToInvoke:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 2415066477029701435, guid: d2da50f08902b434b87840a21a1fa78d, type: 3}
+              m_TargetAssemblyTypeName: MinigameManagerDuck, Assembly-CSharp
+              m_MethodName: StartGame
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 1482223530606854164
+      type: {class: TimelineStep, ns: , asm: Assembly-CSharp}
+      data:
+        disableMove: 1
+        restoreMove: 1
+        timelineToPlay: {fileID: 0}

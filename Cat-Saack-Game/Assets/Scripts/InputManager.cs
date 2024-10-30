@@ -110,6 +110,22 @@ public class InputManager : MonoBehaviour
 
     }
 
+    public void OnEscape(InputAction.CallbackContext aContext)
+    {
+        if (aContext.phase == InputActionPhase.Performed)
+        {
+            if (actionMapName == "Player")
+            {
+                GameManager.Pause();
+            }
+
+            if (actionMapName == "Menu")
+            {
+                UIManager.PopMenuPanel();
+            }
+        }
+    }
+
     private IEnumerator WaitForSelectCooldown()
     {
         selectCooldownActive = true;
@@ -127,7 +143,7 @@ public class InputManager : MonoBehaviour
         {
             Instance.cursorButton.SetIsHighlighted(false);
         }
-        // Debug.Log("Switched action map to Player (overworld)");
+        Debug.Log("Switched action map to Player (overworld)");
     }
 
     // Switch to Menu UI input mode
@@ -143,7 +159,7 @@ public class InputManager : MonoBehaviour
         {
             Instance.cursorButton.SetIsHighlighted(true);
         }
-        // Debug.Log("Switched action map to Menu");
+        Debug.Log("Switched action map to Menu");
     }
 
     public static void SetCursorButton(MenuButton aButton)
@@ -160,29 +176,5 @@ public class InputManager : MonoBehaviour
         {
             Instance.cursorButton.SetIsHighlighted(true);
         }
-        // else
-        // {
-        //     Debug.Log("Did not highlight cursor button. Set it to null instead");
-        // }
     }
-
-    // public static void PushMenuToStack(GameObject aObject)
-    // {
-    //     Instance.menuStack.Push(aObject);
-    // }
-
-    // public static void PopMenuFromStack()
-    // {
-    //     if (Instance.menuStack.Count > 0)
-    //     {
-    //         Instance.menuStack.Pop();
-    //     }
-    //     if (Instance.menuStack.Count == 0)
-    //     {
-    //         // check if the current scene should be unloaded
-    //             // if so unload the scene
-    //     }
-    // }
-
-    
 }

@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MinigameManagerDuck : MonoBehaviour
+public class MinigameManagerDuck : LevelManager
 {
     public static MinigameManagerDuck Instance;
     // StartGame() event handler
     public delegate void GameStartedHandler();
     public static event GameStartedHandler OnGameStarted;
 
+    [Header("Minigame Settings")]
     public MinigameUIManagerDuck uiManager;
     public EnemySpawner enemySpawner;
     public PlayerDuckDodgeInfinite player;
     public BoxCollider2D gameRoomBounds;
     public Vector3 itemStorageBank;
 
-    public AudioClip minigameMusic;
+    public Sequence gameStartSequence;
 
     [HideInInspector]
     public static DifficultyLevel currentDifficulty;
@@ -51,18 +52,16 @@ public class MinigameManagerDuck : MonoBehaviour
         {
             player = FindObjectOfType<PlayerDuckDodgeInfinite>();
         }
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        base.StartLevel();
 
         if (InputManager.Instance != null)
         {
             InputManager.SwitchInputModeMenu();
-        }
-    }
-
-    void Start()
-    {
-        if (minigameMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, minigameMusic);
         }
     }
 
@@ -108,7 +107,21 @@ public class MinigameManagerDuck : MonoBehaviour
         Debug.Log("Updated Difficulty to "+aDifficultyLevel);
     }
 
+    // to be called by the StartGame button in the title screen
     public static void StartGame()
+    {
+        if (Instance.gameStartSequence != null)
+        {
+            SequenceManager.StartSequence(Instance.gameStartSequence);
+        }
+        else
+        {
+            StartGameplay();
+        }
+    }
+
+    // to be run after StartGame in the gameStartSequence. After the countdown happens
+    public static void StartGameplay()
     {
         Instance.startTime = Time.time;
         Instance.SetDifficulty(Instance.defaultDifficulty);

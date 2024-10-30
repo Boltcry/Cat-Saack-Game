@@ -1,4 +1,4 @@
-Shader "Unlit/PixelOutline"
+Shader "Sprites/PixelOutline"
 { 
 Properties 
 { _MainTex ("Texture", 2D) = "white" {}

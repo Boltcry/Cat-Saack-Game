@@ -2,24 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : LevelManager, SavableData
 {
     public static LobbyManager Instance;
-
-    public AudioClip lobbyMusic;
+    
+    // data to be saved
+    private Vector3 lastPlayerPosition;
+    private bool tutorialPassed;
 
     void Awake()
     {
         Instance = this;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         InputManager.SwitchInputModeOverworld();
+        base.StartLevel();
+    }
 
-        if (lobbyMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, lobbyMusic);
-        }
+    public void SaveData()
+    {
+        //
+    }
+
+    public void LoadData()
+    {
+        //
     }
 }

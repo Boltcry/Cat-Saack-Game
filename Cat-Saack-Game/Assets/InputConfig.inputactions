@@ -1,5 +1,5 @@
 {
-    "name": "Cat-Saack-Game",
+    "name": "InputConfig",
     "maps": [
         {
             "name": "Player",
@@ -18,6 +18,15 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "472c058a-0d13-43d7-9389-ed9e5dca6250",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "9ffd0670-6e8b-4e3b-9112-cf0f5cfcc449",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -170,17 +179,6 @@
                 },
                 {
                     "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
                     "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
@@ -222,6 +220,39 @@
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b4a4f8d-6bc6-4ce3-9e47-a9f0b1b2980a",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1088d85d-db16-4fe3-a4de-6dc53243ecb5",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ef7e35c-24b3-4cd7-ae8c-a6c553854bc9",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -242,6 +273,15 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "25e8d343-79f9-47c9-a730-8b297bed1a11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "65c4bea1-785d-4005-b72b-9fdc42bc769e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -394,17 +434,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b7471547-e519-4b21-a6f7-3aa12575e370",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "deec972b-0876-4ac1-8511-3efa31a604ab",
                     "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
@@ -444,6 +473,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "57ae69ab-6fdd-4d2e-bcb5-4ca6124ca155",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9173041c-e6d2-4d39-8b5e-5d589989b561",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e642087-0ae2-431a-a383-2ec70a9f61f3",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

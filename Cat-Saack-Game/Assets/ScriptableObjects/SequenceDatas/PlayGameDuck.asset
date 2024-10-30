@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ef184c10fff104992b292f93fb0ff0, type: 3}
+  m_Name: PlayGameDuck
+  m_EditorClassIdentifier: 
+  sequenceToRun:
+    sequenceSteps:
+    - rid: 3375089845776416780
+  references:
+    version: 2
+    RefIds:
+    - rid: 3375089845776416780
+      type: {class: SceneLoadStep, ns: , asm: Assembly-CSharp}
+      data:
+        disableMove: 1
+        restoreMove: 0
+        targetScene: DuckDodgeInfinite
