@@ -17,6 +17,8 @@ public class MinigameManagerDuck : LevelManager
     public BoxCollider2D gameRoomBounds;
     public Vector3 itemStorageBank;
 
+    public Sequence gameStartSequence;
+
     [HideInInspector]
     public static DifficultyLevel currentDifficulty;
     [HideInInspector]
@@ -50,17 +52,17 @@ public class MinigameManagerDuck : LevelManager
         {
             player = FindObjectOfType<PlayerDuckDodgeInfinite>();
         }
-
-        if (InputManager.Instance != null)
-        {
-            InputManager.SwitchInputModeMenu();
-        }
     }
 
     protected override void Start()
     {
         base.Start();
         base.StartLevel();
+
+        if (InputManager.Instance != null)
+        {
+            InputManager.SwitchInputModeMenu();
+        }
     }
 
     void Update()
@@ -105,7 +107,21 @@ public class MinigameManagerDuck : LevelManager
         Debug.Log("Updated Difficulty to "+aDifficultyLevel);
     }
 
+    // to be called by the StartGame button in the title screen
     public static void StartGame()
+    {
+        if (Instance.gameStartSequence != null)
+        {
+            SequenceManager.StartSequence(Instance.gameStartSequence);
+        }
+        else
+        {
+            StartGameplay();
+        }
+    }
+
+    // to be run after StartGame in the gameStartSequence. After the countdown happens
+    public static void StartGameplay()
     {
         Instance.startTime = Time.time;
         Instance.SetDifficulty(Instance.defaultDifficulty);

@@ -6,6 +6,7 @@ using UnityEngine.Timeline;
 using UnityEngine.Events;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using TMPro;
 
 // holds SequenceSteps
 [System.Serializable]
@@ -45,17 +46,55 @@ public class DialogueStep : SequenceStep
 public class TimelineStep : SequenceStep
 {
     public TimelineAsset timelineToPlay;
+    public GameObject objectToBind;
 
     public override IEnumerator Execute(SequencePlayer aSequencePlayer)
     {
         if (aSequencePlayer.playableDirector != null && timelineToPlay != null)
         {
             aSequencePlayer.playableDirector.playableAsset = timelineToPlay;
+
+            if (objectToBind != null)
+            {
+                BindObjectToAllTracks(aSequencePlayer, timelineToPlay, objectToBind);
+            }
+
             aSequencePlayer.playableDirector.Play();
 
             while (aSequencePlayer.playableDirector.state == PlayState.Playing)
             {
                 yield return null;
+            }
+        }
+    }
+
+    // for use with timelines
+    // Binds given game object to a timeline's tracks
+    private void BindObjectToAllTracks(SequencePlayer aSequencePlayer, TimelineAsset aTimeline, GameObject aObject)
+    {
+        aSequencePlayer.playableDirector.playableAsset = aTimeline;
+
+        foreach (var track in aTimeline.GetOutputTracks())
+        {
+            if (track is AnimationTrack)
+            {
+                Animator anim = aObject.GetComponent<Animator>();
+                if (anim != null)
+                {
+                    aSequencePlayer.playableDirector.SetGenericBinding(track, anim);
+                }
+            }
+            else if (track is TextTrack)
+            {
+                TextMeshProUGUI textMeshPro = aObject.GetComponent<TextMeshProUGUI>();
+                if (textMeshPro != null)
+                {
+                    aSequencePlayer.playableDirector.SetGenericBinding(track, textMeshPro);
+                }
+            }
+            else
+            {
+                aSequencePlayer.playableDirector.SetGenericBinding(track, aObject);
             }
         }
     }

@@ -121,7 +121,10 @@ public class MenuButton : MonoBehaviour
 
     void SetButtonColor(Color aColor)
     {
-        image.color = aColor;
+        if (image != null)
+        {
+            image.color = aColor;
+        }
     }
 
     // Set button to a given color for given amount of time
