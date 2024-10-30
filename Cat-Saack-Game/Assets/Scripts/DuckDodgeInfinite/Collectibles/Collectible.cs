@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public float spawnChance;
+    public AudioClip collectSound;
 
     Collider2D triggerCollider;
     CollectibleSpawner spawner;
@@ -17,6 +18,12 @@ public class Collectible : MonoBehaviour
     protected virtual void OnCollect()
     {
         Debug.Log("Collectible collected: "+this);
+
+        // play collection sound
+        if (collectSound != null)
+        {
+            AudioManager.PlayAudioClip(AudioType.SFX, collectSound);
+        }
         // play collection animation
         // add points, or apply powerup, or whateverI 
         DestroyCollectible();

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2026904586180001298}
   - component: {fileID: 3343734676676332665}
   - component: {fileID: 7984951507099447856}
+  - component: {fileID: 987628554436564146}
   m_Layer: 0
   m_Name: Token
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnChance: 0.7
+  collectSound: {fileID: 8300000, guid: 7e7ed8ec42cb83e40af7e17a266b9527, type: 3}
 --- !u!61 &3343734676676332665
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -60,18 +62,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0031446517, y: -0.0031446218}
+  m_Offset: {x: -0.00090920925, y: 0.0033415481}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.40625, y: 0.375}
+    oldSize: {x: 0.40625, y: 0.40625}
     newSize: {x: 0.625, y: 0.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.57862145, y: 0.6100675}
+  m_Size: {x: 0.41808856, y: 0.4316976}
   m_EdgeRadius: 0
 --- !u!212 &7984951507099447856
 SpriteRenderer:
@@ -114,7 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b999f99d46c080a4d92d8fa9592e1459, type: 3}
+  m_Sprite: {fileID: -579872472, guid: cabacdc4eee8d504ab3d7f5543fbde9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,3 +127,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &987628554436564146
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501894030746388493}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99cb65bf17f710942a24a4f7a2005ad4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
