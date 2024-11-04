@@ -260,6 +260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManagers
       objectReference: {fileID: 0}
+    - target: {fileID: 5428110661644359095, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
+      propertyPath: m_DataSource
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
 --- !u!1 &1010027261
@@ -1286,6 +1290,10 @@ PrefabInstance:
       propertyPath: managedReferences[3375090143932973059].videoRawImage
       value: 
       objectReference: {fileID: 2111257567}
+    - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
+      propertyPath: managedReferences[3375090143932973059].videoToPlayURL
+      value: https://boltcry.github.io/HostedVideos/catsaacklogo.mp4
+      objectReference: {fileID: 0}
     - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
       propertyPath: managedReferences[3375090143932973060].eventToInvoke.m_PersistentCalls.m_Calls.Array.size
       value: 1

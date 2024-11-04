@@ -20,7 +20,7 @@ MonoBehaviour:
     WASD: Move Character
 
     ESC: Pause Game'
-  demoClip: {fileID: 32900000, guid: d91262c3456056f4d993a6a46d149704, type: 3}
+  demoClipURL: https://boltcry.github.io/HostedVideos/DuckDodgeInfiniteDemo.mp4
   startGameSequence: {fileID: 11400000, guid: 1210127098c1dbe44925c24c83f240d1, type: 2}
   timesPlayedCount: 0
   unlocked: 0

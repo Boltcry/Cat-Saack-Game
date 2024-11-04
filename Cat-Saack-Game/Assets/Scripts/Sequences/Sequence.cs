@@ -203,16 +203,20 @@ public class InvokeEventStep : SequenceStep
 [System.Serializable]
 public class PlayVideoStep : SequenceStep
 {
-    public VideoClip videoToPlay;
+    //public VideoClip videoToPlay;
+    public string videoToPlayURL;
     public RawImage videoRawImage;
 
     public override IEnumerator Execute(SequencePlayer aSequencePlayer)
     {
-        if (videoToPlay != null)
+        #pragma warning disable CS0642 // disable empty statment warning since it is intended
+        if (videoToPlayURL != ""); // if url is not empty
+        #pragma warning restore CS0642
         {
             videoRawImage.gameObject.SetActive(true);
 
-            aSequencePlayer.videoPlayer.clip = videoToPlay;
+            //aSequencePlayer.videoPlayer.clip = videoToPlay;
+            aSequencePlayer.videoPlayer.url = videoToPlayURL;
             aSequencePlayer.videoPlayer.Prepare();
             while (!aSequencePlayer.videoPlayer.isPrepared)
             {

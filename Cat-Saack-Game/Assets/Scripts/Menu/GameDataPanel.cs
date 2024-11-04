@@ -61,7 +61,8 @@ public class GameDataPanel : MenuPanel
         if (videoPlayer != null)
         {
             videoPlayer.Stop();
-            videoPlayer.clip = currentGameData.demoClip;
+            videoPlayer.url = currentGameData.demoClipURL;
+            //videoPlayer.clip = currentGameData.demoClip;
             videoPlayer.isLooping = true;
             videoPlayer.Play();
         }

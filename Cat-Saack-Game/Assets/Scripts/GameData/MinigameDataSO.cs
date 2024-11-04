@@ -12,7 +12,8 @@ public class MinigameDataSO : ScriptableObject, SavableData
     public string rules;
     [TextArea]
     public string controls;
-    public VideoClip demoClip;
+    //public VideoClip demoClip;
+    public string demoClipURL;
     public SequenceDataSO startGameSequence;
     
     [HideInInspector] 
