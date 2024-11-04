@@ -35,4 +35,13 @@ public class HockeyManager : MonoBehaviour
         Rigidbody2D rb = Player.GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.zero;
    }
+
+   public void ResetEnemy()
+   {
+    GameObject Enemy = GameObject.FindGameObjectWithTag("Enemy");
+    Enemy.transform.position = new Vector2(0.03f, 3.85f);
+    Rigidbody2D erb = Enemy.GetComponent<Rigidbody2D>();
+    erb.velocity = Vector2.zero;
+
+   }
 }

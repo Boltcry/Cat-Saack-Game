@@ -1,69 +1,87 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform puck;
     public Transform goal;
+    public Transform puck;
     public float moveSpeed = 5f;
-    public float reactionDelay = 1f;
-    public float defenceDistance= 5f;
-    public float goalBuffer = 1f;
-    public float fieldCenter; 
-    public Color gizmoColor = Color.red;
-
-    private Rigidbody2D rb;
+    public float guardSpace = 3f;
+    public float frontSpace = 1f;
+    public float waitTime = 0.5f;
+    public float laserSpeed = 10f;
+    public float shootInterval = 3f;
+    public GameObject laserPrefab;
+    private Vector3 leftBound;
+    private Vector3 rightBound;
+    private bool movingRight = true;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(EnemyUpdate());;
+        SetBounds();
+        StartCoroutine(Guard());
+        InvokeRepeating(nameof(ShootLaser), shootInterval, shootInterval);
     }
 
-    IEnumerator EnemyUpdate ()
+    void SetBounds()
+    {
+        leftBound = goal.position + Vector3.left * guardSpace + Vector3.down * frontSpace;
+        rightBound = goal.position + Vector3.right * guardSpace + Vector3.down * frontSpace;
+    }
+
+    IEnumerator Guard()
     {
         while (true)
         {
-            yield return new WaitForSeconds(reactionDelay);
-            bool isPuckInHalf = puck.position.y > fieldCenter;
-
-            if (isPuckInHalf)
+            if (movingRight)
             {
-                float distanceToPuck = Vector2.Distance(puck.position, transform.position);
-
-                if (distanceToPuck < defenceDistance)
+                transform.position = Vector3.MoveTowards(transform.position, rightBound, moveSpeed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, rightBound) < 0.01f)
                 {
-                    Vector2 direction = (puck.position - transform.position).normalized;
-                    rb.velocity = direction *moveSpeed;
+                    movingRight = false;
+                    yield return new WaitForSeconds(waitTime);
                 }
             }
-            else 
+            else
             {
-                float distanceToGoal = Vector2.Distance(goal.position, transform.position);
-                if (distanceToGoal > goalBuffer)
+                transform.position = Vector3.MoveTowards(transform.position, leftBound, moveSpeed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, leftBound) < 0.01f)
                 {
-                    Vector2 goalDirection = (goal.position - transform.position).normalized;
-                    rb.velocity = goalDirection *moveSpeed;
-                }
-                else 
-                {
-                    rb.velocity = Vector2.zero;
+                    movingRight = true;
+                    yield return new WaitForSeconds(waitTime);
                 }
             }
 
-                if (rb.velocity.magnitude > moveSpeed)
-                {
-                rb.velocity = rb.velocity.normalized * moveSpeed;
-                }
-
-            }
+            yield return null;
         }
+    }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = gizmoColor;
-            Gizmos.DrawLine(new Vector3(-10, fieldCenter, 0), new Vector3(10, fieldCenter, 0));
-            Gizmos.DrawWireCube(new Vector3(0, (fieldCenter + goal.position.y) / 2, 0), new Vector3(20, Mathf.Abs(fieldCenter - goal.position.y), 0));
-        }
+
+    void ShootLaser()
+    {
+        if (puck == null) return;
+
+        
+        Vector2 direction = (puck.position - transform.position).normalized;
+
+        
+        GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        Rigidbody2D laserRb = laser.GetComponent<Rigidbody2D>();
+        laserRb.velocity = direction * laserSpeed;
+
+        
+        Collider2D enemyCollider = GetComponent<Collider2D>();
+        Collider2D laserCollider = laser.GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(laserCollider, enemyCollider);
+    }
+
+    void OnDrawGizmos()
+    {
+        if (goal == null) return;
+
+        
+        SetBounds();
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(leftBound, rightBound);
+    }
 }
