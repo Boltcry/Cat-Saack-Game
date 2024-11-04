@@ -215,10 +215,12 @@ public class MinigameManagerDuck : LevelManager
     public override void PauseLevel()
     {
         gameIsRunning = false;
+        Debug.Log("Paused level from MinigameManagerDuck");
     }
 
     public override void UnpauseLevel()
     {
         gameIsRunning = true;
+        Debug.Log("Unpaused level from MinigameManagerDuck");
     }
 }

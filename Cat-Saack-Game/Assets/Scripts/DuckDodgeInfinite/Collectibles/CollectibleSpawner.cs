@@ -117,7 +117,7 @@ public class CollectibleSpawner : MonoBehaviour
                             walkableTiles.Add(tilePos);                    
                         }
                     }
-                    Debug.Log("Created new tile at "+tilePos);
+                    //Debug.Log("Created new tile at "+tilePos);
                 }
             }
         }
