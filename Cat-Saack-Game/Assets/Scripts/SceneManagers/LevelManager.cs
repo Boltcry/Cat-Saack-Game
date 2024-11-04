@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
 
     protected virtual void Start()
     {
+        GameManager.RegisterLevelManager(this);
+        
         if (sequenceOnAwake != null)
         {
             SequenceManager.StartSequence(sequenceOnAwake);
@@ -29,5 +31,15 @@ public class LevelManager : MonoBehaviour
         {
             AudioManager.PlayAudioClip(AudioType.AMBIENT, ambientMusic);
         }
+    }
+
+    public virtual void PauseLevel()
+    {
+        //
+    }
+
+    public virtual void UnpauseLevel()
+    {
+        //
     }
 }

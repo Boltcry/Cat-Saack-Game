@@ -53,6 +53,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public static void PopMenuPanelNoReturn()
+    {
+        PopMenuPanel();
+    }
+
     void CloseMenu()
     {
         // input settings

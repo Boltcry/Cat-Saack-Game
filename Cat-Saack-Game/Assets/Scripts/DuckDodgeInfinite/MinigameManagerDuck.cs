@@ -211,4 +211,14 @@ public class MinigameManagerDuck : LevelManager
             }
         }
     }
+
+    public override void PauseLevel()
+    {
+        gameIsRunning = false;
+    }
+
+    public override void UnpauseLevel()
+    {
+        gameIsRunning = true;
+    }
 }
