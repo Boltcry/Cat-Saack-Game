@@ -13,12 +13,17 @@ public class MinigameManagerDuck : LevelManager
     [Header("Minigame Settings")]
     public MinigameUIManagerDuck uiManager;
     public EnemySpawner enemySpawner;
+    public CollectibleSpawner collectibleSpawner;
     public PlayerDuckDodgeInfinite player;
-    public BoxCollider2D gameRoomBounds;
     public Vector3 itemStorageBank;
+    // contain list of possible level layout prefabs
+    public List<LevelLayout> levelLayouts = new List<LevelLayout>();
 
     public Sequence gameStartSequence;
 
+
+    //[HideInInspector]
+    public BoxCollider2D gameRoomBounds;
     [HideInInspector]
     public static DifficultyLevel currentDifficulty;
     [HideInInspector]
@@ -47,6 +52,10 @@ public class MinigameManagerDuck : LevelManager
         if (enemySpawner == null)
         {
             enemySpawner = FindObjectOfType<EnemySpawner>();
+        }
+        if (collectibleSpawner == null)
+        {
+            collectibleSpawner = FindObjectOfType<CollectibleSpawner>();
         }
         if (player == null)
         {
@@ -108,8 +117,11 @@ public class MinigameManagerDuck : LevelManager
     }
 
     // to be called by the StartGame button in the title screen
+    // Do Pre-game functions & start actual gameplay
     public static void StartGame()
     {
+        //Instance.StartCoroutine(Instance.SetRandomLayout());
+
         if (Instance.gameStartSequence != null)
         {
             SequenceManager.StartSequence(Instance.gameStartSequence);
@@ -163,5 +175,40 @@ public class MinigameManagerDuck : LevelManager
     public static void AddPlayerHealth(int aHealth)
     {
         Instance.player.AddHealth(aHealth);
+    }
+
+    // grab a random layout from levelLayouts list and update relevant game info
+    IEnumerator SetRandomLayout()
+    {
+        if (levelLayouts.Count > 0)
+        {
+            int randomIndex = Random.Range(0, levelLayouts.Count);
+            LevelLayout layout = levelLayouts[randomIndex];
+
+            Instantiate(layout, transform.position, Quaternion.identity);
+            yield return null;
+
+            // update level information
+            gameRoomBounds = layout.GetGameRoomBounds(); // update game bounds (spawning)
+            Instance.player.transform.position = layout.GetStartPosition().position; // update player start position
+
+            // update camera bounds
+            Camera camera = Camera.main;
+            if (camera != null)
+            {
+                CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
+                if (cameraFollow != null)
+                {
+                    cameraFollow.SetCameraBounds(layout.GetCameraBounds());
+                }
+                camera.transform.position = Instance.player.transform.position + new Vector3(0, 0, -10f);
+            }
+
+            // update collectible spawner tilemap info
+            if (collectibleSpawner != null)
+            {
+                collectibleSpawner.SetTilemaps(layout.GetWalkableTilemap(), layout.GetCollisionTilemap());
+            }
+        }
     }
 }

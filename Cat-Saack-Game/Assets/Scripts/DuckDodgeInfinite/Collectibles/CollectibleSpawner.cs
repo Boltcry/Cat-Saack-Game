@@ -117,6 +117,7 @@ public class CollectibleSpawner : MonoBehaviour
                             walkableTiles.Add(tilePos);                    
                         }
                     }
+                    Debug.Log("Created new tile at "+tilePos);
                 }
             }
         }
@@ -125,6 +126,22 @@ public class CollectibleSpawner : MonoBehaviour
     public void DeregisterCollectible()
     {
         currentCollectibleCount--;
+    }
+
+    public void SetTilemaps(Tilemap aWalkableTilemap, Tilemap aCollisionTilemap)
+    {
+        walkableTilemap = aWalkableTilemap;
+        collisionTilemap = aCollisionTilemap;
+
+        if (walkableTilemap == null)
+        {
+            Debug.LogWarning("walkable tilemap is null");
+        }
+        if (collisionTilemap == null)
+        {
+            Debug.LogWarning("collision tilemap is null");
+        }
+        CacheWalkableTiles();
     }
 
     // Meant to be used with the OnGameStarted event
@@ -153,5 +170,24 @@ public class CollectibleSpawner : MonoBehaviour
     void OnDisable()
     {
         MinigameManagerDuck.OnGameStarted -= StartSpawnCollectibles;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (walkableTiles == null || walkableTilemap == null) return;
+
+        // Set the color of the Gizmos for visibility
+        Gizmos.color = Color.green;
+
+        // Iterate through each position in the walkableTiles list
+        foreach (Vector3Int tilePosition in walkableTiles)
+        {
+            // Convert tile position to world position
+            Vector3 worldPosition = walkableTilemap.CellToWorld(tilePosition) + walkableTilemap.tileAnchor;
+
+            // Draw a small dot (sphere) at the center of each walkable tile
+            Gizmos.DrawSphere(worldPosition, 0.1f); // Adjust the size if necessary
+            Debug.Log("Drew a walkable tiles");
+        }
     }
 }
