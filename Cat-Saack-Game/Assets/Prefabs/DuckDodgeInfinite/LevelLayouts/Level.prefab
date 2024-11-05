@@ -4857,6 +4857,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1582246016232865930}
     m_Modifications:
+    - target: {fileID: 49463515474159958, guid: 6d606befbc324cf4aa48713ee64c1b9d, type: 3}
+      propertyPath: m_Size.x
+      value: 11.796224
+      objectReference: {fileID: 0}
+    - target: {fileID: 49463515474159958, guid: 6d606befbc324cf4aa48713ee64c1b9d, type: 3}
+      propertyPath: m_Size.y
+      value: 9.339606
+      objectReference: {fileID: 0}
+    - target: {fileID: 49463515474159958, guid: 6d606befbc324cf4aa48713ee64c1b9d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.01987505
+      objectReference: {fileID: 0}
+    - target: {fileID: 49463515474159958, guid: 6d606befbc324cf4aa48713ee64c1b9d, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.45859766
+      objectReference: {fileID: 0}
     - target: {fileID: 49463515704342317, guid: 6d606befbc324cf4aa48713ee64c1b9d, type: 3}
       propertyPath: m_Name
       value: Bounds

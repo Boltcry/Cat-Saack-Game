@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     protected Collider2D coll;
 
     private float destroyDistance = 50f;
+    private Vector2 savedVelocity;
 
     virtual protected void Start() 
     {
@@ -26,8 +27,7 @@ public class Enemy : MonoBehaviour
     {
         if (MinigameManagerDuck.gameIsRunning)
         {
-            // destroy if too far away
-            // later maybe change this to move enemies into a buffer
+            //destroy if too far away
             BoxCollider2D gameRoomBounds = MinigameManagerDuck.Instance.gameRoomBounds;
             if(Vector3.Distance(transform.position, gameRoomBounds.bounds.center) > destroyDistance) 
             {
@@ -35,7 +35,23 @@ public class Enemy : MonoBehaviour
             }
 
             // move towards the enemy's movementDirection
-            rb.velocity = movementDirection * moveSpeed;
+            if (savedVelocity != Vector2.zero)
+            {
+                rb.velocity = savedVelocity;
+                savedVelocity = Vector2.zero;
+            }
+            else
+            {
+                rb.velocity = movementDirection * moveSpeed;
+            }
+        }
+        else
+        {
+            if (rb.velocity != Vector2.zero)
+            {
+                savedVelocity = rb.velocity;
+                rb.velocity = Vector2.zero;
+            }
         }
     }
 

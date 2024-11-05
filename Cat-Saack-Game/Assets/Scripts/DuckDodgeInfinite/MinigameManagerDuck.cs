@@ -38,7 +38,7 @@ public class MinigameManagerDuck : LevelManager
     [Tooltip("Number of seconds elapsed when the game changes to Hard difficulty")]
     public float hardDifficultyStart = 40;
 
-    private float startTime;
+
     [HideInInspector]
     public float elapsedTime = 0;
 
@@ -78,7 +78,7 @@ public class MinigameManagerDuck : LevelManager
     {
         if (gameIsRunning)
         {
-            elapsedTime = Time.time - startTime;
+            elapsedTime += Time.deltaTime;
 
             // update difficulty if needed
             if (currentDifficulty < DifficultyLevel.Medium && elapsedTime >= mediumDifficultyStart)
@@ -135,7 +135,6 @@ public class MinigameManagerDuck : LevelManager
     // to be run after StartGame in the gameStartSequence. After the countdown happens
     public static void StartGameplay()
     {
-        Instance.startTime = Time.time;
         Instance.SetDifficulty(Instance.defaultDifficulty);
         gameIsRunning = true;
 
@@ -215,12 +214,14 @@ public class MinigameManagerDuck : LevelManager
     public override void PauseLevel()
     {
         gameIsRunning = false;
+        enemySpawner.StopSpawnEnemies();
         Debug.Log("Paused level from MinigameManagerDuck");
     }
 
     public override void UnpauseLevel()
     {
         gameIsRunning = true;
+        enemySpawner.StartSpawnEnemies();
         Debug.Log("Unpaused level from MinigameManagerDuck");
     }
 }
