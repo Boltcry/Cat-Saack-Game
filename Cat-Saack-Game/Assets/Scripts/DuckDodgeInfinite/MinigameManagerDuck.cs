@@ -123,7 +123,7 @@ public class MinigameManagerDuck : LevelManager
     // Do Pre-game functions & start actual gameplay
     public static void StartGame()
     {
-        //Instance.StartCoroutine(Instance.SetRandomLayout());
+        //Instance.SetRandomLayout();
 
         if (Instance.gameStartSequence != null)
         {
@@ -186,7 +186,7 @@ public class MinigameManagerDuck : LevelManager
     }
 
     // grab a random layout from levelLayouts list and update relevant game info
-    IEnumerator SetRandomLayout()
+    void SetRandomLayout()
     {
         if (levelLayouts.Count > 0)
         {
@@ -194,7 +194,6 @@ public class MinigameManagerDuck : LevelManager
             LevelLayout layout = levelLayouts[randomIndex];
 
             Instantiate(layout, transform.position, Quaternion.identity);
-            yield return null;
 
             // update level information
             gameRoomBounds = layout.GetGameRoomBounds(); // update game bounds (spawning)

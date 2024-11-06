@@ -71,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
     // Spawns enemies as long as the game is running.
     IEnumerator SpawnEnemies()
     {
-        while (true)
+        while (MinigameManagerDuck.gameIsRunning)
         {
             SpawnEnemy();
             //Debug.Log("Current spawnTime: "+currentSpawnTime);

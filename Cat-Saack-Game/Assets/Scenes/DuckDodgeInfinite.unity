@@ -2455,6 +2455,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
+    - target: {fileID: 1582246016232865931, guid: 28c677fec0dc0e34bb185669273c0695, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582246016469764880, guid: 28c677fec0dc0e34bb185669273c0695, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c677fec0dc0e34bb185669273c0695, type: 3}
 --- !u!1 &1496651175

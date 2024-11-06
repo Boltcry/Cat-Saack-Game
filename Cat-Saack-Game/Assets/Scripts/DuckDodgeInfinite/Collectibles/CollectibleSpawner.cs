@@ -121,6 +121,7 @@ public class CollectibleSpawner : MonoBehaviour
                 }
             }
         }
+        Debug.Log("Finished calculating walkable tiles. number of tiles: "+walkableTiles.Count);
     }
 
     public void DeregisterCollectible()
@@ -187,7 +188,6 @@ public class CollectibleSpawner : MonoBehaviour
 
             // Draw a small dot (sphere) at the center of each walkable tile
             Gizmos.DrawSphere(worldPosition, 0.1f); // Adjust the size if necessary
-            Debug.Log("Drew a walkable tiles");
         }
     }
 }
