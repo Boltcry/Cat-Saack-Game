@@ -41,6 +41,8 @@ public class MinigameManagerDuck : LevelManager
 
     [HideInInspector]
     public float elapsedTime = 0;
+    [HideInInspector]
+    public int tokensCollected = 0;
 
     void Awake()
     {
@@ -94,6 +96,7 @@ public class MinigameManagerDuck : LevelManager
             // print current elapsed time
             uiManager.DisplayElapsedTime(CalculateCurrentTime());
             uiManager.DisplayHealth(player.GetHealth());
+
         }
     }
 
@@ -174,6 +177,12 @@ public class MinigameManagerDuck : LevelManager
     public static void AddPlayerHealth(int aHealth)
     {
         Instance.player.AddHealth(aHealth);
+    }
+
+    public static void IncrementTokensCollected()
+    {
+        Instance.tokensCollected++;
+        Instance.uiManager.DisplayTokens(Instance.tokensCollected);
     }
 
     // grab a random layout from levelLayouts list and update relevant game info

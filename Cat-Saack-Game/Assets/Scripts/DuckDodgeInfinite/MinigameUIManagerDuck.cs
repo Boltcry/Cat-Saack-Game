@@ -11,16 +11,18 @@ public class MinigameUIManagerDuck : MonoBehaviour
     public MenuButton startGameButton;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI healthText;
-    public GameObject pauseScreen; // interact with main UI manager in some way?
+    public TextMeshProUGUI tokenText;
     public GameObject gameOverScreen;
     public TextMeshProUGUI timeSurvivedText;
+    public TextMeshProUGUI tokenGameOverText;
 
     void Start()
     {
-        timeText.gameObject.SetActive(true);
-        healthText.gameObject.SetActive(true);
-        gameOverScreen.SetActive(false);
-        titleScreen.SetActive(true);
+        timeText?.gameObject.SetActive(true);
+        healthText?.gameObject.SetActive(true);
+        tokenText?.gameObject.SetActive(true);
+        gameOverScreen?.SetActive(false);
+        titleScreen?.SetActive(true);
         InputManager.SetCursorButton(startGameButton);
     }
 
@@ -48,6 +50,15 @@ public class MinigameUIManagerDuck : MonoBehaviour
         }
     }
 
+    // called when a token is collected
+    public void DisplayTokens(int aTokensCollected)
+    {
+        if (tokenText != null)
+        {
+            tokenText.text = "" + aTokensCollected;
+        }
+    }
+
     public void DisplayGameOver()
     {
         gameOverScreen.SetActive(true);
@@ -59,6 +70,10 @@ public class MinigameUIManagerDuck : MonoBehaviour
         if (timeSurvivedText != null)
         {
             timeSurvivedText.text = string.Format("Time survived: {0:00}:{1:00}", finalTime.minutes, finalTime.seconds);
+        }
+        if (tokenGameOverText != null)
+        {
+            tokenGameOverText.text = "Tokens collected: "+MinigameManagerDuck.Instance.tokensCollected;
         }
     }
 

@@ -17,7 +17,7 @@ public class Collectible : MonoBehaviour
 
     protected virtual void OnCollect()
     {
-        Debug.Log("Collectible collected: "+this);
+        //Debug.Log("Collectible collected: "+this);
 
         // play collection sound
         if (collectSound != null)
@@ -26,6 +26,8 @@ public class Collectible : MonoBehaviour
         }
         // play collection animation
         // add points, or apply powerup, or whateverI 
+        MinigameManagerDuck.IncrementTokensCollected();
+
         DestroyCollectible();
     }
 
