@@ -1225,6 +1225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 8672426008201916343, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8672426008201916348, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
       propertyPath: target
       value: 
@@ -2457,11 +2461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582246016232865931, guid: 28c677fec0dc0e34bb185669273c0695, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582246016469764880, guid: 28c677fec0dc0e34bb185669273c0695, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c677fec0dc0e34bb185669273c0695, type: 3}

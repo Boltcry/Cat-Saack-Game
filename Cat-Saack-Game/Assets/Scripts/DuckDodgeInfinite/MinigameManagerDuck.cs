@@ -123,7 +123,7 @@ public class MinigameManagerDuck : LevelManager
     // Do Pre-game functions & start actual gameplay
     public static void StartGame()
     {
-        //Instance.SetRandomLayout();
+        Instance.SetRandomLayout();
 
         if (Instance.gameStartSequence != null)
         {
@@ -185,37 +185,38 @@ public class MinigameManagerDuck : LevelManager
         Instance.uiManager.DisplayTokens(Instance.tokensCollected);
     }
 
-    // grab a random layout from levelLayouts list and update relevant game info
+    // grab a random layout from list and instantiate it
     void SetRandomLayout()
     {
         if (levelLayouts.Count > 0)
         {
             int randomIndex = Random.Range(0, levelLayouts.Count);
-            LevelLayout layout = levelLayouts[randomIndex];
+            LevelLayout layout = Instantiate(levelLayouts[randomIndex], transform.position, Quaternion.identity);
 
-            Instantiate(layout, transform.position, Quaternion.identity);
+            StartCoroutine(InitializeLayout(layout));
+        }
+    }
 
-            // update level information
-            gameRoomBounds = layout.GetGameRoomBounds(); // update game bounds (spawning)
-            Instance.player.transform.position = layout.GetStartPosition().position; // update player start position
+    IEnumerator InitializeLayout(LevelLayout layout)
+    {
+        yield return null; // Wait for layout initialization
 
-            // update camera bounds
-            Camera camera = Camera.main;
-            if (camera != null)
-            {
-                CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
-                if (cameraFollow != null)
-                {
-                    cameraFollow.SetCameraBounds(layout.GetCameraBounds());
-                }
-                camera.transform.position = Instance.player.transform.position + new Vector3(0, 0, -10f);
-            }
+        // update level information
+        gameRoomBounds = layout.GetGameRoomBounds();
+        Instance.player.transform.position = layout.GetStartPosition().position;
 
-            // update collectible spawner tilemap info
-            if (collectibleSpawner != null)
-            {
-                collectibleSpawner.SetTilemaps(layout.GetWalkableTilemap(), layout.GetCollisionTilemap());
-            }
+        // update camera bounds
+        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        if (cameraFollow != null)
+        {
+            cameraFollow.SetCameraBounds(layout.GetCameraBounds());
+        }
+        Camera.main.transform.position = Instance.player.transform.position + new Vector3(0, 0, -10f);
+
+        // update collectible spawner tilemap info
+        if (collectibleSpawner != null)
+        {
+            collectibleSpawner.SetTilemaps(layout.GetWalkableTilemap(), layout.GetCollisionTilemap());
         }
     }
 
