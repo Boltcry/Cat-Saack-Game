@@ -6,6 +6,7 @@ public class Collectible : MonoBehaviour
 {
     public float spawnChance;
     public AudioClip collectSound;
+    public bool incrementTokenCount = false;
 
     Collider2D triggerCollider;
     CollectibleSpawner spawner;
@@ -26,7 +27,10 @@ public class Collectible : MonoBehaviour
         }
         // play collection animation
         // add points, or apply powerup, or whateverI 
-        MinigameManagerDuck.IncrementTokensCollected();
+        if (incrementTokenCount)
+        {
+            MinigameManagerDuck.IncrementTokensCollected();
+        }
 
         DestroyCollectible();
     }

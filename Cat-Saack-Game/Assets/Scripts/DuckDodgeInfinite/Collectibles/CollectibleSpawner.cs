@@ -86,7 +86,7 @@ public class CollectibleSpawner : MonoBehaviour
     Vector3 GetWalkablePosition()
     {
         Vector3Int randomTilePosition = walkableTiles[Random.Range(0, walkableTiles.Count)];
-        return walkableTilemap.CellToWorld(randomTilePosition) + walkableTilemap.tileAnchor;
+        return walkableTilemap.CellToWorld(randomTilePosition) + new Vector3(0.25f, 0.25f, 0f);
     }
 
     // adds walkable tiles to a list walkableTiles using walkableTilemap and collisionTilemap

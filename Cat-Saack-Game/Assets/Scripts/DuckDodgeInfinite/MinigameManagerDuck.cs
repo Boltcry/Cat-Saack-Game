@@ -190,6 +190,8 @@ public class MinigameManagerDuck : LevelManager
     {
         if (levelLayouts.Count > 0)
         {
+            Random.InitState(System.Environment.TickCount);
+
             int randomIndex = Random.Range(0, levelLayouts.Count);
             LevelLayout layout = Instantiate(levelLayouts[randomIndex], transform.position, Quaternion.identity);
 
