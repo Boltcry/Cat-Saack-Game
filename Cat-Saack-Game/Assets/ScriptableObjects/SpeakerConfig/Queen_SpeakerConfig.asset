@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1763390e7b28a44a4f537f9cac7104, type: 3}
-  m_Name: Repairman_SpeakerConfig
+  m_Name: Queen_SpeakerConfig
   m_EditorClassIdentifier: 
-  id: repairman
-  speakerName: Guy
-  portraitSpriteLibrary: {fileID: 7108339969198208228, guid: 030f558e2e52a6e4ab00135ae8c3a635, type: 3}
-  voiceClip: {fileID: 8300000, guid: a45ae3635d7ce8042a151feb9159aaa3, type: 3}
+  id: queen
+  speakerName: Queen Mother
+  portraitSpriteLibrary: {fileID: 0}
+  voiceClip: {fileID: 8300000, guid: b0f4a09493b21304895178cefcd6d483, type: 3}
   stopAudioSource: 1
-  textAudioPlayRate: 3
-  minPitch: 0.57
-  maxPitch: 0.93
+  textAudioPlayRate: 2
+  minPitch: 1.23
+  maxPitch: 1.97

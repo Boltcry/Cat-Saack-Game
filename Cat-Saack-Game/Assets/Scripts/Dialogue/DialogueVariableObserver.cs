@@ -52,4 +52,15 @@ public class DialogueVariableObserver
             aStory.variablesState.SetGlobal(variable.Key, variable.Value);
         }
     }
+
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        variables.TryGetValue(variableName, out variableValue);
+        if (variableValue == null)
+        {
+            Debug.LogWarning("Ink variable was found to be null: " + variableName);
+        }
+        return variableValue;
+    }
 }

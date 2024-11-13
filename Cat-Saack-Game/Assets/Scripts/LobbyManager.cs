@@ -17,9 +17,15 @@ public class LobbyManager : LevelManager, SavableData
 
     protected override void Start()
     {
-        base.Start();
+        GameManager.RegisterLevelManager(this);
         InputManager.SwitchInputModeOverworld();
         base.StartLevel();
+
+        // start tutorial sequence
+        if (!tutorialPassed && sequenceOnAwake != null)
+        {
+            SequenceManager.StartSequence(sequenceOnAwake);
+        }
     }
 
     public void SaveData()

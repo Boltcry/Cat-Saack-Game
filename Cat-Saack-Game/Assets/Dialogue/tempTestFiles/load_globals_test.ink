@@ -1,0 +1,1 @@
+INCLUDE globals_test.ink
