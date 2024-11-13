@@ -1294,7 +1294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.3141022, y: 0.19239998}
+  m_AnchoredPosition: {x: -1.3140869, y: 0.19239998}
   m_SizeDelta: {x: 49.1363, y: -9.1028}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &4622914157966455901
@@ -1307,7 +1307,7 @@ PrefabInstance:
     - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
       propertyPath: ambientMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 58fd8f82cfe21ff41ad931f706a7477e, type: 3}
+      objectReference: {fileID: 8300000, guid: 08ad909d07c58ef4fb6ff474953016ef, type: 3}
     - target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
       propertyPath: sequenceOnAwake
       value: 

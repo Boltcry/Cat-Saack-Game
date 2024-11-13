@@ -53,8 +53,11 @@ public class PortraitManager : MonoBehaviour
 
     void SetImageTransparency(float aTransparency)
     {
-        Color newColor = portraitImage.color;
-        newColor.a = aTransparency;
-        portraitImage.color = newColor;
+        if (portraitImage != null)
+        {
+            Color newColor = portraitImage.color;
+            newColor.a = aTransparency;
+            portraitImage.color = newColor;
+        }
     }
 }

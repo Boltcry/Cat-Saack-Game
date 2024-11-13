@@ -40,4 +40,20 @@ public class OverworldInteractable : MonoBehaviour, Interactable
     {
         outlineObject.SetOutlineActive(aActive);
     }
+
+    public void SetSequenceData(SequenceDataSO aSequenceData)
+    {
+        if (aSequenceData != null && aSequenceData.sequenceToRun != null)
+        {
+            sequenceToRun = aSequenceData.sequenceToRun;
+        }
+    }
+
+    /*
+    public void SetPosition(float x, float y)
+    {
+        Vector3 newPosition = new Vector3(x, y, 0);
+        transform.position = newPosition;
+    }
+    */
 }

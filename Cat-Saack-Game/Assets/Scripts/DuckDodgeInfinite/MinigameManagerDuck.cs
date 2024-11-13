@@ -9,6 +9,7 @@ public class MinigameManagerDuck : LevelManager
     // StartGame() event handler
     public delegate void GameStartedHandler();
     public static event GameStartedHandler OnGameStarted;
+    public MinigameDataSO minigameData;
 
     [Header("Minigame Settings")]
     public MinigameUIManagerDuck uiManager;
@@ -162,6 +163,11 @@ public class MinigameManagerDuck : LevelManager
         // game over text + time survived
         Instance.uiManager.DisplayGameOver();
         // display the leaderboard
+
+        if (Instance.minigameData != null)
+        {
+            Instance.minigameData.IncrementTimesPlayed();
+        }
     }
 
     public static void SetPlayerSpeed(float aDuration, float aSpeedMultiplier)

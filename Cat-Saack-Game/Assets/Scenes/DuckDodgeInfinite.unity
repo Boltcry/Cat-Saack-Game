@@ -4087,6 +4087,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 933273256}
     - target: {fileID: 2415066477029701435, guid: d2da50f08902b434b87840a21a1fa78d, type: 3}
+      propertyPath: ambientMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 7fe858eeb09620e44ab9d716eab4ecd4, type: 3}
+    - target: {fileID: 2415066477029701435, guid: d2da50f08902b434b87840a21a1fa78d, type: 3}
+      propertyPath: minigameData
+      value: 
+      objectReference: {fileID: 11400000, guid: 362016137d540f245b32f2c33d274fe0, type: 2}
+    - target: {fileID: 2415066477029701435, guid: d2da50f08902b434b87840a21a1fa78d, type: 3}
       propertyPath: gameRoomBounds
       value: 
       objectReference: {fileID: 1277240565}

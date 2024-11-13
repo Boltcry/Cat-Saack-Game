@@ -17,6 +17,6 @@ MonoBehaviour:
   portraitSpriteLibrary: {fileID: 0}
   voiceClip: {fileID: 8300000, guid: b0f4a09493b21304895178cefcd6d483, type: 3}
   stopAudioSource: 1
-  textAudioPlayRate: 2
-  minPitch: 1.23
-  maxPitch: 1.97
+  textAudioPlayRate: 4
+  minPitch: 1.02
+  maxPitch: 1.61
