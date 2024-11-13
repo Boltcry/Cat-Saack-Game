@@ -6,6 +6,7 @@ public class Collectible : MonoBehaviour
 {
     public float spawnChance;
     public AudioClip collectSound;
+    public bool incrementTokenCount = false;
 
     Collider2D triggerCollider;
     CollectibleSpawner spawner;
@@ -17,7 +18,7 @@ public class Collectible : MonoBehaviour
 
     protected virtual void OnCollect()
     {
-        Debug.Log("Collectible collected: "+this);
+        //Debug.Log("Collectible collected: "+this);
 
         // play collection sound
         if (collectSound != null)
@@ -26,6 +27,11 @@ public class Collectible : MonoBehaviour
         }
         // play collection animation
         // add points, or apply powerup, or whateverI 
+        if (incrementTokenCount)
+        {
+            MinigameManagerDuck.IncrementTokensCollected();
+        }
+
         DestroyCollectible();
     }
 

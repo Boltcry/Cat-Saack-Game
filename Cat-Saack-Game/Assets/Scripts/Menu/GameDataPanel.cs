@@ -45,8 +45,14 @@ public class GameDataPanel : MenuPanel
         gameRulesText.text = currentGameData.rules;
         gameControlsText.text = currentGameData.controls;
         timesPlayedText.text = "Times played: " + currentGameData.timesPlayedCount;
-        UpdateStartGameButtonData();
-        UpdateVideoData();
+        if (startGameButton != null)
+        {
+            UpdateStartGameButtonData();
+        }
+        if (rawVideoImage != null)
+        {
+            UpdateVideoData();
+        }
     }
 
     void UpdateStartGameButtonData()

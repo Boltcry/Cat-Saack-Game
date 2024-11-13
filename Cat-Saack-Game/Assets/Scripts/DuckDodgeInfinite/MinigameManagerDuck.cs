@@ -9,6 +9,7 @@ public class MinigameManagerDuck : LevelManager
     // StartGame() event handler
     public delegate void GameStartedHandler();
     public static event GameStartedHandler OnGameStarted;
+    public MinigameDataSO minigameData;
 
     [Header("Minigame Settings")]
     public MinigameUIManagerDuck uiManager;
@@ -38,9 +39,11 @@ public class MinigameManagerDuck : LevelManager
     [Tooltip("Number of seconds elapsed when the game changes to Hard difficulty")]
     public float hardDifficultyStart = 40;
 
-    private float startTime;
+
     [HideInInspector]
     public float elapsedTime = 0;
+    [HideInInspector]
+    public int tokensCollected = 0;
 
     void Awake()
     {
@@ -78,7 +81,7 @@ public class MinigameManagerDuck : LevelManager
     {
         if (gameIsRunning)
         {
-            elapsedTime = Time.time - startTime;
+            elapsedTime += Time.deltaTime;
 
             // update difficulty if needed
             if (currentDifficulty < DifficultyLevel.Medium && elapsedTime >= mediumDifficultyStart)
@@ -94,6 +97,7 @@ public class MinigameManagerDuck : LevelManager
             // print current elapsed time
             uiManager.DisplayElapsedTime(CalculateCurrentTime());
             uiManager.DisplayHealth(player.GetHealth());
+
         }
     }
 
@@ -120,7 +124,7 @@ public class MinigameManagerDuck : LevelManager
     // Do Pre-game functions & start actual gameplay
     public static void StartGame()
     {
-        //Instance.StartCoroutine(Instance.SetRandomLayout());
+        Instance.SetRandomLayout();
 
         if (Instance.gameStartSequence != null)
         {
@@ -135,7 +139,6 @@ public class MinigameManagerDuck : LevelManager
     // to be run after StartGame in the gameStartSequence. After the countdown happens
     public static void StartGameplay()
     {
-        Instance.startTime = Time.time;
         Instance.SetDifficulty(Instance.defaultDifficulty);
         gameIsRunning = true;
 
@@ -160,6 +163,11 @@ public class MinigameManagerDuck : LevelManager
         // game over text + time survived
         Instance.uiManager.DisplayGameOver();
         // display the leaderboard
+
+        if (Instance.minigameData != null)
+        {
+            Instance.minigameData.IncrementTimesPlayed();
+        }
     }
 
     public static void SetPlayerSpeed(float aDuration, float aSpeedMultiplier)
@@ -177,38 +185,60 @@ public class MinigameManagerDuck : LevelManager
         Instance.player.AddHealth(aHealth);
     }
 
-    // grab a random layout from levelLayouts list and update relevant game info
-    IEnumerator SetRandomLayout()
+    public static void IncrementTokensCollected()
+    {
+        Instance.tokensCollected++;
+        Instance.uiManager.DisplayTokens(Instance.tokensCollected);
+    }
+
+    // grab a random layout from list and instantiate it
+    void SetRandomLayout()
     {
         if (levelLayouts.Count > 0)
         {
+            Random.InitState(System.Environment.TickCount);
+
             int randomIndex = Random.Range(0, levelLayouts.Count);
-            LevelLayout layout = levelLayouts[randomIndex];
+            LevelLayout layout = Instantiate(levelLayouts[randomIndex], transform.position, Quaternion.identity);
 
-            Instantiate(layout, transform.position, Quaternion.identity);
-            yield return null;
-
-            // update level information
-            gameRoomBounds = layout.GetGameRoomBounds(); // update game bounds (spawning)
-            Instance.player.transform.position = layout.GetStartPosition().position; // update player start position
-
-            // update camera bounds
-            Camera camera = Camera.main;
-            if (camera != null)
-            {
-                CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
-                if (cameraFollow != null)
-                {
-                    cameraFollow.SetCameraBounds(layout.GetCameraBounds());
-                }
-                camera.transform.position = Instance.player.transform.position + new Vector3(0, 0, -10f);
-            }
-
-            // update collectible spawner tilemap info
-            if (collectibleSpawner != null)
-            {
-                collectibleSpawner.SetTilemaps(layout.GetWalkableTilemap(), layout.GetCollisionTilemap());
-            }
+            StartCoroutine(InitializeLayout(layout));
         }
+    }
+
+    IEnumerator InitializeLayout(LevelLayout layout)
+    {
+        yield return null; // Wait for layout initialization
+
+        // update level information
+        gameRoomBounds = layout.GetGameRoomBounds();
+        Instance.player.transform.position = layout.GetStartPosition().position;
+
+        // update camera bounds
+        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        if (cameraFollow != null)
+        {
+            cameraFollow.SetCameraBounds(layout.GetCameraBounds());
+        }
+        Camera.main.transform.position = Instance.player.transform.position + new Vector3(0, 0, -10f);
+
+        // update collectible spawner tilemap info
+        if (collectibleSpawner != null)
+        {
+            collectibleSpawner.SetTilemaps(layout.GetWalkableTilemap(), layout.GetCollisionTilemap());
+        }
+    }
+
+    public override void PauseLevel()
+    {
+        gameIsRunning = false;
+        enemySpawner.StopSpawnEnemies();
+        Debug.Log("Paused level from MinigameManagerDuck");
+    }
+
+    public override void UnpauseLevel()
+    {
+        gameIsRunning = true;
+        enemySpawner.StartSpawnEnemies();
+        Debug.Log("Unpaused level from MinigameManagerDuck");
     }
 }

@@ -48,7 +48,16 @@ public class DialogueManager : MonoBehaviour
     public static IEnumerator StartDialogue(TextAsset aInkJSON, TextDisplayer aTextDisplayer)
     {
         InputManager.SetCursorButton(null);
-        Instance.currentTextDisplayer = aTextDisplayer;
+
+        if (aTextDisplayer != null)
+        {
+            Instance.currentTextDisplayer = aTextDisplayer;
+        }
+        else if (aTextDisplayer == null)
+        {
+            Instance.currentTextDisplayer = Instance.defaultTextDisplayer;
+        }
+
         Instance.currentTextDisplayer.SetSpeakerConfig(Instance.defaultSpeakerConfig);
         Instance.dialogueReader.ReadDialogueSetup(aInkJSON);
         Instance.dialogueReader.StartListeningVariables();
@@ -144,6 +153,18 @@ public class DialogueManager : MonoBehaviour
         }
         Debug.LogWarning("SpeakerConfigSO with ID " +aID+ " not found.");
         return null;
+    }
+
+    public static void SetDefaultTextDisplayer(TextDisplayer aDisplayer)
+    {
+        if (aDisplayer != null)
+        {
+            Instance.defaultTextDisplayer = aDisplayer;
+        }
+        else
+        {
+            Debug.LogWarning("aTextDisplayer is null in dialogue manager");
+        }
     }
 
 }

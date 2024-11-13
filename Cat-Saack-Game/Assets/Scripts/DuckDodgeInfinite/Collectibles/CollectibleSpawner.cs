@@ -17,7 +17,7 @@ public class CollectibleSpawner : MonoBehaviour
 
     void Start()
     {
-        CacheWalkableTiles();
+        //CacheWalkableTiles();
     }
 
     // spawns a collectible if able every [spawnInterval] seconds
@@ -86,12 +86,14 @@ public class CollectibleSpawner : MonoBehaviour
     Vector3 GetWalkablePosition()
     {
         Vector3Int randomTilePosition = walkableTiles[Random.Range(0, walkableTiles.Count)];
-        return walkableTilemap.CellToWorld(randomTilePosition) + walkableTilemap.tileAnchor;
+        return walkableTilemap.CellToWorld(randomTilePosition) + new Vector3(0.25f, 0.25f, 0f);
     }
 
     // adds walkable tiles to a list walkableTiles using walkableTilemap and collisionTilemap
     void CacheWalkableTiles()
     {
+        walkableTiles.Clear();
+
         if (walkableTilemap != null)
         {
             BoundsInt bounds = walkableTilemap.cellBounds;
@@ -117,10 +119,11 @@ public class CollectibleSpawner : MonoBehaviour
                             walkableTiles.Add(tilePos);                    
                         }
                     }
-                    Debug.Log("Created new tile at "+tilePos);
+                    //Debug.Log("Added new walkable tile at "+tilePos);
                 }
             }
         }
+        //Debug.Log("Finished calculating walkable tiles. number of tiles: "+walkableTiles.Count);
     }
 
     public void DeregisterCollectible()
@@ -176,18 +179,14 @@ public class CollectibleSpawner : MonoBehaviour
     {
         if (walkableTiles == null || walkableTilemap == null) return;
 
-        // Set the color of the Gizmos for visibility
         Gizmos.color = Color.green;
 
         // Iterate through each position in the walkableTiles list
         foreach (Vector3Int tilePosition in walkableTiles)
         {
-            // Convert tile position to world position
-            Vector3 worldPosition = walkableTilemap.CellToWorld(tilePosition) + walkableTilemap.tileAnchor;
-
-            // Draw a small dot (sphere) at the center of each walkable tile
-            Gizmos.DrawSphere(worldPosition, 0.1f); // Adjust the size if necessary
-            Debug.Log("Drew a walkable tiles");
+            Vector3 worldPosition = walkableTilemap.CellToWorld(tilePosition) + new Vector3(0.25f, 0.25f, 0f);
+            Gizmos.DrawSphere(worldPosition, 0.1f);
+            //Debug.Log($"Tilemap at {tilePosition} has world position: {worldPosition}");
         }
     }
 }

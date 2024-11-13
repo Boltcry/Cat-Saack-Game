@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    private LevelManager activeLevelManager;
+
     void Awake()
     {
         if (Instance == null)
@@ -21,7 +23,10 @@ public class GameManager : MonoBehaviour
 
     public static void Pause()
     {
-        // stop other things in the relevant game
+        if (Instance.activeLevelManager != null)
+        {
+            Instance.activeLevelManager.PauseLevel();
+        }
         // muffle sound
         UIManager.OpenPauseMenu();
     }
@@ -30,5 +35,14 @@ public class GameManager : MonoBehaviour
     {
         // unmuffle sound
         // resume game
+        if (Instance.activeLevelManager != null)
+        {
+            Instance.activeLevelManager.UnpauseLevel();
+        }
+    }
+
+    public static void RegisterLevelManager(LevelManager aLevelManager)
+    {
+        Instance.activeLevelManager = aLevelManager;
     }
 }

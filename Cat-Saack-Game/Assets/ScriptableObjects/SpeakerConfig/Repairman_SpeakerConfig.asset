@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Repairman_SpeakerConfig
   m_EditorClassIdentifier: 
   id: repairman
-  speakerName: Repairman
+  speakerName: Guy
   portraitSpriteLibrary: {fileID: 7108339969198208228, guid: 030f558e2e52a6e4ab00135ae8c3a635, type: 3}
   voiceClip: {fileID: 8300000, guid: a45ae3635d7ce8042a151feb9159aaa3, type: 3}
   stopAudioSource: 1

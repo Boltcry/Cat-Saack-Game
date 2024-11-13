@@ -16,7 +16,7 @@ public class MinigameDataSO : ScriptableObject, SavableData
     public string demoClipURL;
     public SequenceDataSO startGameSequence;
     
-    [HideInInspector] 
+    //[HideInInspector] 
     public int timesPlayedCount = 0;
     [HideInInspector]
     public bool unlocked = false;
@@ -34,5 +34,10 @@ public class MinigameDataSO : ScriptableObject, SavableData
     public void LoadData()
     {
         //
+    }
+
+    public void IncrementTimesPlayed()
+    {
+        timesPlayedCount++;
     }
 }

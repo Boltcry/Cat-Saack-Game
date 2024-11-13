@@ -1,4 +1,4 @@
-INCLUDE globals.ink
+INCLUDE globals_test.ink
 ~ test_variable = "Started the portrait dialogue"
 This is a test of the name / portrait system using tags. #character:repairman #portrait:neutral #layout:left
 How's the weather looking?

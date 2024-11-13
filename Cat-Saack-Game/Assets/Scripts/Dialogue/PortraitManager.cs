@@ -38,10 +38,26 @@ public class PortraitManager : MonoBehaviour
             {
                 if (portraitImage != null)
                 {
+                    SetImageTransparency(1f);
                     portraitImage.sprite = updatedSprite;
                 }
                 //Debug.Log("successfully set category to "+aCategory+ " and label to "+aLabel);
             }
+        }
+        // make the sprite transparent if no sprite library available
+        if (currentLibrary == null)
+        {
+            SetImageTransparency(0f);
+        }
+    }
+
+    void SetImageTransparency(float aTransparency)
+    {
+        if (portraitImage != null)
+        {
+            Color newColor = portraitImage.color;
+            newColor.a = aTransparency;
+            portraitImage.color = newColor;
         }
     }
 }

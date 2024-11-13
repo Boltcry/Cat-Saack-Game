@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // starts the SpawnEnemies coroutine. Meant to be used with the OnGameStarted event
-    void StartSpawnEnemies()
+    public void StartSpawnEnemies()
     {
         if (enemySpawnCoroutine == null)
         {
@@ -59,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void StopSpawnEnemies()
+    public void StopSpawnEnemies()
     {
         if (enemySpawnCoroutine != null)
         {
