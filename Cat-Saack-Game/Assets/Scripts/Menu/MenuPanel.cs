@@ -5,7 +5,9 @@ using UnityEngine;
 public class MenuPanel : MonoBehaviour
 {
     public MenuButton defaultButton;
+    [Header("Animation")]
     public Animator panelAnimator;
+    public string closeIdleStateName = "phone_close_idle";
 
     protected void Start()
     {
@@ -21,7 +23,7 @@ public class MenuPanel : MonoBehaviour
         gameObject.SetActive(true);
         if (panelAnimator != null)
         {
-            // play opening animation
+            panelAnimator.SetBool("shouldClose", false);
         }
     }
 
@@ -29,8 +31,22 @@ public class MenuPanel : MonoBehaviour
     {
         if (panelAnimator != null)
         {
-            // play closing animation
+            StartCoroutine(CloseAfterAnimation());
         }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator CloseAfterAnimation()
+    {
+        panelAnimator.SetBool("shouldClose", true);
+
+        // wait for animation to start and finish
+        yield return new WaitUntil(() => 
+            panelAnimator.GetCurrentAnimatorStateInfo(0).IsName(closeIdleStateName));
+
         gameObject.SetActive(false);
     }
 

@@ -5705,6 +5705,7 @@ GameObject:
   - component: {fileID: 739928482}
   - component: {fileID: 739928484}
   - component: {fileID: 739928483}
+  - component: {fileID: 739928485}
   m_Layer: 5
   m_Name: Phone
   m_TagString: Untagged
@@ -5723,7 +5724,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1168203941}
+  - {fileID: 982854123}
+  - {fileID: 1706604422}
   m_Father: {fileID: 1659937018}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5770,6 +5774,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739928481}
   m_CullTransparentMesh: 1
+--- !u!95 &739928485
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739928481}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4cbae5be95a0ba6438bfea390a13f387, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &813194025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6240,7 +6265,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1659937018}
+    m_TransformParent: {fileID: 739928482}
     m_Modifications:
     - target: {fileID: 1669240208302021039, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_Name
@@ -6256,7 +6281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1669240209244411286, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_fontSize
-      value: 10.95
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 1669240209244411286, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_fontSizeMin
@@ -6272,7 +6297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6292,7 +6317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -733.6258
+      value: -546.2245
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6340,11 +6365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -70.2
+      value: -70.20002
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 333.6
+      value: 292.57477
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6813,7 +6838,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1659937018}
+    m_TransformParent: {fileID: 739928482}
     m_Modifications:
     - target: {fileID: 1669240208302021039, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_Name
@@ -6829,7 +6854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1669240209244411286, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_fontSize
-      value: 9.3
+      value: 12.7
       objectReference: {fileID: 0}
     - target: {fileID: 1669240209244411286, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_fontSizeMin
@@ -6845,7 +6870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6865,7 +6890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -731.9723
+      value: -544.571
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6917,7 +6942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 333.5
+      value: 292.47476
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8963,9 +8988,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 739928482}
-  - {fileID: 1168203941}
-  - {fileID: 982854123}
-  - {fileID: 1706604422}
   - {fileID: 2062414613}
   m_Father: {fileID: 1869620818}
   m_RootOrder: 3
@@ -8988,7 +9010,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 1168203940}
-  panelAnimator: {fileID: 0}
+  panelAnimator: {fileID: 739928485}
+  closeIdleStateName: phone_close_idle
 --- !u!114 &1659937020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9071,7 +9094,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1659937018}
+    m_TransformParent: {fileID: 739928482}
     m_Modifications:
     - target: {fileID: 1669240208302021039, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_Name
@@ -9087,7 +9110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1669240209244411286, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_fontSize
-      value: 10.65
+      value: 14.35
       objectReference: {fileID: 0}
     - target: {fileID: 1669240209244411286, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_fontSizeMin
@@ -9103,7 +9126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9123,7 +9146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -732.5097
+      value: -545.1084
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_SizeDelta.y
@@ -9175,7 +9198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 333.25742
+      value: 292.23218
       objectReference: {fileID: 0}
     - target: {fileID: 2945946646290010676, guid: 4c900d34c37e6874cbb5f817130a5325, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9394,6 +9417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 1782385113}
   panelAnimator: {fileID: 0}
+  closeIdleStateName: phone_close_idle
   gameNameText: {fileID: 932471957}
   gameRulesText: {fileID: 837125399}
   gameControlsText: {fileID: 1575109043}
@@ -9825,12 +9849,12 @@ RectTransform:
   - {fileID: 221865433}
   - {fileID: 1516001718}
   m_Father: {fileID: 1659937018}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -2.1333008, y: -0.3704834}
-  m_SizeDelta: {x: -287.0418, y: -139.6035}
+  m_SizeDelta: {x: -287.0418, y: -139.60352}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &2062414614
 VideoPlayer:
@@ -9919,6 +9943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 0}
   panelAnimator: {fileID: 0}
+  closeIdleStateName: phone_close_idle
   gameNameText: {fileID: 1018976000}
   gameRulesText: {fileID: 1121842049}
   gameControlsText: {fileID: 221865434}
@@ -9937,6 +9962,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1869620818}
     m_Modifications:
+    - target: {fileID: 341670514190793825, guid: 9464b80b0ce2dd84fb29a7a13c30578d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.70002747
+      objectReference: {fileID: 0}
     - target: {fileID: 341670514530776992, guid: 9464b80b0ce2dd84fb29a7a13c30578d, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -10505,6 +10534,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a76bc31423d2224db6c4a6da604c75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7155408697305962937
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147245408}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71da06b0c408ae14d822b7acebe7a7fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8522955867842898591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11065,10 +11115,6 @@ PrefabInstance:
     - target: {fileID: 2062949138629305483, guid: 703e3bd4ca5322547951d58e83d8df48, type: 3}
       propertyPath: m_Name
       value: GameCabinet (DuckDodge)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8996290216816016919, guid: 703e3bd4ca5322547951d58e83d8df48, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 703e3bd4ca5322547951d58e83d8df48, type: 3}
