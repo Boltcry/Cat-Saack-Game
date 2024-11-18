@@ -50,6 +50,7 @@ MonoBehaviour:
   spawnChance: 0.7
   collectSound: {fileID: 8300000, guid: 7e7ed8ec42cb83e40af7e17a266b9527, type: 3}
   incrementTokenCount: 1
+  collectAnimationName: coin_collected
 --- !u!61 &3343734676676332665
 BoxCollider2D:
   m_ObjectHideFlags: 0

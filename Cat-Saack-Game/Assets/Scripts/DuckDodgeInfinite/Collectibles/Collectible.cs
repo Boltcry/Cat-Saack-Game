@@ -7,13 +7,17 @@ public class Collectible : MonoBehaviour
     public float spawnChance;
     public AudioClip collectSound;
     public bool incrementTokenCount = false;
+    [Tooltip("Name of the animation played on collect")]
+    public string collectAnimationName;
 
     Collider2D triggerCollider;
     CollectibleSpawner spawner;
+    Animator animator;
 
     void Start()
     {
         triggerCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void OnCollect()
@@ -32,7 +36,7 @@ public class Collectible : MonoBehaviour
             MinigameManagerDuck.IncrementTokensCollected();
         }
 
-        DestroyCollectible();
+        StartCoroutine(DestroyAfterAnimation());
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -51,6 +55,20 @@ public class Collectible : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private IEnumerator DestroyAfterAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("shouldClose", true);
+
+            // wait for animation to start and finish
+            yield return new WaitUntil(() => 
+                animator.GetCurrentAnimatorStateInfo(0).IsName(collectAnimationName));
+        }
+
+        DestroyCollectible();
     }
 
     public void RegisterSpawner(CollectibleSpawner aSpawner)
