@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2062949137548815116}
   - component: {fileID: 2062949137548815117}
+  - component: {fileID: 4615402128818872566}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -116,6 +117,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4615402128818872566
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062949137548815154}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c6f2150e25bc1e44984384dd64b24550, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2062949138629305483
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062949138629305479}
-  - component: {fileID: 2062949138629305477}
+  - component: {fileID: 7908908554162222779}
   - component: {fileID: 2062949138629305482}
   - component: {fileID: 2062949138629305478}
   - component: {fileID: 3584436996895707010}
@@ -154,7 +176,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2062949138629305477
+--- !u!114 &7908908554162222779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,48 +185,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2062949138629305483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a76bc31423d2224db6c4a6da604c75b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa942739e3590e4696bf9ccebec1079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sequenceDataToRun: {fileID: 0}
   sequenceToRun:
-    sequenceSteps:
-    - rid: 3375089845776416779
+    sequenceSteps: []
+  animator: {fileID: 4615402128818872566}
   references:
     version: 2
-    RefIds:
-    - rid: 3375089845776416779
-      type: {class: InvokeEventStep, ns: , asm: Assembly-CSharp}
-      data:
-        disableMove: 1
-        restoreMove: 0
-        eventToInvoke:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: GameDataPanel, Assembly-CSharp
-              m_MethodName: SetGameData
-              m_Mode: 2
-              m_Arguments:
-                m_ObjectArgument: {fileID: 11400000, guid: 362016137d540f245b32f2c33d274fe0, type: 2}
-                m_ObjectArgumentAssemblyTypeName: MinigameDataSO, Assembly-CSharp
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-              m_MethodName: PushMenuPanel
-              m_Mode: 2
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: MenuPanel, Assembly-CSharp
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+    RefIds: []
 --- !u!114 &2062949138629305482
 MonoBehaviour:
   m_ObjectHideFlags: 0
