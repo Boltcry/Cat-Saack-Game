@@ -1194,15 +1194,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672426008201916338, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8672426008201916338, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8672426008201916338, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8672426008201916338, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1234,6 +1234,27 @@ PrefabInstance:
       objectReference: {fileID: 394718868}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
+--- !u!1 &607983269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8672426008201916343, guid: 6bff23501f7d30643ab4418b6151bb2c, type: 3}
+  m_PrefabInstance: {fileID: 607983268}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &607983270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607983269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca07f0e9805e0b74f9e2f1a39db55c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SHAKE_AMOUNT_MODIFIER: 1
+  maxShakeOffset: 0.3
+  defaultAmount: 0.3
+  defaultDuration: 0.5
 --- !u!114 &765795915 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2394403290153275045, guid: 63c86802723a7b84fbdd4cce278c0dc3, type: 3}
@@ -3986,6 +4007,34 @@ PrefabInstance:
       propertyPath: hurtSound
       value: 
       objectReference: {fileID: 8300000, guid: 4fd91a4f1289aac4b912f52077992063, type: 3}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 607983270}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShakeCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CameraShake, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761511099470672508, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
+      propertyPath: onHitEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d49de49055541f647864f5093c3c6b9f, type: 3}
 --- !u!212 &2263741527055770125 stripped

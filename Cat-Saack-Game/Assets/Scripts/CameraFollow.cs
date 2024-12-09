@@ -16,6 +16,10 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         pixelPerfectCamera = GetComponent<PixelPerfectCamera>();
+        if (pixelPerfectCamera == null)
+        {
+            pixelPerfectCamera = GetComponentInChildren<PixelPerfectCamera>();
+        }
 
         if (target == null)
         {

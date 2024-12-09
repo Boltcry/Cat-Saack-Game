@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 // player controller for DuckDodgeInfinite minigame.
 // inherits from PlayerTopDown to recieve footstep and movement functionality
@@ -13,6 +14,7 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
     [Header("Game Variables")]
     public int health = 3;
     public AudioClip hurtSound;
+    public UnityEvent onHitEvent;
 
     bool isInvincible = false;
     float invincibilityTimeLeft = 0.0f;
@@ -83,9 +85,14 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
         if(!isInvincible)
         {
             health--;
+            // juice effects
             if (hurtSound != null)
             {
                 AudioManager.PlayAudioClip(AudioType.SFX, hurtSound);
+            }
+            if (onHitEvent != null)
+            {
+                onHitEvent.Invoke();
             }
             SetInvincible(1f);
             if(health<=0)
