@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InsideGame.unity
     guid: cc9aafe534f64d64793c922655a8d5d8
+  - enabled: 1
+    path: Assets/Scenes/SpaceHockey.unity
+    guid: 55f9ef64bb82ecf4d916e1d43dc2e64d
   m_configObjects: {}
