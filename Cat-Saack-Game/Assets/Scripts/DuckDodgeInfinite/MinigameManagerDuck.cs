@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MinigameManagerDuck : MonoBehaviour
+public class MinigameManagerDuck : LevelManager
 {
     public static MinigameManagerDuck Instance;
     // StartGame() event handler
     public delegate void GameStartedHandler();
     public static event GameStartedHandler OnGameStarted;
+    public MinigameDataSO minigameData;
 
+    [Header("Minigame Settings")]
     public MinigameUIManagerDuck uiManager;
     public EnemySpawner enemySpawner;
+    public CollectibleSpawner collectibleSpawner;
     public PlayerDuckDodgeInfinite player;
-    public BoxCollider2D gameRoomBounds;
     public Vector3 itemStorageBank;
+    // contain list of possible level layout prefabs
+    public List<LevelLayout> levelLayouts = new List<LevelLayout>();
 
-    public AudioClip minigameMusic;
+    public Sequence gameStartSequence;
 
+
+    //[HideInInspector]
+    public BoxCollider2D gameRoomBounds;
     [HideInInspector]
     public static DifficultyLevel currentDifficulty;
     [HideInInspector]
@@ -32,9 +39,11 @@ public class MinigameManagerDuck : MonoBehaviour
     [Tooltip("Number of seconds elapsed when the game changes to Hard difficulty")]
     public float hardDifficultyStart = 40;
 
-    private float startTime;
+
     [HideInInspector]
     public float elapsedTime = 0;
+    [HideInInspector]
+    public int tokensCollected = 0;
 
     void Awake()
     {
@@ -47,10 +56,20 @@ public class MinigameManagerDuck : MonoBehaviour
         {
             enemySpawner = FindObjectOfType<EnemySpawner>();
         }
+        if (collectibleSpawner == null)
+        {
+            collectibleSpawner = FindObjectOfType<CollectibleSpawner>();
+        }
         if (player == null)
         {
             player = FindObjectOfType<PlayerDuckDodgeInfinite>();
         }
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        base.StartLevel();
 
         if (InputManager.Instance != null)
         {
@@ -58,19 +77,11 @@ public class MinigameManagerDuck : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        if (minigameMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, minigameMusic);
-        }
-    }
-
     void Update()
     {
         if (gameIsRunning)
         {
-            elapsedTime = Time.time - startTime;
+            elapsedTime += Time.deltaTime;
 
             // update difficulty if needed
             if (currentDifficulty < DifficultyLevel.Medium && elapsedTime >= mediumDifficultyStart)
@@ -86,6 +97,7 @@ public class MinigameManagerDuck : MonoBehaviour
             // print current elapsed time
             uiManager.DisplayElapsedTime(CalculateCurrentTime());
             uiManager.DisplayHealth(player.GetHealth());
+
         }
     }
 
@@ -108,9 +120,25 @@ public class MinigameManagerDuck : MonoBehaviour
         Debug.Log("Updated Difficulty to "+aDifficultyLevel);
     }
 
+    // to be called by the StartGame button in the title screen
+    // Do Pre-game functions & start actual gameplay
     public static void StartGame()
     {
-        Instance.startTime = Time.time;
+        Instance.SetRandomLayout();
+
+        if (Instance.gameStartSequence != null)
+        {
+            SequenceManager.StartSequence(Instance.gameStartSequence);
+        }
+        else
+        {
+            StartGameplay();
+        }
+    }
+
+    // to be run after StartGame in the gameStartSequence. After the countdown happens
+    public static void StartGameplay()
+    {
         Instance.SetDifficulty(Instance.defaultDifficulty);
         gameIsRunning = true;
 
@@ -135,6 +163,11 @@ public class MinigameManagerDuck : MonoBehaviour
         // game over text + time survived
         Instance.uiManager.DisplayGameOver();
         // display the leaderboard
+
+        if (Instance.minigameData != null)
+        {
+            Instance.minigameData.IncrementTimesPlayed();
+        }
     }
 
     public static void SetPlayerSpeed(float aDuration, float aSpeedMultiplier)
@@ -150,5 +183,62 @@ public class MinigameManagerDuck : MonoBehaviour
     public static void AddPlayerHealth(int aHealth)
     {
         Instance.player.AddHealth(aHealth);
+    }
+
+    public static void IncrementTokensCollected()
+    {
+        Instance.tokensCollected++;
+        Instance.uiManager.DisplayTokens(Instance.tokensCollected);
+    }
+
+    // grab a random layout from list and instantiate it
+    void SetRandomLayout()
+    {
+        if (levelLayouts.Count > 0)
+        {
+            Random.InitState(System.Environment.TickCount);
+
+            int randomIndex = Random.Range(0, levelLayouts.Count);
+            LevelLayout layout = Instantiate(levelLayouts[randomIndex], transform.position, Quaternion.identity);
+
+            StartCoroutine(InitializeLayout(layout));
+        }
+    }
+
+    IEnumerator InitializeLayout(LevelLayout layout)
+    {
+        yield return null; // Wait for layout initialization
+
+        // update level information
+        gameRoomBounds = layout.GetGameRoomBounds();
+        Instance.player.transform.position = layout.GetStartPosition().position;
+
+        // update camera bounds
+        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        if (cameraFollow != null)
+        {
+            cameraFollow.SetCameraBounds(layout.GetCameraBounds());
+        }
+        Camera.main.transform.position = Instance.player.transform.position + new Vector3(0, 0, -10f);
+
+        // update collectible spawner tilemap info
+        if (collectibleSpawner != null)
+        {
+            collectibleSpawner.SetTilemaps(layout.GetWalkableTilemap(), layout.GetCollisionTilemap());
+        }
+    }
+
+    public override void PauseLevel()
+    {
+        gameIsRunning = false;
+        enemySpawner.StopSpawnEnemies();
+        Debug.Log("Paused level from MinigameManagerDuck");
+    }
+
+    public override void UnpauseLevel()
+    {
+        gameIsRunning = true;
+        enemySpawner.StartSpawnEnemies();
+        Debug.Log("Unpaused level from MinigameManagerDuck");
     }
 }

@@ -25,8 +25,6 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyTarget = FindObjectOfType<PlayerDuckDodgeInfinite>().transform;
         }
-        gameRoomBounds = MinigameManagerDuck.Instance.gameRoomBounds;
-        bounds = gameRoomBounds.bounds;
     }
 
     public void UpdateDifficultySettings()
@@ -53,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // starts the SpawnEnemies coroutine. Meant to be used with the OnGameStarted event
-    void StartSpawnEnemies()
+    public void StartSpawnEnemies()
     {
         if (enemySpawnCoroutine == null)
         {
@@ -61,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void StopSpawnEnemies()
+    public void StopSpawnEnemies()
     {
         if (enemySpawnCoroutine != null)
         {
@@ -164,27 +162,28 @@ public class EnemySpawner : MonoBehaviour
         return spawnPosition;
     }
 
+    void UpdateGameRoomBounds()
+    {
+        gameRoomBounds = MinigameManagerDuck.Instance.gameRoomBounds;
+        bounds = gameRoomBounds.bounds;
+    }
+
     // May move to a separate OnGameStart class that this can inherit from later
     void OnEnable()
     {
+        MinigameManagerDuck.OnGameStarted += UpdateGameRoomBounds;
         MinigameManagerDuck.OnGameStarted += StartSpawnEnemies;
     }
 
     void OnDisable()
     {
+        MinigameManagerDuck.OnGameStarted -= UpdateGameRoomBounds;
         MinigameManagerDuck.OnGameStarted -= StartSpawnEnemies;
     }
 
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        // draw gameRoomBounds
-        if (bounds != null)
-        {
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(bounds.center, bounds.size);
-        }
-
         // draw destroyDistance
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, destroyDistance);

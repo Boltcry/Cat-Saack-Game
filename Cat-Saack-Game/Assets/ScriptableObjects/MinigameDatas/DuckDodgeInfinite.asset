@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e1fc0ec8378d74abc4e9027f740b12, type: 3}
+  m_Name: DuckDodgeInfinite
+  m_EditorClassIdentifier: 
+  gameName: Duck Dodge Infinite
+  rules: Duck and Dodge as you try to avoid enemies for as long as possible! Pick
+    up powerups along the way to help you and your score.
+  controls: 'CONTROLS:
+
+    WASD: Move Character
+
+    ESC: Pause Game'
+  demoClipURL: https://boltcry.github.io/HostedVideos/DuckDodgeInfiniteDemo.mp4
+  startGameSequence: {fileID: 11400000, guid: 1210127098c1dbe44925c24c83f240d1, type: 2}
+  timesPlayedCount: 0
+  unlocked: 0

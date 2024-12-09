@@ -53,6 +53,14 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(snappedX, snappedY, -10f);
     }
 
+    public void SetCameraBounds(BoxCollider2D aCameraBounds)
+    {
+        if (aCameraBounds != null)
+        {
+            cameraBounds = aCameraBounds;
+        }
+    }
+
     #if UNITY_EDITOR
         void OnDrawGizmos()
         {

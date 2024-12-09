@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnChance: 0.05
+  collectSound: {fileID: 8300000, guid: 0a24a7c32cf717644b0f3b0f0cccbd41, type: 3}
   powerupType:
     rid: 3375089845776416776
   references:

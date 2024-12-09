@@ -7,12 +7,13 @@ public class SequenceManager : MonoBehaviour
 {
     public static SequenceManager Instance;
 
-    public PlayableDirector playableDirector;
+    [Tooltip("Max number of sequence players to be idle and available in scene.")]
+    [Range(1,5)]
+    public int maxCachedPlayers = 1;
+    public SequencePlayer sequencePlayerPrefab;
 
-    [HideInInspector] 
-    public Sequence currentSequence;
-
-    //bool sequenceIsRunning = false;
+    private List<SequencePlayer> availablePlayers = new List<SequencePlayer>();
+    private List<SequencePlayer> activePlayers = new List<SequencePlayer>();
 
     void Awake()
     {
@@ -27,54 +28,67 @@ public class SequenceManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (playableDirector == null)
+        foreach (SequencePlayer player in GetComponentsInChildren<SequencePlayer>())
         {
-            playableDirector = GetComponentInChildren<PlayableDirector>();
+            availablePlayers.Add(player);
         }
     }
 
     public static void StartSequence(Sequence aSequence)
     {
-        if (aSequence != null)
+        SequencePlayer player = Instance.GetAvailablePlayer();
+        if (player != null)
         {
-            //Debug.Log("Starting sequence");
-            Instance.currentSequence = aSequence;
-
-            //Instance.sequenceIsRunning = true;
-            Instance.StartCoroutine(Instance.RunSequence());
+            Instance.activePlayers.Add(player);
+            player.StartSequence(aSequence);
         }
     }
 
-    public IEnumerator RunSequence()
+    private SequencePlayer GetAvailablePlayer()
     {
-        foreach (SequenceStep step in currentSequence.sequenceSteps)
+        if (availablePlayers.Count > 0)
         {
-            yield return new WaitForEndOfFrame();
-            //Debug.Log("Starting new step");
-            // switch input mode based on step's disableMove flag
-            if (step.disableMove)
-            {
-                InputManager.SwitchInputModeMenu();
-                InputManager.SetCursorButton(null);
-            }
-            else
-            {
-                InputManager.SwitchInputModeOverworld();
-            }
-            yield return StartCoroutine(step.Execute());
+            SequencePlayer player = availablePlayers[0];
+            availablePlayers.RemoveAt(0);
+            return player;
         }
-        EndSequence();
+
+        return CreateNewPlayer();
     }
 
-    void EndSequence()
+    private SequencePlayer CreateNewPlayer()
     {
-        //sequenceIsRunning = false;
-        currentSequence = null;
-
-        // Restore player overworld control & clear cursorButton
-        InputManager.SetCursorButton(null);
-        InputManager.SwitchInputModeOverworld();
-        
-        //Debug.Log("Ending Sequence");
+        if (sequencePlayerPrefab != null)
+        {
+            GameObject newPlayer = Instantiate(sequencePlayerPrefab.gameObject, Instance.transform);
+            return newPlayer.GetComponent<SequencePlayer>();
+        }
+        return null;
     }
+
+    public void ReturnPlayerToPool(SequencePlayer aPlayer)
+    {
+        if (availablePlayers.Count >= maxCachedPlayers)
+        {
+            Destroy(aPlayer);
+        }
+        else
+        {
+            availablePlayers.Add(aPlayer);
+        }
+        activePlayers.Remove(aPlayer);
+    }
+
+    public bool AreSequencesPlaying(SequencePlayer playerToExclude = null)
+    {
+        foreach (SequencePlayer player in activePlayers)
+        {
+            if (player != playerToExclude && player.isPlaying)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

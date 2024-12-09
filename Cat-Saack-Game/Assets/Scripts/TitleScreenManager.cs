@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScreenManager : MonoBehaviour
+public class TitleScreenManager : LevelManager
 {
     public static TitleScreenManager Instance;
 
-    public AudioClip titleMusic;
     public MenuButton startGameButton;
 
     void Awake()
@@ -14,17 +13,14 @@ public class TitleScreenManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    public override void StartLevel()
     {
-        InputManager.SwitchInputModeMenu();
+        base.StartLevel();
+        
+        //InputManager.SwitchInputModeMenu();
         if (startGameButton != null)
         {
             InputManager.SetCursorButton(startGameButton);
-        }
-
-        if (titleMusic != null)
-        {
-            AudioManager.PlayAudioClip(AudioType.AMBIENT, titleMusic);
         }
     }
 

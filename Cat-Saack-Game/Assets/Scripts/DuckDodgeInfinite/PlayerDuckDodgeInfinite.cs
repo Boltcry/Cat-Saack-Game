@@ -12,6 +12,7 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
 
     [Header("Game Variables")]
     public int health = 3;
+    public AudioClip hurtSound;
 
     bool isInvincible = false;
     float invincibilityTimeLeft = 0.0f;
@@ -82,6 +83,10 @@ public class PlayerDuckDodgeInfinite : PlayerTopDown
         if(!isInvincible)
         {
             health--;
+            if (hurtSound != null)
+            {
+                AudioManager.PlayAudioClip(AudioType.SFX, hurtSound);
+            }
             SetInvincible(1f);
             if(health<=0)
             {

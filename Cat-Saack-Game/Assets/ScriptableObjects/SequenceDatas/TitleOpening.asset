@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ef184c10fff104992b292f93fb0ff0, type: 3}
+  m_Name: TitleOpening
+  m_EditorClassIdentifier: 
+  sequenceToRun:
+    sequenceSteps:
+    - rid: 3375090143932973061
+    - rid: 3375089845776416789
+  references:
+    version: 2
+    RefIds:
+    - rid: 3375089845776416789
+      type: {class: InvokeEventStep, ns: , asm: Assembly-CSharp}
+      data:
+        disableMove: 1
+        restoreMove: 0
+        eventToInvoke:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 4622914156491098108, guid: 86f528fb6aee42f4bbba903676b660a9, type: 3}
+              m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
+              m_MethodName: StartTitleScreen
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 3375090143932973061
+      type: {class: PlayVideoStep, ns: , asm: Assembly-CSharp}
+      data:
+        disableMove: 1
+        restoreMove: 0
+        videoToPlay: {fileID: 32900000, guid: 758d28c0dbe9bc14ea884243a7cc8e1e, type: 3}
+        videoRawImage: {fileID: 2215059346313417525, guid: c65aa5953b265d746be922c2f5a476e7, type: 3}
