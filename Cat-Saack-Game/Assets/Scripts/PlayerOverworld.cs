@@ -43,6 +43,7 @@ public class PlayerOverworld : PlayerTopDown
                 {
                     closestDistance = distance;
                     interactable = tempInteractable;
+                    Debug.Log($"Found interactable: {tempInteractable.gameObject.name} at distance {distance}");
                 }
             }
         }
