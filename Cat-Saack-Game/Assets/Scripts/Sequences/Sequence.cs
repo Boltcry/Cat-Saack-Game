@@ -37,7 +37,9 @@ public class DialogueStep : SequenceStep
 
     public override IEnumerator Execute(SequencePlayer aSequencePlayer)
     {
+        GameManager.SetCanPause(false);
         yield return SequenceManager.Instance.StartCoroutine(DialogueManager.StartDialogue(inkJSON, textPanel));
+        GameManager.SetCanPause(true);
     }
 }
 
@@ -108,7 +110,9 @@ public class SceneLoadStep : SequenceStep
 
     public override IEnumerator Execute(SequencePlayer aSequencePlayer)
     {
+        GameManager.SetCanPause(false);
         yield return SequenceManager.Instance.StartCoroutine(SceneLoader.GoToScene(targetScene));
+        GameManager.SetCanPause(true);
     }
 }
 

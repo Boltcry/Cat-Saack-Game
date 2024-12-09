@@ -18,7 +18,7 @@ public class CabinetOverworld : OverworldInteractable
         if (animator != null)
         {
             animator.SetBool("powerOn", aActive);
-            Debug.Log("called set bool in cabinet");
+            //Debug.Log("called set bool in cabinet");
         }
         if (animator == null)
         {

@@ -114,14 +114,17 @@ public class InputManager : MonoBehaviour
     {
         if (aContext.phase == InputActionPhase.Performed)
         {
-            if (actionMapName == "Player")
+            if (GameManager.canPause)
             {
-                GameManager.Pause();
-            }
+                if (actionMapName == "Player")
+                {
+                    GameManager.Pause();
+                }
 
-            if (actionMapName == "Menu")
-            {
-                UIManager.PopMenuPanel();
+                if (actionMapName == "Menu")
+                {
+                    UIManager.PopMenuPanel();
+                }
             }
         }
     }
