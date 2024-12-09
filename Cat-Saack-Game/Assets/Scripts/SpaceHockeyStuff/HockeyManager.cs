@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HockeyManager : MonoBehaviour
+public class HockeyManager : LevelManager
 {
     public static HockeyManager Instance;
    void Awake()
