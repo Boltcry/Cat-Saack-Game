@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 60320296}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!1 &76887592
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 149494577}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!1 &221865432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2439,6 +2441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 467456025}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!1 &512191419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,6 +2490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 512191423}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!61 &512191422
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2613,6 +2617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 523360061}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!61 &523360060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3459,6 +3464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 872743097}
   isMoving: 1
+  shadowSprite: {fileID: 0}
 --- !u!1 &932471955
 GameObject:
   m_ObjectHideFlags: 0
@@ -4566,6 +4572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1419986026}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!1 &1496723498
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,6 +4621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1496723502}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!61 &1496723501
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4813,6 +4821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1523751814}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!61 &1523751813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5140,6 +5149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1595840177}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!61 &1595840176
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7041,6 +7051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2028113254}
   isMoving: 0
+  shadowSprite: {fileID: 0}
 --- !u!61 &2028113253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7486,14 +7497,6 @@ PrefabInstance:
     - target: {fileID: 2999218789649228778, guid: 43642369787dc0847854eae8c5f87ff4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2999218789649228781, guid: 43642369787dc0847854eae8c5f87ff4, type: 3}
-      propertyPath: moveSpeed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2999218789649228781, guid: 43642369787dc0847854eae8c5f87ff4, type: 3}
-      propertyPath: interactRange
-      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43642369787dc0847854eae8c5f87ff4, type: 3}

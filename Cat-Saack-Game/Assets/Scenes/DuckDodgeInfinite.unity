@@ -4022,6 +4022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2263741527055770125}
   isMoving: 1
+  shadowSprite: {fileID: 0}
 --- !u!114 &2263741527055770130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4036,6 +4037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2263741527055770128}
   isMoving: 1
+  shadowSprite: {fileID: 0}
 --- !u!1001 &2294245958960978405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4368,6 +4370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1687286538}
   isMoving: 1
+  shadowSprite: {fileID: 2263741527055770128}
 --- !u!1001 &4207573416999523422
 PrefabInstance:
   m_ObjectHideFlags: 0

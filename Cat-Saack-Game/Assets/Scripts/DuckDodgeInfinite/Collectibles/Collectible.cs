@@ -21,6 +21,10 @@ public class Collectible : MonoBehaviour
     {
         triggerCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
     }
 
     protected virtual IEnumerator OnCollect()

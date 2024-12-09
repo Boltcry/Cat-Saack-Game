@@ -8,6 +8,8 @@ public class SpriteOrderSorter : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private bool isMoving = false;
+    [SerializeField]
+    private SpriteRenderer shadowSprite;
 
     void Start()
     {
@@ -34,5 +36,9 @@ public class SpriteOrderSorter : MonoBehaviour
     void SortSpriteOrder()
     {
         spriteRenderer.sortingOrder = Mathf.FloorToInt(-transform.position.y * 10);
+        if (shadowSprite != null)
+        {
+            shadowSprite.sortingOrder = spriteRenderer.sortingOrder - 1;
+        }
     }
 }
