@@ -857,7 +857,12 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -872,11 +877,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 2ea785cc-4d73-43b5-9098-36bef1706b0e
+  cloudProjectId: 0d3aab28-2070-4c90-b312-7f326938a513
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Cat-Saack-Game
-  organizationId: maskedranger
+  projectName: Aliens-Arcades-Abductions
+  organizationId: dedbolt
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

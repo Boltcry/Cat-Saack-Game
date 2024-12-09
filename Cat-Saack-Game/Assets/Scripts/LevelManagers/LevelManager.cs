@@ -42,4 +42,19 @@ public class LevelManager : MonoBehaviour
     {
         //
     }
+
+    public void MuteMaster(bool aMute)
+    {
+        AudioManager.MuteMaster(aMute);
+    }
+
+    public void MuteSFX(bool aMute)
+    {
+        AudioManager.MuteSFX(aMute);
+    }
+
+    public void MuteMusic(bool aMute)
+    {
+        AudioManager.MuteMusic(aMute);
+    }
 }

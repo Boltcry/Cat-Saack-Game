@@ -36,11 +36,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (audioMixer != null)
-        {
-
-        }
     }
 
     public static void PlayAudioClip(AudioType aAudioType, AudioClip aClip)
@@ -70,47 +65,47 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void MuteMaster(bool aMute)
+    public static void MuteMaster(bool aMute)
     {
-        if (audioMixer != null)
+        if (Instance.audioMixer != null)
         {
             if (aMute)
             {
-                audioMixer.SetFloat("MasterVolume", mutedVolume);
+                Instance.audioMixer.SetFloat("MasterVolume", Instance.mutedVolume);
             }
             else
             {
-                audioMixer.ClearFloat("MasterVolume");
+                Instance.audioMixer.ClearFloat("MasterVolume");
             }
         }
     }
 
-    public void MuteSFX(bool aMute)
+    public static void MuteSFX(bool aMute)
     {
-        if (audioMixer != null)
+        if (Instance.audioMixer != null)
         {
             if (aMute)
             {
-                audioMixer.SetFloat("SFXVolume", mutedVolume);
+                Instance.audioMixer.SetFloat("SFXVolume", Instance.mutedVolume);
             }
             else
             {
-                audioMixer.ClearFloat("SFXVolume");
+                Instance.audioMixer.ClearFloat("SFXVolume");
             }
         }
     }
 
-    public void MuteMusic(bool aMute)
+    public static void MuteMusic(bool aMute)
     {
-        if (audioMixer != null)
+        if (Instance.audioMixer != null)
         {
             if (aMute)
             {
-                audioMixer.SetFloat("MusicVolume", mutedVolume);
+                Instance.audioMixer.SetFloat("MusicVolume", Instance.mutedVolume);
             }
             else
             {
-                audioMixer.ClearFloat("MusicVolume");
+                Instance.audioMixer.ClearFloat("MusicVolume");
             }
         }
     }
