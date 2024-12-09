@@ -39,7 +39,7 @@ public class MenuButton : MonoBehaviour
     }
 
     // Invoke the custom Action set in the button's Inspector
-    public void OnSelect()
+    virtual public void OnSelect()
     {
         Debug.Log("OnSelect in MenuButton called!");
         if (onSelect != null && !isDisabled)

@@ -8,6 +8,7 @@ public class OverworldInteractable : MonoBehaviour, Interactable
     public SequenceDataSO sequenceDataToRun;
     public Sequence sequenceToRun;
     
+    public bool disabled = false; // determines if object can be interacted with
     public event Action OnSelected;
 
     OutlineObject outlineObject;
@@ -47,6 +48,11 @@ public class OverworldInteractable : MonoBehaviour, Interactable
         {
             sequenceToRun = aSequenceData.sequenceToRun;
         }
+    }
+
+    public void SetDisabled(bool aBool)
+    {
+        disabled = aBool;
     }
 
     /*

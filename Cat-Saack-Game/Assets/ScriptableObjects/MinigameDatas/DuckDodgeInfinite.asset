@@ -22,5 +22,5 @@ MonoBehaviour:
     ESC: Pause Game'
   demoClipURL: https://boltcry.github.io/HostedVideos/DuckDodgeInfiniteDemo.mp4
   startGameSequence: {fileID: 11400000, guid: 1210127098c1dbe44925c24c83f240d1, type: 2}
-  timesPlayedCount: 1
+  timesPlayedCount: 0
   unlocked: 0

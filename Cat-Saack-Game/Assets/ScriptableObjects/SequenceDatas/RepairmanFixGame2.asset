@@ -15,6 +15,7 @@ MonoBehaviour:
   sequenceToRun:
     sequenceSteps:
     - rid: 5535010013318479874
+    - rid: 6111230975980601352
   references:
     version: 2
     RefIds:
@@ -24,4 +25,11 @@ MonoBehaviour:
         disableMove: 1
         restoreMove: 1
         inkJSON: {fileID: 4900000, guid: 711adcb2a19a57846a0c92af4477527b, type: 3}
+        textPanel: {fileID: 0}
+    - rid: 6111230975980601352
+      type: {class: DialogueStep, ns: , asm: Assembly-CSharp}
+      data:
+        disableMove: 1
+        restoreMove: 1
+        inkJSON: {fileID: 4900000, guid: a02255a1893ed25478a2ecc241158e67, type: 3}
         textPanel: {fileID: 0}

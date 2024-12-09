@@ -397,6 +397,8 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 3200040315808028967}
   uiAudioSource: {fileID: 3200040315559073936}
   ambientAudioSource: {fileID: 3200040314069905086}
+  audioMixer: {fileID: 24100000, guid: de93782b08cf49e47aef181d070975ad, type: 2}
+  mutedVolume: -80
 --- !u!1 &3200040315559073942
 GameObject:
   m_ObjectHideFlags: 0

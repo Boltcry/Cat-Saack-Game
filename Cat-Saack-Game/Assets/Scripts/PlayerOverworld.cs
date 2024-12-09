@@ -38,12 +38,15 @@ public class PlayerOverworld : PlayerTopDown
             OverworldInteractable tempInteractable = each.gameObject.GetComponent<OverworldInteractable>();
             if (tempInteractable != null)
             {
-                float distance = Vector3.Distance(transform.position, each.transform.position);
-                if (distance < closestDistance)
+                if (!tempInteractable.disabled)
                 {
-                    closestDistance = distance;
-                    interactable = tempInteractable;
-                    Debug.Log($"Found interactable: {tempInteractable.gameObject.name} at distance {distance}");
+                    float distance = Vector3.Distance(transform.position, each.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        interactable = tempInteractable;
+                        //Debug.Log($"Found interactable: {tempInteractable.gameObject.name} at distance {distance}");
+                    }
                 }
             }
         }

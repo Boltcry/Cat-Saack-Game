@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: UFOHockey
   m_EditorClassIdentifier: 
   gameName: UFO Hockey
-  rules: Rules upcoming
+  rules: Use your lasers and fire at the puck to send it into your opponent's goal
+    and score!
   controls: 'CONTROLS:
 
     WASD: Move Character
 
-    E: Fire laser
+    Mouse: Aim
 
-    ESC: Pause
-    Game'
-  demoClipURL: https://boltcry.github.io/HostedVideos/DuckDodgeInfiniteDemo.mp4
+    Left Click:
+    Fire Laser
+
+    ESC: Pause Game'
+  demoClipURL: https://boltcry.github.io/HostedVideos/UfoHockeyDemo.mp4
   startGameSequence: {fileID: 11400000, guid: 3aaee2db11349324b91740785f7a7ff3, type: 2}
   timesPlayedCount: 0
   unlocked: 0

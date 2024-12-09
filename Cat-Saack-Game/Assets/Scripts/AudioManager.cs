@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public enum AudioType
 {
@@ -17,6 +18,12 @@ public class AudioManager : MonoBehaviour
     public AudioSource uiAudioSource;
     public AudioSource ambientAudioSource;
 
+    [Header("Audio Control Settings")]
+    [SerializeField]
+    private AudioMixer audioMixer;
+    [SerializeField]
+    private float mutedVolume = -80f;
+
     void Awake()
     {
         if (Instance == null)
@@ -28,6 +35,11 @@ public class AudioManager : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
+        }
+
+        if (audioMixer != null)
+        {
+
         }
     }
 
@@ -55,6 +67,51 @@ public class AudioManager : MonoBehaviour
                     Instance.ambientAudioSource.Play();
                 }
                 break;
+        }
+    }
+
+    public void MuteMaster(bool aMute)
+    {
+        if (audioMixer != null)
+        {
+            if (aMute)
+            {
+                audioMixer.SetFloat("MasterVolume", mutedVolume);
+            }
+            else
+            {
+                audioMixer.ClearFloat("MasterVolume");
+            }
+        }
+    }
+
+    public void MuteSFX(bool aMute)
+    {
+        if (audioMixer != null)
+        {
+            if (aMute)
+            {
+                audioMixer.SetFloat("SFXVolume", mutedVolume);
+            }
+            else
+            {
+                audioMixer.ClearFloat("SFXVolume");
+            }
+        }
+    }
+
+    public void MuteMusic(bool aMute)
+    {
+        if (audioMixer != null)
+        {
+            if (aMute)
+            {
+                audioMixer.SetFloat("MusicVolume", mutedVolume);
+            }
+            else
+            {
+                audioMixer.ClearFloat("MusicVolume");
+            }
         }
     }
 }
