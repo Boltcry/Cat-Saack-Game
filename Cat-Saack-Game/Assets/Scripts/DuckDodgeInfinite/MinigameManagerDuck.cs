@@ -232,6 +232,7 @@ public class MinigameManagerDuck : LevelManager
     {
         gameIsRunning = false;
         enemySpawner.StopSpawnEnemies();
+        collectibleSpawner.StopSpawnCollectibles();
         Debug.Log("Paused level from MinigameManagerDuck");
     }
 
@@ -239,6 +240,7 @@ public class MinigameManagerDuck : LevelManager
     {
         gameIsRunning = true;
         enemySpawner.StartSpawnEnemies();
+        collectibleSpawner.StartSpawnCollectibles();
         Debug.Log("Unpaused level from MinigameManagerDuck");
     }
 }

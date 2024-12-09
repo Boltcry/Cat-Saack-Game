@@ -7,10 +7,10 @@ public class Powerup : Collectible
     [SerializeReference]
     public PowerupData powerupType;
 
-    protected override void OnCollect()
+    protected override IEnumerator OnCollect()
     {
         powerupType.ApplyPowerup();
-        base.OnCollect();
+        yield return StartCoroutine(base.OnCollect());
     }
 }
 

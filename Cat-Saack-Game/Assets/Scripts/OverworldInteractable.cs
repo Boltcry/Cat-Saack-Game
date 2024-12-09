@@ -36,7 +36,7 @@ public class OverworldInteractable : MonoBehaviour, Interactable
         OnSelected?.Invoke();
     }
 
-    public void SetOutlineActive(bool aActive)
+    virtual public void SetOutlineActive(bool aActive)
     {
         outlineObject.SetOutlineActive(aActive);
     }

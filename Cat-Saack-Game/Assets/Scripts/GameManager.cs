@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public static bool canPause = true;
     private LevelManager activeLevelManager;
 
     void Awake()
@@ -39,6 +40,11 @@ public class GameManager : MonoBehaviour
         {
             Instance.activeLevelManager.UnpauseLevel();
         }
+    }
+
+    public static void SetCanPause(bool aBool)
+    {
+        canPause = aBool;
     }
 
     public static void RegisterLevelManager(LevelManager aLevelManager)

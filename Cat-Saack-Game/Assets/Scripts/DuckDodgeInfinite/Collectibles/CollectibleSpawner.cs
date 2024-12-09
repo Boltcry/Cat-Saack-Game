@@ -148,7 +148,7 @@ public class CollectibleSpawner : MonoBehaviour
     }
 
     // Meant to be used with the OnGameStarted event
-    void StartSpawnCollectibles()
+    public void StartSpawnCollectibles()
     {
         if (collectibleSpawnCoroutine == null)
         {
@@ -156,7 +156,7 @@ public class CollectibleSpawner : MonoBehaviour
         }
     }
 
-    void StopSpawnCollectibles()
+    public void StopSpawnCollectibles()
     {
         if (collectibleSpawnCoroutine != null)
         {
